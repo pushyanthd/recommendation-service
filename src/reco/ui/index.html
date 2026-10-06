@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CPU Recommendation Service</title>
+<style>
+body{font:17px system-ui;max-width:760px;margin:60px auto;padding:0 24px;color:#18372d;background:#f6f8f5}
+h1{font-size:36px}label{display:block;padding:6px}button{padding:12px 20px;margin:20px 0;background:#18372d;color:white;border:0;border-radius:8px;font:inherit}li{padding:8px}small{color:#58695e}#status{min-height:30px}fieldset{border:1px solid #cbd5ce;border-radius:8px}
+</style>
+<h1>Find your next movie</h1>
+<p>Fictional fixture demo · CPU only · Popularity baseline</p>
+<p>Select movies you have already seen. The service excludes your selections and returns unseen titles from this fictional catalog.</p>
+<fieldset><legend>Movies you have seen</legend><div id="catalog"></div></fieldset>
+<button id="recommend">Get recommendations</button>
+<p id="status" role="status" aria-live="polite"></p>
+<ol id="results"></ol>
+<small>Personalized CPU methods are available in the development smoke comparison. Real MovieLens evaluation and automatic model selection are future milestones.</small>
+<script>
+const status=document.querySelector('#status');
+async function load(){try{const response=await fetch('/v1/catalog');if(!response.ok)throw new Error('Catalog unavailable');for(const movie of await response.json()){const label=document.createElement('label');const input=document.createElement('input');input.type='checkbox';input.value=movie.movie_id;label.append(input,document.createTextNode(' '+movie.title+' · '+movie.genres.join(', ')));document.querySelector('#catalog').append(label)}}catch(error){status.textContent=error.message}}
+document.querySelector('#recommend').addEventListener('click',async()=>{const button=document.querySelector('#recommend');button.disabled=true;status.textContent='Finding unseen movies…';document.querySelector('#results').replaceChildren();try{const ids=[...document.querySelectorAll('input:checked')].map(input=>Number(input.value));const response=await fetch('/v1/recommendations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({liked_movie_ids:ids,k:10})});const data=await response.json();if(!response.ok)throw new Error(typeof data.detail==='string'?data.detail:'Invalid request');status.textContent=data.returned_count+' unseen titles · '+data.variant+' · '+data.data_mode+(data.catalog_exhausted?' · End of eligible catalog':'');for(const hit of data.items){const li=document.createElement('li');li.textContent=hit.title+' — '+hit.reason;document.querySelector('#results').append(li)}}catch(error){status.textContent=error.message}finally{button.disabled=false}});load();
+</script>
+</html>

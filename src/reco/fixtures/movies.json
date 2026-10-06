@@ -1,0 +1,322 @@
+{
+  "data_mode": "fictional_fixture",
+  "movies": [
+    {
+      "movie_id": 1,
+      "title": "Lantern Harbor",
+      "genres": [
+        "Drama"
+      ]
+    },
+    {
+      "movie_id": 2,
+      "title": "Map of Rain",
+      "genres": [
+        "Drama"
+      ]
+    },
+    {
+      "movie_id": 3,
+      "title": "The Quiet Station",
+      "genres": [
+        "Drama",
+        "Mystery"
+      ]
+    },
+    {
+      "movie_id": 4,
+      "title": "Paper Comet",
+      "genres": [
+        "Comedy"
+      ]
+    },
+    {
+      "movie_id": 5,
+      "title": "Window at Dawn",
+      "genres": [
+        "Drama"
+      ]
+    },
+    {
+      "movie_id": 6,
+      "title": "The Last Orchard",
+      "genres": [
+        "Drama"
+      ]
+    },
+    {
+      "movie_id": 7,
+      "title": "Orbit Garden",
+      "genres": [
+        "Sci-Fi"
+      ]
+    },
+    {
+      "movie_id": 8,
+      "title": "Beyond the Small Moon",
+      "genres": [
+        "Sci-Fi"
+      ]
+    },
+    {
+      "movie_id": 9,
+      "title": "Signal from Tomorrow",
+      "genres": [
+        "Sci-Fi",
+        "Mystery"
+      ]
+    },
+    {
+      "movie_id": 10,
+      "title": "Cloud Mechanics",
+      "genres": [
+        "Sci-Fi"
+      ]
+    },
+    {
+      "movie_id": 11,
+      "title": "A Pocket of Stars",
+      "genres": [
+        "Sci-Fi"
+      ]
+    },
+    {
+      "movie_id": 12,
+      "title": "The Teacup Parade",
+      "genres": [
+        "Comedy"
+      ]
+    },
+    {
+      "movie_id": 13,
+      "title": "Future Lanterns",
+      "genres": [
+        "Drama"
+      ]
+    }
+  ],
+  "ratings": [
+    {
+      "user_id": 1,
+      "movie_id": 1,
+      "rating": 5,
+      "timestamp": 1
+    },
+    {
+      "user_id": 1,
+      "movie_id": 2,
+      "rating": 4,
+      "timestamp": 2
+    },
+    {
+      "user_id": 1,
+      "movie_id": 3,
+      "rating": 5,
+      "timestamp": 3
+    },
+    {
+      "user_id": 1,
+      "movie_id": 4,
+      "rating": 1,
+      "timestamp": 4
+    },
+    {
+      "user_id": 2,
+      "movie_id": 1,
+      "rating": 4,
+      "timestamp": 5
+    },
+    {
+      "user_id": 2,
+      "movie_id": 2,
+      "rating": 5,
+      "timestamp": 6
+    },
+    {
+      "user_id": 2,
+      "movie_id": 3,
+      "rating": 4,
+      "timestamp": 7
+    },
+    {
+      "user_id": 2,
+      "movie_id": 5,
+      "rating": 5,
+      "timestamp": 8
+    },
+    {
+      "user_id": 3,
+      "movie_id": 2,
+      "rating": 4,
+      "timestamp": 9
+    },
+    {
+      "user_id": 3,
+      "movie_id": 3,
+      "rating": 5,
+      "timestamp": 10
+    },
+    {
+      "user_id": 3,
+      "movie_id": 5,
+      "rating": 5,
+      "timestamp": 11
+    },
+    {
+      "user_id": 3,
+      "movie_id": 6,
+      "rating": 4,
+      "timestamp": 12
+    },
+    {
+      "user_id": 4,
+      "movie_id": 7,
+      "rating": 5,
+      "timestamp": 13
+    },
+    {
+      "user_id": 4,
+      "movie_id": 8,
+      "rating": 4,
+      "timestamp": 14
+    },
+    {
+      "user_id": 4,
+      "movie_id": 9,
+      "rating": 5,
+      "timestamp": 15
+    },
+    {
+      "user_id": 4,
+      "movie_id": 10,
+      "rating": 4,
+      "timestamp": 16
+    },
+    {
+      "user_id": 5,
+      "movie_id": 7,
+      "rating": 5,
+      "timestamp": 17
+    },
+    {
+      "user_id": 5,
+      "movie_id": 8,
+      "rating": 4,
+      "timestamp": 18
+    },
+    {
+      "user_id": 5,
+      "movie_id": 9,
+      "rating": 5,
+      "timestamp": 19
+    },
+    {
+      "user_id": 5,
+      "movie_id": 11,
+      "rating": 4,
+      "timestamp": 20
+    },
+    {
+      "user_id": 6,
+      "movie_id": 6,
+      "rating": 4,
+      "timestamp": 21
+    },
+    {
+      "user_id": 6,
+      "movie_id": 10,
+      "rating": 5,
+      "timestamp": 22
+    },
+    {
+      "user_id": 6,
+      "movie_id": 11,
+      "rating": 4,
+      "timestamp": 23
+    },
+    {
+      "user_id": 6,
+      "movie_id": 12,
+      "rating": 2,
+      "timestamp": 24
+    },
+    {
+      "user_id": 1,
+      "movie_id": 5,
+      "rating": 5,
+      "timestamp": 25
+    },
+    {
+      "user_id": 2,
+      "movie_id": 6,
+      "rating": 4,
+      "timestamp": 26
+    },
+    {
+      "user_id": 3,
+      "movie_id": 1,
+      "rating": 4,
+      "timestamp": 27
+    },
+    {
+      "user_id": 4,
+      "movie_id": 11,
+      "rating": 5,
+      "timestamp": 28
+    },
+    {
+      "user_id": 5,
+      "movie_id": 10,
+      "rating": 4,
+      "timestamp": 29
+    },
+    {
+      "user_id": 7,
+      "movie_id": 13,
+      "rating": 5,
+      "timestamp": 30
+    },
+    {
+      "user_id": 1,
+      "movie_id": 6,
+      "rating": 5,
+      "timestamp": 31
+    },
+    {
+      "user_id": 8,
+      "movie_id": 12,
+      "rating": 5,
+      "timestamp": 32
+    },
+    {
+      "user_id": 2,
+      "movie_id": 7,
+      "rating": 4,
+      "timestamp": 33
+    },
+    {
+      "user_id": 3,
+      "movie_id": 10,
+      "rating": 4,
+      "timestamp": 34
+    },
+    {
+      "user_id": 4,
+      "movie_id": 2,
+      "rating": 4,
+      "timestamp": 35
+    },
+    {
+      "user_id": 5,
+      "movie_id": 1,
+      "rating": 4,
+      "timestamp": 36
+    },
+    {
+      "user_id": 6,
+      "movie_id": 9,
+      "rating": 5,
+      "timestamp": 37
+    }
+  ]
+}
