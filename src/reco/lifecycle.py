@@ -82,7 +82,11 @@ def _alive(pid: int) -> bool:
 
 
 def _command(pid: int) -> str:
-    result = subprocess.run(["ps", "-p", str(pid), "-o", "args="], capture_output=True, text=True)
+    # Linux ps truncates piped output unless unlimited width is requested. The
+    # ownership token is the last argument and must survive long checkout paths.
+    result = subprocess.run(
+        ["ps", "-ww", "-p", str(pid), "-o", "args="], capture_output=True, text=True
+    )
     return result.stdout.strip()
 
 

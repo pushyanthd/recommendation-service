@@ -90,7 +90,9 @@ If an active pointer already exists, build without `--select`, then activate the
 
 `make dev` runs in the foreground and stops with Ctrl-C. `reco start/stop` manage a detached local process; activation/rollback require that owned process. `reco recover` handles an interrupted pointer change using the last-known-good bundle. Only locally built trusted snapshots are supported. `verify-bundle <directory>` checks a model without training or activation.
 
-The October 7 security update changes only the development pytest dependency. The original benchmark lock is retained under `config/frozen/<original-lock-sha256>.uv.lock`. A verifier permits that documented dev-only change while requiring every runtime/other package record to remain identical, as well as exact installed numerical versions and unchanged ranking/data/contracts source. This does not rewrite the frozen evaluation identity or tune on final labels. The container uses a patched Python 3.12 base; its fictional CPU checks are separate from the original macOS quality measurements.
+The October 7 security update changes only the development pytest dependency. The original benchmark lock is retained under `config/frozen/<original-lock-sha256>.uv.lock`. A verifier permits that documented dev-only change and the local project's release version while requiring every external runtime/other package record and the project's dependency metadata to remain identical, as well as exact installed numerical versions and unchanged ranking/data/contracts source. This does not rewrite the frozen evaluation identity or tune on final labels. The container uses a patched Python 3.12 base; its fictional CPU checks are separate from the original macOS quality measurements.
+
+The v1.0.0 lifecycle correction changes serving source identity. The original October 7 reports remain immutable historical evidence; active-root verification of those reports requires their recorded code and bundle. Use a fresh bundle root and showcase output to verify the v1.0.0 source, rather than assigning its identity to the old run.
 
 ## CPU image and measured showcase
 

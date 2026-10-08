@@ -231,6 +231,26 @@ def test_stop_refuses_unrelated_pid(tmp_path):
         stop(tmp_path)
 
 
+def test_process_inspection_preserves_token_after_long_arguments():
+    import subprocess
+    import sys
+    from uuid import uuid4
+
+    from reco.lifecycle import _command
+
+    token = uuid4().hex
+    child = subprocess.Popen(
+        [sys.executable, "-c", "import time; time.sleep(30)", "x" * 400, "--token", token]
+    )
+    try:
+        command = _command(child.pid)
+        assert "x" * 400 in command
+        assert command.endswith("--token " + token)
+    finally:
+        child.terminate()
+        child.wait(timeout=5)
+
+
 @pytest.mark.parametrize("variant", ["popularity", "item_knn", "als_cpu"])
 def test_instrumented_serving_preserves_frozen_rankings(tmp_path, variant):
     from reco.serving import ServingRanker
@@ -292,7 +312,7 @@ def test_stale_pointer_recovery_uses_validated_last_known_good(tmp_path):
         stop(tmp_path)
 
 
-def test_only_pytest_security_fix_is_allowed_against_frozen_lock(tmp_path):
+def test_release_metadata_and_pytest_fix_preserve_frozen_dependencies(tmp_path):
     from reco.bundles import verify_serving_lock
 
     frozen = next(Path("config/frozen").glob("*.uv.lock"))
@@ -303,6 +323,23 @@ def test_only_pytest_security_fix_is_allowed_against_frozen_lock(tmp_path):
         .read_text()
         .replace('name = "implicit"\nversion = "0.7.3"', 'name = "implicit"\nversion = "0.7.4"')
     )
+    with pytest.raises(ValueError, match="runtime"):
+        verify_serving_lock(changed, frozen.name.split(".")[0])
+
+
+def test_local_release_version_does_not_allow_project_dependency_changes(tmp_path):
+    from reco.bundles import verify_serving_lock
+
+    frozen = next(Path("config/frozen").glob("*.uv.lock"))
+    changed = tmp_path / "changed.lock"
+    current = Path("uv.lock").read_text()
+    project_start = current.index('name = "cpu-recommendation-service"')
+    project_end = current.index("[[package]]", project_start)
+    project = current[project_start:project_end].replace(
+        '{ name = "implicit" },', '{ name = "pytest" },', 1
+    )
+    assert project != current[project_start:project_end]
+    changed.write_text(current[:project_start] + project + current[project_end:])
     with pytest.raises(ValueError, match="runtime"):
         verify_serving_lock(changed, frozen.name.split(".")[0])
 

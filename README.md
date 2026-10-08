@@ -2,9 +2,9 @@
 
 CPU-only movie ranking with chronological splits, full-catalog evaluation, and an offline API demo.
 
-**Status: end-to-end local benchmark/demo delivered; release remains experimental.** Built a CPU-only recommendation API with chronological full-catalog evaluation, automatic model selection, cold-start fallback and verified rollback. Frozen MovieLens comparisons, real-data serving, the browser workflow, CPU packaging and process-backed showcase evidence are implemented. Neither personalized method passed validation, so popularity remains selected; outstanding unfixed image findings are documented.
+**Status: v1.0.0 software release; personalization quality objective failed.** Built a CPU-only recommendation API with chronological full-catalog evaluation, automatic model selection, cold-start fallback and verified rollback. Frozen MovieLens comparisons, real-data serving, the browser workflow, CPU packaging and process-backed showcase evidence are implemented. Neither personalized method passed validation, so popularity remains selected; outstanding unfixed image findings are documented. The benchmark's experimental quality label is separate from the full software release.
 
-For a portfolio review, start with the [engineering case study and demo walkthrough](docs/engineering-case-study.md), then the [v1 acceptance checklist](docs/acceptance.md). The experimental label records a failed personalization objective; engineering acceptance is reported separately.
+For a portfolio review, start with the [engineering case study and demo walkthrough](docs/engineering-case-study.md), then the [v1 acceptance checklist](docs/acceptance.md) and [v1.0.0 release notes](docs/release-v1.md). The experimental label records a failed personalization objective; engineering acceptance is reported separately.
 
 ## Run locally
 

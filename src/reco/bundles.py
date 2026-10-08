@@ -329,7 +329,7 @@ def load_bundle(directory: Path) -> Bundle:
 
 
 def verify_serving_lock(lock: Path, frozen_digest: str) -> None:
-    """Permit only the documented pytest security fix; preserve all runtime lock records."""
+    """Permit pytest security fixes and local release versions; preserve dependency records."""
     if sha256_file(lock) == frozen_digest:
         return
     original = Path("config/frozen") / (frozen_digest + ".uv.lock")
@@ -344,6 +344,9 @@ def verify_serving_lock(lock: Path, frozen_digest: str) -> None:
             if package["name"] == "pytest":
                 continue
             if package["name"] == "cpu-recommendation-service":
+                # The local project's release version does not change the frozen
+                # numerical treatment. Its source/dependency records still match.
+                package.pop("version")
                 package["dev-dependencies"]["dev"] = [
                     entry
                     for entry in package["dev-dependencies"]["dev"]

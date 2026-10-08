@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cpu-recommendation-service"
-version = "0.1.0"
+version = "1.0.0"
 description = "CPU-only ranking with chronological evaluation and an offline fixture API"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"

@@ -23,3 +23,11 @@ Connect the real-data API to the validation-selected popularity snapshot. Refitt
 Keep the benchmark implementation fixed and instrument an equivalent serving path. Parity checks cover all three treatments and cold-start/filter behavior. Hash the actual process code/dependency identity and match it against the tested bundle during showcase. Activation effects require process restart and readiness verification; rollback evidence uses actual prior versions and files in an isolated root.
 
 The security audit identified a development-only pytest advisory. Update pytest to the patched range described in the [upstream release](https://github.com/pytest-dev/pytest/releases/tag/9.0.3), preserve the original lock, and accept only that dev-only lock-record difference when reconstructing the frozen numerical treatment. All runtime lock records remain fixed. Use a patched, digest-pinned Python 3.12 container base and an explicit OpenMP runtime so ALS works under Linux. Retain all remaining unfixed image findings and limit claims to the local experimental demo.
+
+## Full software release and Linux lifecycle correction
+
+Publish the completed bounded service as v1.0.0, with matching local package metadata. Keep `experimental_quality_objective_failed` as the benchmark outcome; a full software release does not change the earlier validation selection or claim that personalization passed.
+
+The first published CI run exposed Linux `ps` command-width truncation: long runner/artifact paths hid the final ownership token and caused legitimate stop/restart/rollback operations to be rejected. Request unlimited width with `ps -ww` and retain ownership checks. A real subprocess regression test places the token after more than 400 argument characters.
+
+Permit the local project's release-version field to change when reconstructing a frozen numerical treatment. Continue checking all external dependency records, local project dependency metadata, numerical versions and ranking/data/contracts source. A regression test verifies that an altered local-project dependency is rejected. Dated benchmark and serving reports remain immutable; the corrected process code needs fresh serving evidence.
