@@ -1,24 +1,26 @@
-# CPU Recommendation Service v1.0.0
+# Recommendation service release readiness
 
-First full software release of the bounded local CPU recommendation service.
+Finish and verify the remaining project work before publishing a full release. No release tag or GitHub release has been published. Package version 0.1.0 remains in use during this work.
 
-## Delivered
+## Remaining work
 
-- Popularity, item similarity and CPU ALS ranking with chronological full-catalog evaluation.
-- Automatic validation-based selection, cold-start fallback and strict exclusion of every previously rated movie.
-- Typed FastAPI endpoints and a browser workflow for saved profiles, ephemeral likes, genre filters and popularity comparison.
-- Immutable hash-verified model bundles, atomic selection, restart/readiness verification, restoration on activation failure and rollback.
-- Structured telemetry, locked dependencies, a non-root CPU image and automated fixture/image CI checks.
-- Measured MovieLens results, standalone reports, data/system cards, reproduction instructions and an engineering case study.
+- [x] Correct the Linux CI lifecycle failure without weakening process ownership checks.
+- [x] Add a real subprocess regression test for long arguments and verify local checks.
+- [x] Verify both GitHub fixture and CPU-image jobs on the correction: [passing run](https://github.com/pushyanthd/recommendation-service/actions/runs/37709752278).
+- [ ] Build and verify the final CPU image against the corrected source and current package metadata.
+- [ ] Audit dependencies and scan that final image; retain its actual findings and applicable fixes.
+- [ ] Rebuild a serving snapshot from the unchanged frozen MovieLens treatment.
+- [ ] Run the complete 200-warmup/5,000-request HTTP protocol and all four recovery drills for that snapshot.
+- [ ] Verify and export checksummed evidence bound to the final source, bundle and image identities.
+- [ ] Reconcile the README, acceptance mapping and progress with the final verified state.
+- [ ] Confirm GitHub CI passes on the final project revision.
 
-## CI correction
+Only after those tasks are complete should the full software release version, tag and GitHub release be published. Release publication remains a separate step.
 
-Linux process inspection now requests unlimited command width so long checkout/artifact paths cannot hide the ownership token. A real subprocess regression test checks the token survives long arguments. Local release version metadata can change independently of the frozen numerical treatment; dependency records and numerical source identities remain enforced.
+## Preserved results and limits
 
-## Measured result and limits
+The frozen MovieLens comparison covers 1,188 eligible users with zero scoring failures per method. Item similarity improved final NDCG@10 by 11.97%, but its validation gain was 3.41%, below the frozen 10% objective. Popularity remains selected. The benchmark label `experimental_quality_objective_failed` records that research outcome and cannot be removed by renaming the software release.
 
-The original frozen MovieLens comparison covers 1,188 eligible users with zero scoring failures per method. Item similarity improved final NDCG@10 by 11.97%, but its validation gain was 3.41%, below the frozen 10% objective. Popularity remains selected. The benchmark label `experimental_quality_objective_failed` records that research outcome; it is separate from this full software release.
+The original October 7 baseline serving measurement completed 5,000 HTTP requests with zero failures and 11.52 ms client P95 on Apple M1 / 16 GiB. Its image scan documents eight unfixed high findings. These dated reports remain historical evidence; they do not substitute for checking the corrected process code.
 
-The October 7 selected-baseline serving measurement completed 5,000 HTTP requests with zero failures and 11.52 ms client P95 on Apple M1 / 16 GiB. The dated image scan documents eight unfixed high findings. This release supports a local benchmark/demo; authenticated real-user profiles, large-catalog serving, public API deployment and online engagement claims are outside its scope.
-
-See the repository README, `docs/engineering-case-study.md`, `docs/acceptance.md`, `docs/reproduction.md` and the checksummed `evals/` reports.
+The planned full release covers the local benchmark/demo. Authenticated real-user profiles, large-catalog serving, public API deployment and online engagement claims remain outside the architecture's bounded v1 scope.

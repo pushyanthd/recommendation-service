@@ -92,7 +92,7 @@ If an active pointer already exists, build without `--select`, then activate the
 
 The October 7 security update changes only the development pytest dependency. The original benchmark lock is retained under `config/frozen/<original-lock-sha256>.uv.lock`. A verifier permits that documented dev-only change and the local project's release version while requiring every external runtime/other package record and the project's dependency metadata to remain identical, as well as exact installed numerical versions and unchanged ranking/data/contracts source. This does not rewrite the frozen evaluation identity or tune on final labels. The container uses a patched Python 3.12 base; its fictional CPU checks are separate from the original macOS quality measurements.
 
-The v1.0.0 lifecycle correction changes serving source identity. The original October 7 reports remain immutable historical evidence; active-root verification of those reports requires their recorded code and bundle. Use a fresh bundle root and showcase output to verify the v1.0.0 source, rather than assigning its identity to the old run.
+The Linux lifecycle correction changes serving source identity. The original October 7 reports remain immutable historical evidence; active-root verification of those reports requires their recorded code and bundle. Use a fresh bundle root and showcase output to verify the corrected source, rather than assigning its identity to the old run.
 
 ## CPU image and measured showcase
 

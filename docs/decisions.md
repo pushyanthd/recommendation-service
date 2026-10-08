@@ -24,9 +24,9 @@ Keep the benchmark implementation fixed and instrument an equivalent serving pat
 
 The security audit identified a development-only pytest advisory. Update pytest to the patched range described in the [upstream release](https://github.com/pytest-dev/pytest/releases/tag/9.0.3), preserve the original lock, and accept only that dev-only lock-record difference when reconstructing the frozen numerical treatment. All runtime lock records remain fixed. Use a patched, digest-pinned Python 3.12 container base and an explicit OpenMP runtime so ALS works under Linux. Retain all remaining unfixed image findings and limit claims to the local experimental demo.
 
-## Full software release and Linux lifecycle correction
+## Release readiness and Linux lifecycle correction
 
-Publish the completed bounded service as v1.0.0, with matching local package metadata. Keep `experimental_quality_objective_failed` as the benchmark outcome; a full software release does not change the earlier validation selection or claim that personalization passed.
+Defer a full software release until the remaining verification and evidence work is complete. Keep `experimental_quality_objective_failed` as the benchmark outcome; release preparation does not change the earlier validation selection or claim that personalization passed. The package stays at 0.1.0 during this work, with no release tag or GitHub release.
 
 The first published CI run exposed Linux `ps` command-width truncation: long runner/artifact paths hid the final ownership token and caused legitimate stop/restart/rollback operations to be rejected. Request unlimited width with `ps -ww` and retain ownership checks. A real subprocess regression test places the token after more than 400 argument characters.
 

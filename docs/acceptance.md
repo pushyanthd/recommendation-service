@@ -1,6 +1,6 @@
 # Recommendation service v1 acceptance
 
-The bounded local service is delivered as a full v1.0.0 software release. Engineering acceptance passed, including HTTP/resource objectives and all four recovery drills. The personalized quality objective failed validation, so popularity stays active and the benchmark retains its experimental quality label. Software release status and model-quality results are separate outcomes, and the failed objective remains visible.
+The bounded local service is implemented. Full release publication is deferred until the remaining work is finished and verified. The original engineering acceptance passed, including HTTP/resource objectives and all four recovery drills. The personalized quality objective failed validation, so popularity stays active and the benchmark retains its experimental quality label. Software release status and model-quality results are separate outcomes, and the failed objective remains visible.
 
 ## Architecture acceptance criteria
 
@@ -24,6 +24,6 @@ The clean environment reproduction also rebuilt real-data reports and a serving 
 
 ## Portfolio release work
 
-The implementation, measured reports, case study and demo walkthrough were published in the source repository. The v1.0.0 release adds the Linux process-inspection correction and matching package version. Release publication requires passing GitHub fixture and CPU-image jobs on the tagged revision. The [release notes](release-v1.md) retain the quality decision and deployment limits; the GitHub release records the final revision and CI link.
+The implementation, measured reports, case study and demo walkthrough were published in the source repository. The Linux process-inspection correction passed both [GitHub fixture and CPU-image jobs](https://github.com/pushyanthd/recommendation-service/actions/runs/37709752278). The remaining work is tracked in [release readiness](release-v1.md). No release tag or GitHub release has been published. Complete the remaining checks before assigning and publishing the full release version.
 
 A screen recording is optional: follow the case study's five minute demo, keep fictional and real-data provenance visible, and show the failed validation gate alongside the final result. Additional recommenders, a learned reranker and cloud infrastructure are follow-up projects rather than requirements for this release.
