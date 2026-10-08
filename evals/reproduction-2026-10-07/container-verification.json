@@ -1,0 +1,24 @@
+{
+  "architecture": "arm64",
+  "checks": {
+    "api_peak_process_rss_bytes": 80052224,
+    "cpu_backend": "implicit.cpu.als",
+    "data_mode": "fictional_fixture",
+    "model_id": "fictional_fixture-a8d92ae361c9bc13-d74c3366dcd9c771",
+    "ready": true,
+    "runtime_identity_sha256": "526ea16a1847e9fd69852debf570c756472e1fa196b7aae6f77cd7d1f0d0102b",
+    "source_identity_sha256": "e66859e0959cce0a8a337f957d15560a4225cfebb80fa5d769ac4796afaa9dde",
+    "uid": 10001
+  },
+  "dockerfile_sha256": "576f40ef2093ebdc3e16dbc10123c1bf167c2dc3d528d693ed728c1016df40ea",
+  "gpu_device_requests": [],
+  "image_id": "sha256:c69e2c611198ae415ffb7073659eb240fe56ec34b21ff3fbde394698f284bd56",
+  "image_size_bytes": 360676804,
+  "image_user": "10001:10001",
+  "network": "none",
+  "os": "linux",
+  "passed": true,
+  "read_only": true,
+  "schema_version": 1,
+  "source_identity_sha256": "e66859e0959cce0a8a337f957d15560a4225cfebb80fa5d769ac4796afaa9dde"
+}

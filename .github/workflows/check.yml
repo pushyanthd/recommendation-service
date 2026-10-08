@@ -13,7 +13,28 @@ jobs:
       - run: make setup
       - run: make check
       - run: make smoke
+      - run: .bootstrap/bin/uv audit --locked
+      - run: .venv/bin/reco benchmark --fixture --output artifacts/ci-canary
+      - run: .venv/bin/reco benchmark --fixture --final --output artifacts/ci-canary
+      - run: .venv/bin/reco verify-report artifacts/ci-canary/final
       - uses: actions/upload-artifact@v4
         with:
           name: fictional-fixture-smoke
-          path: artifacts/fixture-smoke.json
+          path: |
+            artifacts/fixture-smoke.json
+            artifacts/ci-canary
+
+  cpu-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: make setup
+      - run: make image
+      - run: make image-check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cpu-container-verification
+          path: artifacts/container/verification.json

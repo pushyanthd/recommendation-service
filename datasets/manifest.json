@@ -1,0 +1,39 @@
+{
+  "archive_sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "counts": {
+    "movies": 3883,
+    "rated_movies": 3706,
+    "ratings": 1000209,
+    "users": 6040
+  },
+  "data_mode": "movielens_1m",
+  "demographics": "users.dat is not extracted or parsed",
+  "encoding": {
+    "README": "ascii",
+    "movies.dat": "latin-1",
+    "ratings.dat": "ascii"
+  },
+  "files": {
+    "README": "2d5ddce86ccbd247207456165827b4b9ddf27282bca93807d4c763e28414f133",
+    "movies.dat": "0140fc2356357c1a851d0f52e893a1e4d3696df632c4141cea8d5bc3d621f0b9",
+    "ratings.dat": "506d64ca44484487c11dc2d9a28de5c54948213e6b96285e298afe28d6ea4e0f"
+  },
+  "preprocessing_version": "movielens-1m-v1",
+  "schema_version": 1,
+  "source_url": "https://files.grouplens.org/datasets/movielens/ml-1m.zip",
+  "split": {
+    "fractions": [
+      0.8,
+      0.9
+    ],
+    "protocol": "global-timestamp-strict-before-v1",
+    "test_cutoff": 978133414,
+    "test_events": 100021,
+    "train_events": 800164,
+    "validation_cutoff": 975768738,
+    "validation_events": 100024
+  },
+  "terms": "Upstream README retained locally; no dataset redistribution",
+  "timestamp_max": 1046454590,
+  "timestamp_min": 956703932
+}

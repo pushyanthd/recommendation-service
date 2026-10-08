@@ -3,6 +3,7 @@ from typing import Annotated, Literal, Self
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 type Variant = Literal["popularity", "item_knn", "als_cpu"]
+type DataMode = Literal["fictional_fixture", "movielens_1m"]
 
 
 class Contract(BaseModel):
@@ -26,6 +27,30 @@ class Fixture(Contract):
     data_mode: Literal["fictional_fixture"]
     movies: tuple[Movie, ...]
     ratings: tuple[Rating, ...]
+
+
+class BenchmarkProtocol(Contract):
+    protocol: Literal["chronological-full-catalog-v1"]
+    train_fraction: float = Field(gt=0, lt=1, allow_inf_nan=False)
+    test_start: float = Field(gt=0, lt=1, allow_inf_nan=False)
+    positive_rating_min: Literal[4]
+    variants: tuple[Variant, ...]
+    bootstrap_samples: int = Field(ge=1, le=10000, strict=True)
+    bootstrap_seed: int = Field(ge=0, strict=True)
+    minimum_relative_ndcg_gain: float = Field(ge=0, allow_inf_nan=False)
+    maximum_recall_at_20_drop: float = Field(ge=0, le=1, allow_inf_nan=False)
+    near_tie_absolute_ndcg: float = Field(ge=0, le=1, allow_inf_nan=False)
+    warm_http_p95_objective_ms: float = Field(gt=0, allow_inf_nan=False)
+    maximum_peak_rss_bytes: int = Field(gt=0, strict=True)
+    maximum_single_fit_seconds: float = Field(gt=0, allow_inf_nan=False)
+
+    @model_validator(mode="after")
+    def bounded_protocol(self) -> Self:
+        if self.variants != ("popularity", "item_knn", "als_cpu"):
+            raise ValueError("v1 requires exactly the three bounded ranking treatments")
+        if not self.train_fraction < self.test_start:
+            raise ValueError("Training must precede validation and test")
+        return self
 
 
 class RecommendationRequest(Contract):
@@ -59,7 +84,7 @@ class Hit(Contract):
 class RecommendationResponse(Contract):
     request_id: str
     model_id: str
-    data_mode: Literal["fictional_fixture"]
+    data_mode: DataMode
     variant: Variant
     fallback_reason: Literal["insufficient_history"] | None
     catalog_exhausted: bool

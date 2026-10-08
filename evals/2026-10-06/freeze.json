@@ -1,0 +1,162 @@
+{
+  "development_report_sha256": "270db3c6fe7dd1e5ae2056ad3131b2fdfffdc3cf6383a606d739dee521f99b49",
+  "freeze_sha256": "e2fd1b765de529ab903eca043a4e5f27b99ff535d321a47d00f14f3614157520",
+  "inputs": {
+    "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+    "data_mode": "movielens_1m",
+    "execution_identity": {
+      "dependencies": {
+        "fastapi": "0.142.2",
+        "implicit": "0.7.3",
+        "numpy": "2.5.3",
+        "pydantic": "2.13.5",
+        "scipy": "1.18.1",
+        "threadpoolctl": "3.7.0"
+      },
+      "dependency_lock_sha256": "d93e9d8ba152520f8ab15fed9bd3e244e219db0b06745b971d61d761a0eb7655",
+      "python": "3.12.12",
+      "source_files": {
+        "__init__.py": "6d6f9595cfccb7646730a08104bf455c9d6d85c5789258cfe9793d49d84c5d8b",
+        "api.py": "0903339a63fcde354beac18642e602be464eeb4de65ab45a6582a10f928e5875",
+        "benchmark.py": "915c186ae162aefba395f6278b8b033d06a14ca8d2c6f09e1f7590050a0f3fa8",
+        "cli.py": "25ddeeabcd2d26c9d04b365f224c3a101c3d670d1aea55689d6dcd1cfdbccd54",
+        "contracts.py": "98e352800e53eeb8e130aeedcb9c0e443d5cfe8896712be6c4f5ee72b7e8e180",
+        "data.py": "1cbaafd8ef2fbd9203632af8bfa46a839466586be1055518991a93f60fa33ada",
+        "evaluation.py": "bc148d96df3d675c5d6dd37b9ea8c48aea2b2aa3f1739ae7c07b9a208253341a",
+        "evidence.py": "68d4c9b8e866cefb82156080fdbd86a825bfb399010b2c8839c6d8da5505c879",
+        "fixtures/movies.json": "52ededb370ed9f7618f72d466e2886850db677b302a97c6adcb2da56c9f5d634",
+        "ingestion.py": "ec5d3152db9a280292886de78eabf6f78bbd790b9297fe2c0e2d716af73d0b44",
+        "ranking.py": "6671b0531773530f239b086b6821a2cf255e1a0e1f7349d5b25ac0ae4babba3c",
+        "reports.py": "52c8a00225d7fbd7ae6b7b2a0980bfde355c67a037a63b2525e88abc88309a69",
+        "selection.py": "2b68d9a726e6a4ebadd672af7f5f6d45d933a69f83859f13a953876c741f4586",
+        "storage.py": "93312e59b0c8badf3363db8b68c7cad7c3394e9ac556dfcfd0586f65821efa08",
+        "ui/index.html": "2aa8df52e47184c8a2ae3761675b28c4b70ef0cb54787028e46e4440cabf114c"
+      }
+    },
+    "protocol": {
+      "bootstrap_samples": 2000,
+      "bootstrap_seed": 42,
+      "maximum_peak_rss_bytes": 2147483648,
+      "maximum_recall_at_20_drop": 0.01,
+      "maximum_single_fit_seconds": 600.0,
+      "minimum_relative_ndcg_gain": 0.1,
+      "near_tie_absolute_ndcg": 0.001,
+      "positive_rating_min": 4,
+      "protocol": "chronological-full-catalog-v1",
+      "test_start": 0.9,
+      "train_fraction": 0.8,
+      "variants": [
+        "popularity",
+        "item_knn",
+        "als_cpu"
+      ],
+      "warm_http_p95_objective_ms": 50.0
+    },
+    "split": {
+      "test_cutoff": 978133414,
+      "test_events": 100021,
+      "train_events": 800164,
+      "validation_cutoff": 975768738,
+      "validation_events": 100024
+    }
+  },
+  "selection": {
+    "promotion_status": "pending_http_resource_and_bundle_gates",
+    "quality_gates": [
+      {
+        "comparison": {
+          "candidate": "item_knn",
+          "interval_scope": "Paired benchmark users; shared items/training limit generalization",
+          "metrics": {
+            "hit_rate_at_10": {
+              "absolute_difference": 0.005439709882139619,
+              "paired_95_interval": [
+                -0.006346328195829556,
+                0.01813236627379873
+              ]
+            },
+            "ndcg_at_10": {
+              "absolute_difference": 0.008866954398135767,
+              "paired_95_interval": [
+                0.003926097634791934,
+                0.013702922211801414
+              ]
+            },
+            "recall_at_10": {
+              "absolute_difference": 0.004810882563633702,
+              "paired_95_interval": [
+                0.0006255308212381545,
+                0.008964118278280796
+              ]
+            },
+            "recall_at_20": {
+              "absolute_difference": 0.00246065671600328,
+              "paired_95_interval": [
+                -0.0024474488038315335,
+                0.007840121857042994
+              ]
+            }
+          },
+          "paired_users": 1103,
+          "relative_ndcg_gain": 0.03405095138098141,
+          "samples": 2000,
+          "seed": 42
+        },
+        "passed": false,
+        "reasons": [
+          "ndcg_relative_gain_below_objective"
+        ],
+        "variant": "item_knn"
+      },
+      {
+        "comparison": {
+          "candidate": "als_cpu",
+          "interval_scope": "Paired benchmark users; shared items/training limit generalization",
+          "metrics": {
+            "hit_rate_at_10": {
+              "absolute_difference": -0.006346328195829556,
+              "paired_95_interval": [
+                -0.025385312783318223,
+                0.012692656391659111
+              ]
+            },
+            "ndcg_at_10": {
+              "absolute_difference": -0.007337745884873807,
+              "paired_95_interval": [
+                -0.014071867170941272,
+                -0.0005110343111944903
+              ]
+            },
+            "recall_at_10": {
+              "absolute_difference": 0.0074394893491618735,
+              "paired_95_interval": [
+                -0.00026379547207831274,
+                0.01480639796166996
+              ]
+            },
+            "recall_at_20": {
+              "absolute_difference": 0.010086154229342786,
+              "paired_95_interval": [
+                0.0016372962037878845,
+                0.018677451874821678
+              ]
+            }
+          },
+          "paired_users": 1103,
+          "relative_ndcg_gain": -0.02817847224119768,
+          "samples": 2000,
+          "seed": 42
+        },
+        "passed": false,
+        "reasons": [
+          "ndcg_relative_gain_below_objective",
+          "ndcg_interval_not_above_zero"
+        ],
+        "variant": "als_cpu"
+      }
+    ],
+    "selected_for_final_refit": "popularity",
+    "serving_variant": "popularity",
+    "test_labels_used_for_selection": false
+  }
+}

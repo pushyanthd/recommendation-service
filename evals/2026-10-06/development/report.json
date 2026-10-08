@@ -1,0 +1,404 @@
+{
+  "backend": "cpu",
+  "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "data_mode": "movielens_1m",
+  "evidence_kind": "aggregate_summary_not_raw_user_evidence",
+  "execution_identity": {
+    "dependencies": {
+      "fastapi": "0.142.2",
+      "implicit": "0.7.3",
+      "numpy": "2.5.3",
+      "pydantic": "2.13.5",
+      "scipy": "1.18.1",
+      "threadpoolctl": "3.7.0"
+    },
+    "dependency_lock_sha256": "d93e9d8ba152520f8ab15fed9bd3e244e219db0b06745b971d61d761a0eb7655",
+    "python": "3.12.12",
+    "source_files": {
+      "__init__.py": "6d6f9595cfccb7646730a08104bf455c9d6d85c5789258cfe9793d49d84c5d8b",
+      "api.py": "0903339a63fcde354beac18642e602be464eeb4de65ab45a6582a10f928e5875",
+      "benchmark.py": "915c186ae162aefba395f6278b8b033d06a14ca8d2c6f09e1f7590050a0f3fa8",
+      "cli.py": "25ddeeabcd2d26c9d04b365f224c3a101c3d670d1aea55689d6dcd1cfdbccd54",
+      "contracts.py": "98e352800e53eeb8e130aeedcb9c0e443d5cfe8896712be6c4f5ee72b7e8e180",
+      "data.py": "1cbaafd8ef2fbd9203632af8bfa46a839466586be1055518991a93f60fa33ada",
+      "evaluation.py": "bc148d96df3d675c5d6dd37b9ea8c48aea2b2aa3f1739ae7c07b9a208253341a",
+      "evidence.py": "68d4c9b8e866cefb82156080fdbd86a825bfb399010b2c8839c6d8da5505c879",
+      "fixtures/movies.json": "52ededb370ed9f7618f72d466e2886850db677b302a97c6adcb2da56c9f5d634",
+      "ingestion.py": "ec5d3152db9a280292886de78eabf6f78bbd790b9297fe2c0e2d716af73d0b44",
+      "ranking.py": "6671b0531773530f239b086b6821a2cf255e1a0e1f7349d5b25ac0ae4babba3c",
+      "reports.py": "52c8a00225d7fbd7ae6b7b2a0980bfde355c67a037a63b2525e88abc88309a69",
+      "selection.py": "2b68d9a726e6a4ebadd672af7f5f6d45d933a69f83859f13a953876c741f4586",
+      "storage.py": "93312e59b0c8badf3363db8b68c7cad7c3394e9ac556dfcfd0586f65821efa08",
+      "ui/index.html": "2aa8df52e47184c8a2ae3761675b28c4b70ef0cb54787028e46e4440cabf114c"
+    }
+  },
+  "final_quality_gates": [],
+  "hardware": {
+    "als_threads": 2,
+    "blas_threads_during_fit_and_scoring": 1,
+    "machine": "arm64",
+    "numerical_libraries": [],
+    "peak_process_rss_bytes": 985300992,
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "http_load_gate": "unmeasured_no_promotion",
+  "limitations": [
+    "Rating activity timestamps are not verified viewing/exposure times",
+    "Missing ratings are unobserved preferences",
+    "Fixture correctness cannot establish MovieLens ranking quality",
+    "No product pass or deployment promotion before HTTP and bundle checks"
+  ],
+  "phase": "development_validation",
+  "protocol": {
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 42,
+    "maximum_peak_rss_bytes": 2147483648,
+    "maximum_recall_at_20_drop": 0.01,
+    "maximum_single_fit_seconds": 600.0,
+    "minimum_relative_ndcg_gain": 0.1,
+    "near_tie_absolute_ndcg": 0.001,
+    "positive_rating_min": 4,
+    "protocol": "chronological-full-catalog-v1",
+    "test_start": 0.9,
+    "train_fraction": 0.8,
+    "variants": [
+      "popularity",
+      "item_knn",
+      "als_cpu"
+    ],
+    "warm_http_p95_objective_ms": 50.0
+  },
+  "raw_source_report_sha256": "270db3c6fe7dd1e5ae2056ad3131b2fdfffdc3cf6383a606d739dee521f99b49",
+  "raw_user_accounting_verified_before_export": true,
+  "release_status": "development_only",
+  "resource_gate": true,
+  "schema_version": 1,
+  "selection": {
+    "promotion_status": "pending_http_resource_and_bundle_gates",
+    "quality_gates": [
+      {
+        "comparison": {
+          "candidate": "item_knn",
+          "interval_scope": "Paired benchmark users; shared items/training limit generalization",
+          "metrics": {
+            "hit_rate_at_10": {
+              "absolute_difference": 0.005439709882139619,
+              "paired_95_interval": [
+                -0.006346328195829556,
+                0.01813236627379873
+              ]
+            },
+            "ndcg_at_10": {
+              "absolute_difference": 0.008866954398135767,
+              "paired_95_interval": [
+                0.003926097634791934,
+                0.013702922211801414
+              ]
+            },
+            "recall_at_10": {
+              "absolute_difference": 0.004810882563633702,
+              "paired_95_interval": [
+                0.0006255308212381545,
+                0.008964118278280796
+              ]
+            },
+            "recall_at_20": {
+              "absolute_difference": 0.00246065671600328,
+              "paired_95_interval": [
+                -0.0024474488038315335,
+                0.007840121857042994
+              ]
+            }
+          },
+          "paired_users": 1103,
+          "relative_ndcg_gain": 0.03405095138098141,
+          "samples": 2000,
+          "seed": 42
+        },
+        "passed": false,
+        "reasons": [
+          "ndcg_relative_gain_below_objective"
+        ],
+        "variant": "item_knn"
+      },
+      {
+        "comparison": {
+          "candidate": "als_cpu",
+          "interval_scope": "Paired benchmark users; shared items/training limit generalization",
+          "metrics": {
+            "hit_rate_at_10": {
+              "absolute_difference": -0.006346328195829556,
+              "paired_95_interval": [
+                -0.025385312783318223,
+                0.012692656391659111
+              ]
+            },
+            "ndcg_at_10": {
+              "absolute_difference": -0.007337745884873807,
+              "paired_95_interval": [
+                -0.014071867170941272,
+                -0.0005110343111944903
+              ]
+            },
+            "recall_at_10": {
+              "absolute_difference": 0.0074394893491618735,
+              "paired_95_interval": [
+                -0.00026379547207831274,
+                0.01480639796166996
+              ]
+            },
+            "recall_at_20": {
+              "absolute_difference": 0.010086154229342786,
+              "paired_95_interval": [
+                0.0016372962037878845,
+                0.018677451874821678
+              ]
+            }
+          },
+          "paired_users": 1103,
+          "relative_ndcg_gain": -0.02817847224119768,
+          "samples": 2000,
+          "seed": 42
+        },
+        "passed": false,
+        "reasons": [
+          "ndcg_relative_gain_below_objective",
+          "ndcg_interval_not_above_zero"
+        ],
+        "variant": "als_cpu"
+      }
+    ],
+    "selected_for_final_refit": "popularity",
+    "serving_variant": "popularity",
+    "test_labels_used_for_selection": false
+  },
+  "split": {
+    "test_cutoff": 978133414,
+    "test_events": 100021,
+    "train_events": 800164,
+    "validation_cutoff": 975768738,
+    "validation_events": 100024
+  },
+  "variants": [
+    {
+      "catalog_fingerprint": "7f96073dbd899e970732d1bd9f77e9c01146546a081a62f5842d51e9b4cc7459",
+      "catalog_size": 3662,
+      "cohorts": {
+        "sparse": {
+          "descriptive_only": true,
+          "metrics": {
+            "hit_rate_at_10": 0.7272727272727273,
+            "ndcg_at_10": 0.2670374103544224,
+            "recall_at_10": 0.06950551718724787,
+            "recall_at_20": 0.09915382843573842
+          },
+          "users": 11
+        },
+        "warm": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.41372141372141374,
+            "ndcg_at_10": 0.12290104762326423,
+            "recall_at_10": 0.04724514313481309,
+            "recall_at_20": 0.08367019409734064
+          },
+          "users": 481
+        },
+        "zero_history": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.8576104746317512,
+            "ndcg_at_10": 0.36852895528197166,
+            "recall_at_10": 0.07119660910704036,
+            "recall_at_20": 0.12318376486700035
+          },
+          "users": 611
+        }
+      },
+      "completed_users": 1103,
+      "config": {
+        "als": null,
+        "min_likes_for_personalization": 3,
+        "neighbors": null,
+        "positive_rating_min": 4,
+        "variant": "popularity"
+      },
+      "coverage_at_10": 0.03304205352266521,
+      "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+      "data_mode": "movielens_1m",
+      "eligible_users": 1103,
+      "failed_users": 0,
+      "fallback_rate": 0.0,
+      "fit_ms": 965.5998750240542,
+      "history_fingerprint": "60adfe61cb88f7ba857a118f70963504cfaa1cc84bb2cbb8e2ae7c4bc3677cf8",
+      "metric_protocol": "binary-future-positive-4-unseen-full-catalog-v1",
+      "metrics": {
+        "hit_rate_at_10": 0.6627379873073436,
+        "ndcg_at_10": 0.260402544966431,
+        "recall_at_10": 0.06073490725413098,
+        "recall_at_20": 0.10571290644365473
+      },
+      "model_id": "movielens_1m-d3f6f330a34243f9",
+      "no_target_users": 4937,
+      "popular_fraction_at_10": 1.0,
+      "positive_targets": 57812,
+      "scoring_latency_ms": {
+        "p50": 0.7452089921571314,
+        "p95": 0.8396493969485164
+      },
+      "target_fingerprint": "580c55579f73936688c3f60c38987b9d3b8997d774b455f02e48c0c6e819723b",
+      "total_users": 6040,
+      "unreachable_positives": 5,
+      "variant": "popularity"
+    },
+    {
+      "catalog_fingerprint": "7f96073dbd899e970732d1bd9f77e9c01146546a081a62f5842d51e9b4cc7459",
+      "catalog_size": 3662,
+      "cohorts": {
+        "sparse": {
+          "descriptive_only": true,
+          "metrics": {
+            "hit_rate_at_10": 0.6363636363636364,
+            "ndcg_at_10": 0.31825747637526486,
+            "recall_at_10": 0.08900180231553659,
+            "recall_at_20": 0.10805899394108322
+          },
+          "users": 11
+        },
+        "warm": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.4282744282744283,
+            "ndcg_at_10": 0.14206285630292012,
+            "recall_at_10": 0.057831305985700396,
+            "recall_at_20": 0.08910917026614068
+          },
+          "users": 481
+        },
+        "zero_history": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.8576104746317512,
+            "ndcg_at_10": 0.36852895528197166,
+            "recall_at_10": 0.07119660910704036,
+            "recall_at_20": 0.12318376486700035
+          },
+          "users": 611
+        }
+      },
+      "completed_users": 1103,
+      "config": {
+        "als": null,
+        "min_likes_for_personalization": 3,
+        "neighbors": 100,
+        "positive_rating_min": 4,
+        "variant": "item_knn"
+      },
+      "coverage_at_10": 0.05133806663025669,
+      "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+      "data_mode": "movielens_1m",
+      "eligible_users": 1103,
+      "failed_users": 0,
+      "fallback_rate": 0.556663644605621,
+      "fit_ms": 1921.7864170204848,
+      "history_fingerprint": "60adfe61cb88f7ba857a118f70963504cfaa1cc84bb2cbb8e2ae7c4bc3677cf8",
+      "metric_protocol": "binary-future-positive-4-unseen-full-catalog-v1",
+      "metrics": {
+        "hit_rate_at_10": 0.6681776971894833,
+        "ndcg_at_10": 0.2692694993645668,
+        "recall_at_10": 0.06554578981776468,
+        "recall_at_20": 0.10817356315965801
+      },
+      "model_id": "movielens_1m-fb84614c08c44e16",
+      "no_target_users": 4937,
+      "popular_fraction_at_10": 0.9984587488667271,
+      "positive_targets": 57812,
+      "scoring_latency_ms": {
+        "p50": 0.7530000293627381,
+        "p95": 0.9662461176048962
+      },
+      "target_fingerprint": "580c55579f73936688c3f60c38987b9d3b8997d774b455f02e48c0c6e819723b",
+      "total_users": 6040,
+      "unreachable_positives": 5,
+      "variant": "item_knn"
+    },
+    {
+      "catalog_fingerprint": "7f96073dbd899e970732d1bd9f77e9c01146546a081a62f5842d51e9b4cc7459",
+      "catalog_size": 3662,
+      "cohorts": {
+        "sparse": {
+          "descriptive_only": true,
+          "metrics": {
+            "hit_rate_at_10": 0.7272727272727273,
+            "ndcg_at_10": 0.27254402941240574,
+            "recall_at_10": 0.05995347502651007,
+            "recall_at_20": 0.08823332804863114
+          },
+          "users": 11
+        },
+        "warm": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.3991683991683992,
+            "ndcg_at_10": 0.10594864321442093,
+            "recall_at_10": 0.06452337435288723,
+            "recall_at_20": 0.10704889185040357
+          },
+          "users": 481
+        },
+        "zero_history": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.8576104746317512,
+            "ndcg_at_10": 0.36852895528197166,
+            "recall_at_10": 0.07119660910704036,
+            "recall_at_20": 0.12318376486700035
+          },
+          "users": 611
+        }
+      },
+      "completed_users": 1103,
+      "config": {
+        "als": {
+          "factors": 32,
+          "iterations": 15,
+          "positive_confidence": 20,
+          "regularization": 0.1,
+          "seed": 42,
+          "threads": 2
+        },
+        "min_likes_for_personalization": 3,
+        "neighbors": null,
+        "positive_rating_min": 4,
+        "variant": "als_cpu"
+      },
+      "coverage_at_10": 0.2580557072637903,
+      "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+      "data_mode": "movielens_1m",
+      "eligible_users": 1103,
+      "failed_users": 0,
+      "fallback_rate": 0.556663644605621,
+      "fit_ms": 2638.9727920177393,
+      "history_fingerprint": "60adfe61cb88f7ba857a118f70963504cfaa1cc84bb2cbb8e2ae7c4bc3677cf8",
+      "metric_protocol": "binary-future-positive-4-unseen-full-catalog-v1",
+      "metrics": {
+        "hit_rate_at_10": 0.6563916591115141,
+        "ndcg_at_10": 0.2530647990815572,
+        "recall_at_10": 0.06817439660329286,
+        "recall_at_20": 0.11579906067299753
+      },
+      "model_id": "movielens_1m-2a415b78205f92e8",
+      "no_target_users": 4937,
+      "popular_fraction_at_10": 0.8745240253853128,
+      "positive_targets": 57812,
+      "scoring_latency_ms": {
+        "p50": 0.7576249772682786,
+        "p95": 0.9319547156337649
+      },
+      "target_fingerprint": "580c55579f73936688c3f60c38987b9d3b8997d774b455f02e48c0c6e819723b",
+      "total_users": 6040,
+      "unreachable_positives": 5,
+      "variant": "als_cpu"
+    }
+  ]
+}

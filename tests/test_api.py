@@ -13,7 +13,7 @@ def client():
 def test_api_ready_demo_and_catalog(client):
     assert client.get("/healthz").json() == {"status": "ok"}
     assert client.get("/readyz").json()["status"] == "ready"
-    assert "Fictional fixture" in client.get("/").text
+    assert "Find your next movie" in client.get("/").text
     assert client.get("/v1/model").json()["variant"] == "popularity"
     assert len(client.get("/v1/catalog?q=Orbit").json()) == 1
 

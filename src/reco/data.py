@@ -3,7 +3,7 @@ import math
 from dataclasses import dataclass
 from importlib.resources import files
 
-from reco.contracts import Fixture, Movie, Rating
+from reco.contracts import DataMode, Fixture, Movie, Rating
 
 
 @dataclass(frozen=True)
@@ -11,6 +11,7 @@ class Dataset:
     movies: tuple[Movie, ...]
     ratings: tuple[Rating, ...]
     fingerprint: str
+    data_mode: DataMode = "fictional_fixture"
 
     def __post_init__(self) -> None:
         movie_ids = {movie.movie_id for movie in self.movies}

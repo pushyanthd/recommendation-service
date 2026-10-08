@@ -1,5 +1,4 @@
 import hashlib
-import json
 import time
 from collections import defaultdict
 from typing import Any, Literal
@@ -12,6 +11,18 @@ from threadpoolctl import threadpool_limits
 
 from reco.contracts import Hit, Rating, RecommendationRequest, RecommendationResponse, Variant
 from reco.data import Dataset
+from reco.storage import json_hash
+
+
+class ALSConfig:
+    """Single bounded v1 treatment; changes must be frozen before test scoring."""
+
+    factors = 32
+    iterations = 15
+    regularization = 0.1
+    positive_confidence = 20
+    seed = 42
+    threads = 2
 
 
 class Ranker:
@@ -20,6 +31,7 @@ class Ranker:
     def __init__(self, dataset: Dataset, history: tuple[Rating, ...], variant: Variant) -> None:
         self.variant = variant
         self.data_fingerprint = dataset.fingerprint
+        self.data_mode = dataset.data_mode
         observed = {event.movie_id for event in history}
         self.movies = tuple(
             sorted(
@@ -30,6 +42,8 @@ class Ranker:
         if not self.movies:
             raise ValueError("Cannot fit an empty catalog")
         self.columns = {movie.movie_id: index for index, movie in enumerate(self.movies)}
+        self.movie_ids = np.array([movie.movie_id for movie in self.movies], dtype=np.int64)
+        self.genres = {genre for movie in self.movies for genre in movie.genres}
         self.known_users = {event.user_id for event in dataset.ratings}
         self.users = {uid: i for i, uid in enumerate(sorted({e.user_id for e in history}))}
         self.seen: dict[int, set[int]] = defaultdict(set)
@@ -68,27 +82,47 @@ class Ranker:
             from implicit.cpu.als import AlternatingLeastSquares
 
             self.als = AlternatingLeastSquares(
-                factors=32, iterations=15, regularization=0.1, random_state=42, num_threads=2
+                factors=ALSConfig.factors,
+                iterations=ALSConfig.iterations,
+                regularization=ALSConfig.regularization,
+                random_state=ALSConfig.seed,
+                num_threads=ALSConfig.threads,
             )
             with threadpool_limits(limits=1, user_api="blas"):
-                self.als.fit(self.positive * 20, show_progress=False)
+                self.als.fit(self.positive * ALSConfig.positive_confidence, show_progress=False)
         elif variant != "popularity":
             raise ValueError("Unknown ranking variant")
-        identity = json.dumps(
+        history_digest = hashlib.sha256()
+        for event in history:
+            history_digest.update(
+                f"{event.user_id}:{event.movie_id}:{event.rating}:{event.timestamp}\n".encode()
+            )
+        self.history_fingerprint = history_digest.hexdigest()
+        self.config = {
+            "variant": variant,
+            "positive_rating_min": 4,
+            "min_likes_for_personalization": 3,
+            "neighbors": 100 if variant == "item_knn" else None,
+            "als": {
+                "factors": ALSConfig.factors,
+                "iterations": ALSConfig.iterations,
+                "regularization": ALSConfig.regularization,
+                "positive_confidence": ALSConfig.positive_confidence,
+                "seed": ALSConfig.seed,
+                "threads": ALSConfig.threads,
+            }
+            if variant == "als_cpu"
+            else None,
+        }
+        identity = json_hash(
             {
                 "dataset": dataset.fingerprint,
-                "history": [
-                    event.model_dump()
-                    for event in sorted(
-                        history, key=lambda event: (event.timestamp, event.user_id, event.movie_id)
-                    )
-                ],
-                "variant": variant,
-                "implementation": "fixture-v1",
-            },
-            sort_keys=True,
-        ).encode()
-        self.model_id = "fixture-" + hashlib.sha256(identity).hexdigest()[:16]
+                "history": history_digest.hexdigest(),
+                "config": self.config,
+                "implementation": "ranking-v2",
+            }
+        )
+        self.model_id = dataset.data_mode + "-" + identity[:16]
 
     def recommend(self, request: RecommendationRequest) -> RecommendationResponse:
         started = time.perf_counter()
@@ -102,8 +136,7 @@ class Ranker:
             if not liked <= self.columns.keys():
                 raise ValueError("Unknown or unavailable movie ID")
             seen = liked
-        genres = {genre for movie in self.movies for genre in movie.genres}
-        if request.genre is not None and request.genre not in genres:
+        if request.genre is not None and request.genre not in self.genres:
             raise ValueError("Unknown genre")
         variant = self.variant if request.variant == "selected" else "popularity"
         fallback: Literal["insufficient_history"] | None = None
@@ -119,7 +152,10 @@ class Ranker:
             else:
                 indices = [self.columns[movie_id] for movie_id in sorted(liked)]
                 row = csr_matrix(
-                    (np.full(len(indices), 20, dtype=np.float32), ([0] * len(indices), indices)),
+                    (
+                        np.full(len(indices), ALSConfig.positive_confidence, dtype=np.float32),
+                        ([0] * len(indices), indices),
+                    ),
                     shape=(1, len(self.movies)),
                 )
                 with threadpool_limits(limits=1, user_api="blas"):
@@ -133,9 +169,9 @@ class Ranker:
             if movie.movie_id not in seen
             and (request.genre is None or request.genre in movie.genres)
         ]
-        ordered = sorted(
-            eligible, key=lambda index: (-float(scores[index]), self.movies[index].movie_id)
-        )
+        eligible_array = np.array(eligible, dtype=np.int64)
+        order = np.lexsort((self.movie_ids[eligible_array], -scores[eligible_array]))
+        ordered = eligible_array[order][: request.k]
         reasons: dict[Variant, Literal["popular", "similar_to_history", "collaborative_match"]] = {
             "popularity": "popular",
             "item_knn": "similar_to_history",
@@ -149,12 +185,12 @@ class Ranker:
                 score=float(scores[i]),
                 reason=reason,
             )
-            for i in ordered[: request.k]
+            for i in ordered
         ]
         return RecommendationResponse(
             request_id=str(uuid4()),
             model_id=self.model_id,
-            data_mode="fictional_fixture",
+            data_mode=self.data_mode,
             variant=variant,
             fallback_reason=fallback,
             catalog_exhausted=len(items) < request.k,

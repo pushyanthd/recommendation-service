@@ -1,0 +1,11 @@
+# Systems measurement protocols
+
+`reco showcase` runs against one owned Uvicorn process on loopback. It verifies readiness and exact model/code identities, executes four file/process recovery drills, then measures HTTP inference. Lifecycle drills use immutable locally built versions of the same frozen treatment and a fresh isolated model root.
+
+The reference protocol is 200 warmups followed by 5,000 offered requests at 20 requests/second, concurrency capped at four, `k=10`, with saved warm/sparse profiles and ephemeral zero/one/three-like profiles. Saved zero-positive profiles are included where available; fixtures lacking one still exercise zero-history requests through empty ephemeral likes. Requests are scheduled from a fixed clock independently of completion. Client wall latency includes schedule/queue delay; achieved throughput, queue P95, errors, fallback, startup and API-process peak RSS are retained separately. Raw rows have sequence/profile type/timing/status, not profile histories or user IDs.
+
+The warm HTTP objective is P95 under 50 ms with zero failures for valid traffic. Peak API-process RSS must remain under 2 GiB. Small/development configurations are labeled incomplete and cannot satisfy the reference acceptance flag. Shared CI machines verify correctness without applying the reference-hardware latency objective. Run measurements without simultaneous training or load generators.
+
+`verify_container.py` checks the image's actual source identity, UID, readiness and HTTP seen-item exclusion. It independently trains CPU ALS, verifies the imported backend, and inspects read-only/no-network/no-GPU settings. It removes the test container afterward. Image build/setup may download dependencies; verification uses network-disabled runtime containers.
+
+Use `make image image-check` for packaging checks, `make showcase` for the full protocol, and `reco verify-showcase <output> --root artifacts/models` to bind the result to the active snapshot/current code. Immutable outputs require a fresh `--output` directory for repeated runs. The [reproduction guide](../docs/reproduction.md) gives full commands and the [system card](../docs/system-card.md) records boundaries and outstanding security findings.

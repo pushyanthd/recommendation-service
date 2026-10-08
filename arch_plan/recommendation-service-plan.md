@@ -8,6 +8,8 @@ The engineering question is: **Can personalization improve discovery over popula
 
 **Draft architecture, October 5, 2026.** Target: **12–16 engineer-days**, including tests, benchmark evidence, documentation, and contingency. One engineer-day means six focused hours. This is about 2.5–3.5 full-time working weeks or 5–6.5 weeks at 15 focused hours/week. First working demo: day 4–5. Commands and performance thresholds below are proposed interfaces and objectives; implementation and measurements have not started.
 
+**Delivery update, October 7, 2026:** the bounded local v1 is implemented, with frozen real-data evaluation, CPU packaging and process-backed serving evidence. Engineering objectives passed; personalization missed the validation quality objective, so the release remains experimental and serves popularity. The original design and thresholds below remain the planning record. See the [acceptance checklist](../docs/acceptance.md), [implementation progress](../docs/progress.md) and [engineering case study](../docs/engineering-case-study.md) for current scope and results.
+
 Training, inference, evaluation, and CI use CPU only. There is no local language model, hosted model API, human labeling, review queue, approval workflow, or manual quality assessment required for v1 completion. Dataset download and dependency installation are explicit setup steps; subsequent runs work offline. Cloud/API spend is zero, with local hardware and electricity recorded separately.
 
 ### Portfolio rationale

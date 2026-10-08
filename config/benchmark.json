@@ -1,0 +1,15 @@
+{
+  "protocol": "chronological-full-catalog-v1",
+  "train_fraction": 0.8,
+  "test_start": 0.9,
+  "positive_rating_min": 4,
+  "variants": ["popularity", "item_knn", "als_cpu"],
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 42,
+  "minimum_relative_ndcg_gain": 0.1,
+  "maximum_recall_at_20_drop": 0.01,
+  "near_tie_absolute_ndcg": 0.001,
+  "warm_http_p95_objective_ms": 50,
+  "maximum_peak_rss_bytes": 2147483648,
+  "maximum_single_fit_seconds": 600
+}

@@ -96,3 +96,18 @@ def test_no_targets_is_unusable():
     ranker = Ranker(source, source.ratings, "popularity")
     with pytest.raises(ValueError, match="No eligible"):
         evaluate(ranker, source.ratings)
+
+
+def test_unexpected_request_failure_is_retained_for_every_scheduled_user(monkeypatch):
+    source = load_fixture()
+    split = chronological_split(source.ratings)
+    ranker = Ranker(source, split.train, "popularity")
+
+    def fail(_request):
+        raise IndexError("injected numerical mapping failure")
+
+    monkeypatch.setattr(ranker, "recommend", fail)
+    report = evaluate(ranker, split.validation)
+    assert report["eligible_users"] == report["failed_users"] == 4
+    assert report["completed_users"] == 0
+    assert all(record["metrics"]["ndcg_at_10"] == 0 for record in report["users"])

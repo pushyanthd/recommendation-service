@@ -1,0 +1,15 @@
+{
+  "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "files": {
+    "checksums.json": "570309530d2d99b93834a4892f4c055f1372915dae51a1248de8ee99a5f9be6a",
+    "report.html": "4863967e0250f5af583db807035bc8c95831bb78745f4a84e5c6459be224c16f",
+    "report.json": "05cbc463bf31abfcf51491245d23632135c6eeb61201fe3bed2ffb61f85798ed",
+    "report.md": "0c768db390dae0589ee957d2ebd1b6f3d97f02a9b392c66aeb40cb722dcb0a34",
+    "resources.json": "c18bca6d4cbc86302b1283357932078dc61475347d1cc5ab8589af838c1ad935",
+    "security.json": "b1b0596977b74aac7a97e17184b880731c9d2b6160a6ac2ab7361cc78b8b422e"
+  },
+  "final_report_sha256": "cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25",
+  "model_id": "movielens_1m-087582f44d7b5e9a-052d6efc4263ecfe",
+  "raw_run": "artifacts/showcase-2026-10-07",
+  "schema_version": 1
+}

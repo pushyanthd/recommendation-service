@@ -1,0 +1,26 @@
+{
+  "data_mode": "movielens_1m",
+  "dataset_manifest_sha256": "a04cd0e0060a7a39f7c39d030e605139392b417b1f928f3eb7c16dff56f3b5d9",
+  "files": {
+    "README.md": "40df4eb1bd17e5e54d5cac4607e79cb65fd56f84f37d1a9e900df0f33747e57d",
+    "development/checksums.json": "0dd56d862932553c9be4926a49c62e85394aa94773daca3cfaf62a65c260bcbf",
+    "development/report.html": "51355c4b58c67d20a78abf527b519c6566616ccb6380b08f9b152a058ade23ec",
+    "development/report.json": "4591163564116164ec45a8a1feee003f0ea52a1493a0cce727218add0151daf6",
+    "development/report.md": "db6546dd06e990371ee23cd9a06c229e6380c5ef278b328d63e3c1bd0173ea50",
+    "final/checksums.json": "3c0c8c9ee2b681fa7cd09e1646599928dec91f6040d9b1861acca2e8dc947f08",
+    "final/report.html": "4cf22491d6a9356dd39e7cac16df333c9388f2cf02b66ca7c9a6b23fc758b557",
+    "final/report.json": "ebe7607142605ee5816cf0f1263b50aa55f52d4da1d8f1da48d1e37b68c654f3",
+    "final/report.md": "e29c80b3b0e18c62de89624c75aec519ea5df5ac53710398e53f48c303365f26",
+    "freeze.json": "44fd0aa390b4d80bd4d0c0a7e5136f26a78235f67d210d5d565d29816636314a",
+    "hardware.json": "1fefb5ef0d9ce341bdfe3f199cddc30f2f1afacba209a116be473179765a4213"
+  },
+  "raw_local_report_sha256": {
+    "development": "270db3c6fe7dd1e5ae2056ad3131b2fdfffdc3cf6383a606d739dee521f99b49",
+    "final": "cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25"
+  },
+  "raw_user_accounting_verified": true,
+  "release_status": "experimental_quality_objective_failed",
+  "schema_version": 1,
+  "scope": "Frozen research comparison. HTTP load, bundles, rollback and full v1 acceptance are pending.",
+  "source_identity_matches_current_package": true
+}

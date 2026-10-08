@@ -1,0 +1,13 @@
+{
+  "observed_on": "2026-10-06",
+  "observation_command": "/usr/sbin/sysctl hw.memsize hw.model machdep.cpu.brand_string hw.ncpu hw.physicalcpu hw.logicalcpu",
+  "cpu_model": "Apple M1",
+  "machine_model": "MacBookPro17,1",
+  "physical_memory_bytes": 17179869184,
+  "physical_cpus": 8,
+  "logical_cpus": 8,
+  "machine": "arm64",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python_version": "3.12.12",
+  "measurement_scope": "Actual host CPU and RAM; process peak RSS and numerical threads are in each report. Whole-system and container memory are unmeasured."
+}

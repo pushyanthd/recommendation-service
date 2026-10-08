@@ -1,0 +1,10 @@
+{
+  "all_local_artifact_bytes_including_dataset_and_scanner_cache": 66622163,
+  "cloud_model_api_resources_provisioned": false,
+  "docker_image_bytes": 360676804,
+  "electricity_cost": "not_metered",
+  "hardware_cpu": "Apple M1",
+  "hardware_model": "MacBookPro17,1",
+  "physical_memory_bytes": 17179869184,
+  "under_one_gib": true
+}

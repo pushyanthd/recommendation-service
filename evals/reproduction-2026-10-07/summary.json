@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-07",
+  "passed": true,
+  "environment": "new venv with non-editable wheel in isolated source copy",
+  "dependency_setup": "uv sync --locked --offline --no-editable using previously populated dependency cache",
+  "data_setup": "explicit pinned original archive; no prior prepared dataset or bundle copied",
+  "commands": [
+    {
+      "command": [
+        "make",
+        "check"
+      ],
+      "exit_code": 0,
+      "seconds": 32.458482500049286,
+      "log": "00.log"
+    },
+    {
+      "command": [
+        "make",
+        "smoke"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8914231660310179,
+      "log": "01.log"
+    },
+    {
+      "command": [
+        ".venv/bin/reco",
+        "benchmark",
+        "--fixture",
+        "--output",
+        "artifacts/fixture-review"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5646873749792576,
+      "log": "02.log"
+    },
+    {
+      "command": [
+        ".venv/bin/reco",
+        "benchmark",
+        "--fixture",
+        "--final",
+        "--output",
+        "artifacts/fixture-review"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5626912079751492,
+      "log": "03.log"
+    },
+    {
+      "command": [
+        ".venv/bin/reco",
+        "verify-report",
+        "artifacts/fixture-review/final"
+      ],
+      "exit_code": 0,
+      "seconds": 0.349963708082214,
+      "log": "04.log"
+    },
+    {
+      "command": [
+        ".venv/bin/reco",
+        "data-fetch",
+        "--archive",
+        "local-pinned-ml-1m.zip"
+      ],
+      "exit_code": 0,
+      "seconds": 5.197760458104312,
+      "log": "05.log"
+    },
+    {
+      "command": [
+        "make",
+        "benchmark",
+        "benchmark-final",
+        "bundle"
+      ],
+      "exit_code": 0,
+      "seconds": 43.43884475005325,
+      "log": "06.log"
+    },
+    {
+      "command": [
+        ".venv/bin/reco",
+        "verify-report",
+        "artifacts/benchmark/final",
+        "--against",
+        "artifacts/benchmark-2026-10-06/final"
+      ],
+      "exit_code": 0,
+      "seconds": 0.661126249935478,
+      "log": "07.log"
+    }
+  ],
+  "package_source_files": {
+    "__init__.py": "6d6f9595cfccb7646730a08104bf455c9d6d85c5789258cfe9793d49d84c5d8b",
+    "api.py": "51e082885811abeede7f094be486a75cb5d7672af506638fad08fc3ac6c5be4f",
+    "benchmark.py": "915c186ae162aefba395f6278b8b033d06a14ca8d2c6f09e1f7590050a0f3fa8",
+    "bundles.py": "ee7365929c97251883eca2c5e26a5c3bf4976e1187c914e403330ad129f5197b",
+    "cli.py": "6c6d76611ad26495322f2f3c07e99e2e15a791c742045dacaabc34f56ef79e9e",
+    "container.py": "ddee0e481e90873bf0e24e889bca016b9f3d0c832100d512eb8a14a0e59e0f52",
+    "contracts.py": "98e352800e53eeb8e130aeedcb9c0e443d5cfe8896712be6c4f5ee72b7e8e180",
+    "data.py": "1cbaafd8ef2fbd9203632af8bfa46a839466586be1055518991a93f60fa33ada",
+    "evaluation.py": "bc148d96df3d675c5d6dd37b9ea8c48aea2b2aa3f1739ae7c07b9a208253341a",
+    "evidence.py": "68d4c9b8e866cefb82156080fdbd86a825bfb399010b2c8839c6d8da5505c879",
+    "fixtures/movies.json": "52ededb370ed9f7618f72d466e2886850db677b302a97c6adcb2da56c9f5d634",
+    "ingestion.py": "ec5d3152db9a280292886de78eabf6f78bbd790b9297fe2c0e2d716af73d0b44",
+    "lifecycle.py": "76286f7ceb199f667388ab8272a62d73c2e883ba105c13de7b4a1629cf1a34ff",
+    "load.py": "690e72c9e5262d277ec49ddc53e9c7467a8255a36d02d2e1ebab966d20d2465d",
+    "ranking.py": "6671b0531773530f239b086b6821a2cf255e1a0e1f7349d5b25ac0ae4babba3c",
+    "reports.py": "52c8a00225d7fbd7ae6b7b2a0980bfde355c67a037a63b2525e88abc88309a69",
+    "runtime.py": "e913a1748d5e3741e83751890151b434920ce7d103b8ea1b2b19f6a15c1aee9b",
+    "selection.py": "2b68d9a726e6a4ebadd672af7f5f6d45d933a69f83859f13a953876c741f4586",
+    "serving.py": "48aec3eff7ca49aa91e762df5226ca5d826590c7710efe5346423f569bbba3ef",
+    "showcase.py": "59dcdae7030f7c3464195f13a2369a1941c03858a825f070faf23b8e198fe720",
+    "storage.py": "93312e59b0c8badf3363db8b68c7cad7c3394e9ac556dfcfd0586f65821efa08",
+    "telemetry.py": "8ef2ccc5dbd9942f70ba781c9eca60710f7ed9af6058e06e90282d878419a54d",
+    "ui/index.html": "62031b79a2b75f2a3bc43982e570b81370c0ae0e2cb7b72d48da91ca5e6d6ada"
+  },
+  "dependency_lock_sha256": "b3f4051bbfc86ef0d7bf407815d1eb8b5bbebea01f72e3b2df37e23d8341adf9",
+  "fixture_final_report_sha256": "0a5dd6ceb93a06d5ad181f404645d639cac94b6529a413109673646554ae436f",
+  "real_final_report_sha256": "55dadfde388c5021570708c9bc057fff5f5553fe6730f86ce2a8fe26adfaceca",
+  "original_final_report_sha256": "cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25",
+  "numerical_treatment_model_ids_match": true,
+  "maximum_per_user_metric_difference": 0.0,
+  "http_checks": {
+    "readiness": true,
+    "real_data_provenance": true,
+    "saved_seen_exclusion": true,
+    "ephemeral_seen_exclusion": true,
+    "selected_baseline_parity": true
+  },
+  "checks": {
+    "tests_passed": 119,
+    "ruff": true,
+    "mypy": true
+  },
+  "release_status": "experimental_quality_objective_failed",
+  "limitations": [
+    "Dependencies use an explicitly supplied cache; this is not an empty-cache network installation.",
+    "Process code differs from original research; numerical treatment and compatible per-user metrics were verified separately.",
+    "Original full HTTP load and CPU container evidence remain the reference measurements."
+  ],
+  "evidence_kind": "isolated_source_copy_reproduction_summary",
+  "raw_local_evidence": "artifacts/reviewer-reproduction-2026-10-07",
+  "raw_summary_sha256": "070283f7a2aa075d6b79a3399b6a0e70d595359d64b8a022e84cc4cd7be0c674",
+  "raw_logs_sha256": {
+    "00.log": "83c8de302b6c37f0f88819fbe54e1006829bbdf2c9e5f622d6da603f21f39210",
+    "01.log": "3826fe44e2ec3c1ad0b6e712d1ad0d3c27bc7c3efb6c91a952c33d26682cad5f",
+    "02.log": "937e6e312e9e9af5812f9d612f76027508a2efd402488a9bbe7f217a0817859c",
+    "03.log": "bacef676689902df1c0ef21307ce2ad3d4341d2f9ec7829efcd0736647cbd276",
+    "04.log": "b78b0e96ff046cf73a82f46fc77c4c8280dd1870f6a4dc16b5a16d28dff452d9",
+    "05.log": "36a3d0a000d8267c0a40b1638306a6ca13ef5a65358d4d8c7ee6c9de14d2b71b",
+    "06.log": "40d97d03596fcbaf4353b48e065e0234b985eab7c8bbf2bd99a24b969055aa3e",
+    "07.log": "614b3c41d35b83ec0d14cb1ca6647aab508dfd047e7e3b866793d679d39af844"
+  }
+}
