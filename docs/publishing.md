@@ -4,6 +4,10 @@ The hardened candidate passed local arm64 verification. Its first amd64 CI build
 
 Local verification of the fix passes all 140 tests, Ruff lint/format, strict mypy and fixture smoke. A fresh linux/amd64 image builds and passes CPU ALS, HTTP exclusion, healthcheck, native-library hashes and offline/non-root/read-only verification under Docker's emulation on Apple Silicon. Its Trivy gate passes with 0 HIGH/CRITICAL, 24 MEDIUM, 10 LOW and 1 UNKNOWN; its full scan and CycloneDX SBOM remain under ignored `artifacts/ci-fix-amd64/`. This does not replace the required native amd64 GitHub checks on the new commit. The dated arm64 showcase evidence is unchanged.
 
+CI at `0cc04a4` passed the image build and CPU verification, then failed because Trivy's default root user could not write runner-owned `/cache` with all capabilities dropped. The scanner now uses the host UID/GID for both scanning and SBOM conversion, including access to the private temporary input directory. Read-only mounts, dropped capabilities and the vulnerability gate remain enforced. Docker Desktop's bind-mount behavior did not expose this Linux ownership failure during the earlier local check.
+
+The permission fix was verified with Linux-owned Docker volumes: UID/GID 1001, 0755 cache/output directories and a 0700 input directory. Default root with no capabilities reproduces the denial; UID/GID 1001:1001 passes a fresh database download, image scan and SBOM conversion. The updated audit code also passes against the verified amd64 image, with 0 HIGH/CRITICAL findings. All 13 audit gate tests pass. Logs/scans remain under ignored `artifacts/scanner-permissions/` and `artifacts/ci-scanner-fix/`.
+
 Review [release readiness](release-v1.md), [security review](security.md) and [current evidence](../evals/hardened-v1-2026-10-07/README.md). Trivy reports no HIGH/CRITICAL findings, while Scout reports one unfixed HIGH and the required C++ library has an additional tracked Debian advisory. A passing CI scan does not erase either risk. Current raw scans, lower-severity findings and package provenance remain available.
 
 ## Review and commit the fixes
@@ -13,10 +17,9 @@ cd /Users/pushyanth/Desktop/Code/recommendation-service
 git diff --check
 git diff
 git status --short
-git add benchmarks/stage_runtime.py benchmarks/verify_container.py \
-  benchmarks/README.md tests/test_stage_runtime.py docs/publishing.md
+git add benchmarks/image_audit.py benchmarks/README.md docs/publishing.md
 git diff --cached --stat
-git commit -m "Fix amd64 CPU image staging by excluding optional CUDA binary"
+git commit -m "Fix Linux scanner permissions by using the host UID and GID"
 git -c http.version=HTTP/1.1 -c http.postBuffer=16777216 push origin main
 ```
 
@@ -31,7 +34,7 @@ release_run=$(gh run list --commit "$release_commit" --workflow check.yml \
 test -n "$release_run" && gh run watch "$release_run" --exit-status
 ```
 
-Repeat the last two commands if the run has not appeared. Continue only when both jobs pass for this commit. The earlier passing run verifies the earlier preparation, not the CPU staging fix. CI checks tests, installed-wheel HTTP startup, fixture evaluation, CPU serving, native library provenance, vulnerability inventory and SBOM generation. Raw scan evidence is retained on gate failure; resolve a new failure before tagging.
+Repeat the last two commands if the run has not appeared. Continue only when both jobs pass for this commit. The earlier passing run verifies the earlier preparation, not the CPU staging and scanner permission fixes. CI checks tests, installed-wheel HTTP startup, fixture evaluation, CPU serving, native library provenance, vulnerability inventory and SBOM generation. Raw scan evidence is retained on gate failure; resolve a new failure before tagging.
 
 ## Tag and produce attested assets
 

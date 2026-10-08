@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import os
 import subprocess
 import tempfile
 from collections import Counter
@@ -101,6 +102,11 @@ def audit(image, output, cache, verification):
         scanner = [
             "run",
             "--rm",
+            # Bind mounts retain the runner's Linux ownership. Root with every
+            # capability dropped cannot write another user's 0755 directories
+            # or read the user's 0700 temporary input directory.
+            "--user",
+            f"{os.getuid()}:{os.getgid()}",
             "--read-only",
             "--cap-drop",
             "ALL",
