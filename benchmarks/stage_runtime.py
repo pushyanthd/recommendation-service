@@ -19,6 +19,22 @@ def sha256(path):
     return value.hexdigest()
 
 
+def exclude_optional_extensions(destination):
+    removed = []
+    for path in (destination / "usr/local/lib/python3.12/lib-dynload").iterdir():
+        if path.name.startswith(OPTIONAL_EXTENSIONS):
+            removed.append(str(path.relative_to(destination)))
+            path.unlink()
+    # The amd64 implicit wheel ships an optional CUDA binary. Keep its Python
+    # fallback and all CPU extensions, but exclude GPU code before resolving ELF
+    # dependencies so the CPU image never needs CUDA/RMM runtime libraries.
+    gpu = destination / "opt/venv/lib/python3.12/site-packages/implicit/gpu"
+    for path in gpu.glob("_cuda*.so"):
+        removed.append(str(path.relative_to(destination)))
+        path.unlink()
+    return sorted(removed)
+
+
 def stage(destination, base):
     if destination.exists():
         raise ValueError("Runtime staging directory must be new")
@@ -55,11 +71,7 @@ def stage(destination, base):
     for path in (destination / "usr/local/bin").iterdir():
         if path.name not in ("python", "python3", "python3.12"):
             path.unlink()
-    removed = []
-    for path in (destination / "usr/local/lib/python3.12/lib-dynload").iterdir():
-        if path.name.startswith(OPTIONAL_EXTENSIONS):
-            removed.append(str(path.relative_to(destination)))
-            path.unlink()
+    removed = exclude_optional_extensions(destination)
     # uuid.uuid4 uses os.urandom; Python supplies a fallback without optional _uuid.
     binaries = [Path("/usr/local/bin/python3.12")]
     for tree in (destination / "usr/local/lib", destination / "opt/venv"):

@@ -41,6 +41,7 @@ def verify(image, output):
 import hashlib, json, os, pathlib, urllib.request
 from reco.data import load_fixture, chronological_split
 from reco.ranking import Ranker
+import implicit.gpu
 url='http://127.0.0.1:8000'
 def get(path):
     return json.load(urllib.request.urlopen(url+path, timeout=2))
@@ -56,6 +57,8 @@ dataset=load_fixture()
 split=chronological_split(dataset.ratings)
 als=Ranker(dataset,split.train,'als_cpu')
 assert type(als.als).__module__=='implicit.cpu.als'
+assert not implicit.gpu.HAS_CUDA
+assert not list(pathlib.Path(implicit.gpu.__file__).parent.glob('_cuda*.so'))
 inventory=json.loads(pathlib.Path('/usr/share/reco-runtime/inventory.json').read_text())
 for library in inventory['external_libraries']:
     assert hashlib.sha256(pathlib.Path(library['path']).read_bytes()).hexdigest()==library['sha256']

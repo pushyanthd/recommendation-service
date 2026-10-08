@@ -1,6 +1,8 @@
 # Publish v1.0.0 yourself
 
-The hardened candidate is locally verified. No commits, pushes, tags or releases were made during this work. Publish after the exact committed revision passes CI and the tag workflow produces verified, attested assets. This is a local experimental benchmark/demo; popularity remains selected and the failed personalization objective stays visible.
+The hardened candidate passed local arm64 verification. Its first amd64 CI build at `b34a1c6` failed because the `implicit` wheel ships an optional CUDA binary and runtime staging attempted to resolve its unavailable GPU libraries. The CPU staging fix excludes only `implicit/gpu/_cuda*.so` before dependency resolution, preserves its Python fallback and CPU extensions, and adds container checks and regression coverage. Publish after the fixed committed revision passes CI and the tag workflow produces verified, attested assets. This is a local experimental benchmark/demo; popularity remains selected and the failed personalization objective stays visible.
+
+Local verification of the fix passes all 140 tests, Ruff lint/format, strict mypy and fixture smoke. A fresh linux/amd64 image builds and passes CPU ALS, HTTP exclusion, healthcheck, native-library hashes and offline/non-root/read-only verification under Docker's emulation on Apple Silicon. Its Trivy gate passes with 0 HIGH/CRITICAL, 24 MEDIUM, 10 LOW and 1 UNKNOWN; its full scan and CycloneDX SBOM remain under ignored `artifacts/ci-fix-amd64/`. This does not replace the required native amd64 GitHub checks on the new commit. The dated arm64 showcase evidence is unchanged.
 
 Review [release readiness](release-v1.md), [security review](security.md) and [current evidence](../evals/hardened-v1-2026-10-07/README.md). Trivy reports no HIGH/CRITICAL findings, while Scout reports one unfixed HIGH and the required C++ library has an additional tracked Debian advisory. A passing CI scan does not erase either risk. Current raw scans, lower-severity findings and package provenance remain available.
 
@@ -11,17 +13,11 @@ cd /Users/pushyanth/Desktop/Code/recommendation-service
 git diff --check
 git diff
 git status --short
-git add Dockerfile Makefile .github/workflows/check.yml .github/workflows/release.yml \
-  benchmarks/stage_runtime.py benchmarks/image_audit.py benchmarks/capture_demo.py \
-  benchmarks/verify_container.py benchmarks/verify_distribution.py benchmarks/README.md \
-  src/reco/api.py src/reco/runtime.lock tests/test_api.py tests/test_image_audit.py \
-  README.md arch_plan/recommendation-service-plan.md docs/acceptance.md docs/progress.md \
-  docs/release-v1.md docs/reproduction.md docs/system-card.md docs/security.md \
-  docs/publishing.md docs/release-notes-v1.md docs/engineering-case-study.md \
-  docs/demo evals/hardened-v1-2026-10-07
+git add benchmarks/stage_runtime.py benchmarks/verify_container.py \
+  benchmarks/README.md tests/test_stage_runtime.py docs/publishing.md
 git diff --cached --stat
-git commit -m "Harden v1 runtime and verify standalone installation and release assets"
-git push origin main
+git commit -m "Fix amd64 CPU image staging by excluding optional CUDA binary"
+git -c http.version=HTTP/1.1 -c http.postBuffer=16777216 push origin main
 ```
 
 The commands stage project files explicitly. Real data, model bundles, local browser tools, scanner caches and distributions remain ignored. No portfolio files outside this repository are included.
@@ -35,7 +31,7 @@ release_run=$(gh run list --commit "$release_commit" --workflow check.yml \
 test -n "$release_run" && gh run watch "$release_run" --exit-status
 ```
 
-Repeat the last two commands if the run has not appeared. Continue only when both jobs pass for this commit. The earlier passing run verifies the earlier preparation, not these uncommitted changes. CI checks tests, installed-wheel HTTP startup, fixture evaluation, CPU serving, native library provenance, vulnerability inventory and SBOM generation. Raw scan evidence is retained on gate failure; resolve a new failure before tagging.
+Repeat the last two commands if the run has not appeared. Continue only when both jobs pass for this commit. The earlier passing run verifies the earlier preparation, not the CPU staging fix. CI checks tests, installed-wheel HTTP startup, fixture evaluation, CPU serving, native library provenance, vulnerability inventory and SBOM generation. Raw scan evidence is retained on gate failure; resolve a new failure before tagging.
 
 ## Tag and produce attested assets
 
@@ -43,7 +39,7 @@ Repeat the last two commands if the run has not appeared. Continue only when bot
 test -z "$(git status --porcelain)"
 test "$(git rev-parse HEAD)" = "$release_commit"
 git tag -a v1.0.0 -m "CPU Recommendation Service v1.0.0"
-git push origin v1.0.0
+git -c http.version=HTTP/1.1 -c http.postBuffer=16777216 push origin v1.0.0
 ```
 
 The tag starts `release-candidate`; it does not automatically publish a release. The workflow verifies tag/package version agreement, repeats engineering/package/image checks, scans the linux/amd64 image and generates provenance and SBOM attestations. It uploads `verified-release-assets`, including the wheel, source archive, compressed CPU image, complete Trivy scan, CycloneDX SBOM, checksums, showcase and fixture demo. Local arm64 security evidence is explicitly named separately from the fresh CI amd64 scan.
