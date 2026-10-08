@@ -1,0 +1,22 @@
+{
+  "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "dependency_lock_sha256": "116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f",
+  "evidence_kind": "local_release_preparation",
+  "files": {
+    "README.md": "5991318276815a43bd03d899afdce22aea02f96193d952c4dd4009f587d6839e",
+    "checksums.json": "89d84f7e8513961f944fa281a006760c7a85f4a1bcb2d5c853ede430c75c6959",
+    "container.json": "087eeefd69d7430d036cf6d55a5755d88ceac3b86ee9d8e56d65e7a1ea4d5db3",
+    "local-checks.json": "429edd3d05e4b3c31a35235ffe246300e4b07a7626fd03ad317cfb6d89ac6153",
+    "os-packages.txt": "5f7d8702dea5cea016de609bf33d9292ad33760ce5b581f5ca13d41f28dacb47",
+    "report.html": "a2aef34d292bf18814b352797d269868f63ebf2fb3ef14991865161a31f74ed6",
+    "report.json": "d778382165e14225af6ee7d2b0a452e6f75bcf8defd57110584541d90bee6939",
+    "report.md": "c1d35a200734ff5f2623372e624f0ffb0302355bc01fb0b7e13936ae0d90118b",
+    "security.json": "ba319565b40d270ab0d9d6f6cec6791cad0ebb32d676a5365f17bfe0dad7619a"
+  },
+  "final_report_sha256": "cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25",
+  "image_id": "sha256:9c6e3a6328120f6bbac8d064685aa2ad92a44a275c0b6855255c050911bc6700",
+  "model_id": "movielens_1m-087582f44d7b5e9a-c6d9748b722d3a11",
+  "package_version": "1.0.0",
+  "schema_version": 1,
+  "source_identity_sha256": "bf629857b587f78176b2750726b5487f4e1b01ae02792de16cb1afd1a21748d8"
+}

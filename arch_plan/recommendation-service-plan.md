@@ -41,6 +41,8 @@ Deliver three comparable ranking variants, a recommendation API, cold-start fall
 
 Keep v1 to one dataset, one application process, one offline CLI pipeline, and local model bundles. Exclude neural recommenders, LLM explanations, fine-tuning, a separately learned reranker, live ingestion, Redis, Postgres, MLflow, Kafka, Kubernetes, Terraform, distributed jobs, and online A/B experiments. These exclusions are what make the shorter timeline credible. There is no revenue, click-through-rate, or user-productivity uplift claim from an offline ratings benchmark.
 
+**Release preparation, October 7, 2026:** package v1.0.0, isolated distribution verification, a fresh CPU image and the full serving/recovery protocol are verified locally. The original frozen quality result remains experimental. Commits, CI for the new revision, tags and publication are user-managed; see [release evidence](../evals/release-v1-2026-10-07/README.md) and [publishing commands](../docs/publishing.md).
+
 ## 2. User experience and workflow
 
 The browser demo has one screen: select a benchmark profile or choose up to ten liked movies, optionally filter by genre, and receive ten recommendations. Display the ranking variant, model version, fallback reason, and a short deterministic reason code. Compare the same request against popularity. Use movie titles and genres from the local catalog; posters, external movie APIs, and generated prose are unnecessary.

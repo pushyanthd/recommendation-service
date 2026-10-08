@@ -1,0 +1,24 @@
+{
+  "dependency_lock_sha256": "116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f",
+  "distribution_scope": "Locked dependencies installed from an explicitly populated local cache",
+  "installed_wheel_checks": {
+    "installed_cli_bundle_roundtrip": true,
+    "isolated_noneditable_wheel_install": true,
+    "offline_three_variant_fixture": true,
+    "sdist_contains_reproduction_inputs_without_dataset_rows": true,
+    "wheel_metadata_and_source": true
+  },
+  "mypy_strict": "passed",
+  "new_distribution_ci_status": "requires_user_commit_and_push",
+  "offline_fixture_validation_freeze_final_canary": "passed",
+  "package_version": "1.0.0",
+  "ruff_format": "passed",
+  "ruff_lint": "passed",
+  "schema_version": 1,
+  "source_identity_sha256": "bf629857b587f78176b2750726b5487f4e1b01ae02792de16cb1afd1a21748d8",
+  "tests": {
+    "failed": 0,
+    "passed": 121,
+    "result_sha256": "919958f2c59f2fb5e150a6f6d459830604be4ff5fe82595d04fc7c338cdcf5cf"
+  }
+}

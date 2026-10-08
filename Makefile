@@ -1,5 +1,7 @@
 PYTHON ?= python3.12
 BENCHMARK_DIR ?= artifacts/benchmark
+DIST_DIR ?= dist
+DIST_SETUP ?= --allow-downloads
 UV = .bootstrap/bin/uv
 export UV_CACHE_DIR := $(CURDIR)/.uv-cache
 export OPENBLAS_NUM_THREADS := 1
@@ -62,3 +64,10 @@ image-check:
 audit:
 	$(UV) audit --locked
 	docker scout cves cpu-reco:local --only-severity critical,high --exit-code
+
+.PHONY: distribution distribution-check
+distribution:
+	$(UV) build --out-dir $(DIST_DIR)
+
+distribution-check: distribution
+	.venv/bin/python benchmarks/verify_distribution.py --directory $(DIST_DIR) $(DIST_SETUP)

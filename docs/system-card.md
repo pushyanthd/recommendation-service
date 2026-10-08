@@ -34,4 +34,8 @@ The [October 7 showcase](../evals/2026-10-07/report.html) records HTTP measureme
 
 ## Corrected Linux lifecycle evidence
 
-The [corrected-code verification](../evals/ci-corrected-2026-10-07/README.md) records the process ownership correction, passing Linux CI and a fresh full HTTP/recovery protocol. The package remains at 0.1.0 with release publication deferred. Its final image passed CPU/non-root/read-only/network-disabled checks and dependency auditing; its actual image scan retains eight high findings with no fixed versions reported. The original numerical treatment and automatic quality decision remain frozen.
+The [corrected-code verification](../evals/ci-corrected-2026-10-07/README.md) records the process ownership correction, passing Linux CI and a fresh full HTTP/recovery protocol. That historical verification used package 0.1.0. The current v1.0.0 release preparation is documented in the [release checklist](release-v1.md). Its final image passed CPU/non-root/read-only/network-disabled checks and dependency auditing; its actual image scan retains eight high findings with no fixed versions reported. The original numerical treatment and automatic quality decision remain frozen.
+
+## v1.0.0 preparation
+
+The [release evidence](../evals/release-v1-2026-10-07/README.md) records the current package lock, a fresh unchanged-treatment MovieLens snapshot and the v1.0.0 CPU image. The full protocol passed with zero failures across 5,000 requests, 11.66 ms client P95 and 175.4 MiB API RSS; all four real recovery drills passed. These timings apply to the selected popularity baseline on the shared Apple M1 development host. The current high/critical image scan retains eight unfixed high findings, with zero fixable high/critical findings; the locked Python dependency audit is clear. Quality selection and deployment boundaries remain unchanged.

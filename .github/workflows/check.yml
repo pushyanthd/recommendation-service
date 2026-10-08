@@ -17,12 +17,17 @@ jobs:
       - run: .venv/bin/reco benchmark --fixture --output artifacts/ci-canary
       - run: .venv/bin/reco benchmark --fixture --final --output artifacts/ci-canary
       - run: .venv/bin/reco verify-report artifacts/ci-canary/final
+      - run: make distribution-check
       - uses: actions/upload-artifact@v4
         with:
           name: fictional-fixture-smoke
           path: |
             artifacts/fixture-smoke.json
             artifacts/ci-canary
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
 
   cpu-image:
     runs-on: ubuntu-latest

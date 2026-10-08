@@ -2,6 +2,8 @@
 
 ## Offline fixture
 
+The current package is v1.0.0. [Release preparation](release-v1.md) records its local verification; [publishing](publishing.md) remains user-managed. Original dated reports retain their original package and evidence identities.
+
 Use Python 3.12 and the committed lock. Installation is the dependency-network step; the fixture commands and tests use no network.
 
 ```bash
@@ -64,6 +66,16 @@ To export verified aggregate evidence without dataset rows, user identifiers or 
 ```
 
 Aggregate exports retain the raw source-report digest and checksummed JSON/Markdown/HTML. They cannot replace raw per-user evidence in compatibility/reproducibility checks. The committed October 6 summaries are a measured research result, not a completed v1 product acceptance report.
+
+## Distribution verification
+
+```bash
+make distribution-check
+```
+
+This explicitly builds a wheel and source archive and prepares a separate environment with hash-verified dependencies from the lock. Setup may download dependencies. From outside the checkout, it checks installed source/assets and package version, runs all three fictional methods, and builds/verifies a bundle using the installed CLI. Fixture commands run offline. The source archive retains the lock, benchmark config and reproduction commands, while excluding real dataset rows and ignored artifacts. CI runs the same check and uploads the archives, `verification.json` and `SHA256SUMS`.
+
+After populating the dependency/build cache, force offline setup with `UV_OFFLINE=1 make distribution-check DIST_SETUP=`. Use `DIST_DIR` to choose a separate release output directory. These package checks supplement the real-process showcase and frozen MovieLens reports.
 
 Typed data/pipeline failures are saved to `data-failure.json` or the run's `failure.json` and exit nonzero. Process locks reject simultaneous setup or selection in the same artifact root. Benchmarks and report verification have no network-download code path.
 

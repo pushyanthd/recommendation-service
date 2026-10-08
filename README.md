@@ -2,7 +2,7 @@
 
 CPU-only movie ranking with chronological splits, full-catalog evaluation, and an offline API demo.
 
-**Status: local v1 engineering verification complete; full release publication deferred.** Built a CPU-only recommendation API with chronological full-catalog evaluation, automatic model selection, cold-start fallback and verified rollback. Frozen MovieLens comparisons, real-data serving, the browser workflow, CPU packaging and process-backed showcase evidence are implemented. Neither personalized method passed validation, so popularity remains selected; outstanding unfixed image findings are documented. The benchmark retains its experimental quality label. No release tag or GitHub release has been published.
+**Status: v1.0.0 prepared locally; publication is user-managed.** Built a CPU-only recommendation API with chronological full-catalog evaluation, automatic model selection, cold-start fallback and verified rollback. Frozen MovieLens comparisons, real-data serving, the browser workflow, CPU packaging and process-backed showcase evidence are implemented. Neither personalized method passed validation, so popularity remains selected; outstanding unfixed image findings are documented. The benchmark retains its experimental quality label. No release tag or GitHub release has been published.
 
 For a portfolio review, start with the [engineering case study and demo walkthrough](docs/engineering-case-study.md), then the [v1 acceptance checklist](docs/acceptance.md) and [release readiness](docs/release-v1.md). The experimental label records a failed personalization objective; engineering acceptance is reported separately.
 
@@ -82,7 +82,15 @@ See the [standalone showcase](evals/2026-10-07/report.html), [evidence guide](ev
 
 The [corrected-code evidence](evals/ci-corrected-2026-10-07/README.md) verifies Linux process ownership with full command-line inspection, 121 local tests, Ruff, strict mypy and passing GitHub fixture/image jobs. A fresh MovieLens snapshot completed **5,000/5,000 HTTP requests with zero failures**, **12.07 ms client P95** and **175.5 MiB API RSS**. All four recovery drills passed. The earlier reports remain historical evidence; this new report binds to the corrected source and current package metadata.
 
-The final image's dependency audit is clear, and its scan retains eight high findings with no fixed versions reported. The [readiness checklist](docs/release-v1.md) records completed engineering work and those limits. Package version remains 0.1.0; release publication is deferred.
+The corrected 0.1.0 image's dependency audit is clear, and its scan retains eight high findings with no fixed versions reported. Those reports remain historical evidence. The [readiness checklist](docs/release-v1.md) tracks v1.0.0 packaging and publication, and the [publishing guide](docs/publishing.md) provides commands to commit and publish it yourself.
+
+## v1.0.0 release preparation
+
+The [release verification](evals/release-v1-2026-10-07/README.md) binds a fresh serving snapshot and CPU image to the 1.0.0 package lock. It completed **5,000/5,000 HTTP requests with zero failures**, **11.66 ms client P95**, **175.4 MiB API RSS**, and all four recovery drills. All 121 local tests, lint/types and the fixture validation/freeze/final canary pass. The distribution check installs the built wheel outside the checkout and runs all three fictional methods and a bundle roundtrip; CI now runs that check and uploads the archives.
+
+The current image scan retains eight unfixed high findings, with no fixable high/critical findings; the locked Python dependency audit is clear. The source archive and wheel include fictional fixtures, with no MovieLens rows or real-data models. Checksums and installation verification accompany the release assets.
+
+No commits, pushes, tags or releases were made during preparation. Remaining steps are your commit/push, CI verification of that exact revision and publication. Use the [publishing commands](docs/publishing.md) and [draft release notes](docs/release-notes-v1.md). The stronger final item-similarity result still does not change the earlier validation decision.
 
 ## Serve and reproduce
 
@@ -101,7 +109,7 @@ make image-check              # Offline non-root/read-only/no-GPU verification
 make showcase                 # Isolated fault/restart/rollback and full HTTP protocol
 ```
 
-Outputs are immutable; repeat runs need fresh directories. The [reproduction guide](docs/reproduction.md) gives options and commands for the original dated run, verified exports and compatible comparisons. Publishing, tagging, hosting, live collection and online experiments remain separate future work under the [architecture plan](arch_plan/recommendation-service-plan.md).
+Outputs are immutable; repeat runs need fresh directories. The [reproduction guide](docs/reproduction.md) gives options and commands for the original dated run, verified exports and compatible comparisons. Publishing and tagging are user-managed release steps in the [publishing guide](docs/publishing.md). Hosting, live collection and online experiments remain future work under the [architecture plan](arch_plan/recommendation-service-plan.md).
 
 ## Documentation
 
