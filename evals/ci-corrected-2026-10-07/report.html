@@ -1,0 +1,471 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CPU recommendation service showcase</title><style>body{font:16px/1.65 system-ui;max-width:1000px;margin:48px auto;padding:0 24px;background:#f4f6f1;color:#19332d}table{border-collapse:collapse;width:100%;background:white}th,td{text-align:left;padding:12px;border-bottom:1px solid #ccd8d0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:24px;border-radius:12px}h1{font-size:40px}</style><h1>CPU ranking, measured.</h1><p>experimental_quality_objective_failed · movielens_1m</p><table><tr><th>Method</th><th>Final NDCG@10</th><th>Final Recall@20</th></tr><tr><td>popularity</td><td>0.218277</td><td>0.093712</td></tr><tr><td>item_knn</td><td>0.244413</td><td>0.103511</td></tr><tr><td>als_cpu</td><td>0.196194</td><td>0.108018</td></tr></table><h2>Serving and recovery evidence</h2><pre># CPU recommendation service showcase
+
+Status: **experimental_quality_objective_failed**. Selected: **popularity**.
+
+Model: `movielens_1m-087582f44d7b5e9a-9ab1ee157fe38ee7`. Data: `movielens_1m`.
+
+| Method | Final NDCG@10 | Final Recall@20 |
+|---|---:|---:|
+| popularity | 0.218277 | 0.093712 |
+| item_knn | 0.244413 | 0.103511 |
+| als_cpu | 0.196194 | 0.108018 |
+
+HTTP: 5000/5000 completed; 0 failures; warm client P95 12.071 ms; 20.00 requests/s.
+
+API process peak RSS: 175.5 MiB. Snapshot startup load: 304.59 ms.
+
+## Recovery drills
+
+- corrupt_candidate_rejected: passed
+- forced_gate_rejection: passed
+- restart_preserves_version_and_ranking: passed
+- rollback_restores_exact_prior_version: passed
+
+Validation selection is preserved. Final metrics do not select a new model. Offline rating recovery does not establish viewing, clicks or revenue. HTTP latency includes client queueing. Docker/whole-system memory is separate. Raw timings and process evidence remain in ignored local artifacts.
+</pre><details><summary>Full provenance and acceptance evidence</summary><pre>{
+  &quot;bundle_manifest_sha256&quot;: &quot;b50b86dfb90fd0a176e9c70570321561a396a3cda6394ea76f9abdff66e3818e&quot;,
+  &quot;cold_start_to_readiness_wall_ms&quot;: 1216.0842919256538,
+  &quot;container&quot;: {
+    &quot;architecture&quot;: &quot;arm64&quot;,
+    &quot;checks&quot;: {
+      &quot;api_peak_process_rss_bytes&quot;: 79790080,
+      &quot;cpu_backend&quot;: &quot;implicit.cpu.als&quot;,
+      &quot;data_mode&quot;: &quot;fictional_fixture&quot;,
+      &quot;model_id&quot;: &quot;fictional_fixture-a8d92ae361c9bc13-db7f5b5c20015de1&quot;,
+      &quot;ready&quot;: true,
+      &quot;runtime_identity_sha256&quot;: &quot;629d65da99be93f6c14f8dbb2d2d427c55399c3e9f5c025c4e2741a4784cd25f&quot;,
+      &quot;source_identity_sha256&quot;: &quot;bf629857b587f78176b2750726b5487f4e1b01ae02792de16cb1afd1a21748d8&quot;,
+      &quot;uid&quot;: 10001
+    },
+    &quot;dockerfile_sha256&quot;: &quot;576f40ef2093ebdc3e16dbc10123c1bf167c2dc3d528d693ed728c1016df40ea&quot;,
+    &quot;gpu_device_requests&quot;: [],
+    &quot;image_id&quot;: &quot;sha256:459bed1d73daf81f691afb7de19607c4f926392db96e13be80aa430f98f9e1c7&quot;,
+    &quot;image_size_bytes&quot;: 360680282,
+    &quot;image_user&quot;: &quot;10001:10001&quot;,
+    &quot;network&quot;: &quot;none&quot;,
+    &quot;os&quot;: &quot;linux&quot;,
+    &quot;passed&quot;: true,
+    &quot;read_only&quot;: true,
+    &quot;schema_version&quot;: 1,
+    &quot;security_scan&quot;: {
+      &quot;dependency_audit&quot;: {
+        &quot;adverse_statuses&quot;: 0,
+        &quot;audited_packages&quot;: 38,
+        &quot;vulnerabilities&quot;: 0
+      },
+      &quot;dependency_audit_sha256&quot;: &quot;bab15a8c51e6769ac866ca28be7dc7fbf2abf93e2f3a1a222cc542e3a6d9078d&quot;,
+      &quot;docker_scout_version&quot;: &quot;1.24.0&quot;,
+      &quot;findings&quot;: [
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-78409&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        },
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-82560&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/perl@5.36.0-7%2Bdeb12u4?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        },
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-95619&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/gcc-12@12.2.0-14%2Bdeb12u1?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        },
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-78410&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        },
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-78408&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        },
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-84782&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/openssl@3.0.22-1~deb12u1?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        },
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-85091&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/zlib@1%3A1.2.13.dfsg-1?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        },
+        {
+          &quot;fixed_version&quot;: &quot;not fixed&quot;,
+          &quot;id&quot;: &quot;CVE-2026-76642&quot;,
+          &quot;package&quot;: &quot;pkg:deb/debian/util-linux@2.38.1-5%2Bdeb12u3?os_distro=bookworm&amp;os_name=debian&amp;os_version=12&quot;,
+          &quot;severity&quot;: &quot;HIGH&quot;
+        }
+      ],
+      &quot;fixable_high_critical_findings&quot;: 0,
+      &quot;high_critical_findings&quot;: 8,
+      &quot;image_id&quot;: &quot;sha256:459bed1d73daf81f691afb7de19607c4f926392db96e13be80aa430f98f9e1c7&quot;,
+      &quot;image_scan_sha256&quot;: &quot;661aaa86ba7175860ae307fa083c9b18d9882f0dd7c101391f2c12e79e170dd0&quot;,
+      &quot;scan_date&quot;: &quot;2026-10-07&quot;,
+      &quot;scanned_severities&quot;: [
+        &quot;critical&quot;,
+        &quot;high&quot;
+      ],
+      &quot;status&quot;: &quot;unfixed_base_image_findings&quot;
+    },
+    &quot;source_identity_sha256&quot;: &quot;bf629857b587f78176b2750726b5487f4e1b01ae02792de16cb1afd1a21748d8&quot;
+  },
+  &quot;data_fingerprint&quot;: &quot;a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20&quot;,
+  &quot;data_mode&quot;: &quot;movielens_1m&quot;,
+  &quot;drills&quot;: {
+    &quot;corrupt_candidate_rejected&quot;: {
+      &quot;active_pointer_unchanged&quot;: true,
+      &quot;error&quot;: &quot;Bundle checksum mismatch: popularity.npz&quot;,
+      &quot;passed&quot;: true
+    },
+    &quot;forced_gate_rejection&quot;: {
+      &quot;candidate_error&quot;: &quot;Candidate operation gate rejected activation&quot;,
+      &quot;development_selected&quot;: &quot;popularity&quot;,
+      &quot;passed&quot;: true
+    },
+    &quot;restart_preserves_version_and_ranking&quot;: {
+      &quot;after_pid&quot;: 98388,
+      &quot;before_pid&quot;: 98380,
+      &quot;model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-9ab1ee157fe38ee7&quot;,
+      &quot;passed&quot;: true
+    },
+    &quot;rollback_restores_exact_prior_version&quot;: {
+      &quot;activated_model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-e4cb8c41899e918c&quot;,
+      &quot;activated_pid&quot;: 98394,
+      &quot;passed&quot;: true,
+      &quot;restored_model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-9ab1ee157fe38ee7&quot;,
+      &quot;restored_pid&quot;: 98398
+    }
+  },
+  &quot;engineering_acceptance_passed&quot;: true,
+  &quot;evidence_kind&quot;: &quot;process_backed_showcase&quot;,
+  &quot;execution_identity&quot;: {
+    &quot;dependencies&quot;: {
+      &quot;fastapi&quot;: &quot;0.142.2&quot;,
+      &quot;implicit&quot;: &quot;0.7.3&quot;,
+      &quot;numpy&quot;: &quot;2.5.3&quot;,
+      &quot;pydantic&quot;: &quot;2.13.5&quot;,
+      &quot;scipy&quot;: &quot;1.18.1&quot;,
+      &quot;threadpoolctl&quot;: &quot;3.7.0&quot;
+    },
+    &quot;dependency_lock_sha256&quot;: &quot;b3f4051bbfc86ef0d7bf407815d1eb8b5bbebea01f72e3b2df37e23d8341adf9&quot;,
+    &quot;python&quot;: &quot;3.12.12&quot;,
+    &quot;source_files&quot;: {
+      &quot;__init__.py&quot;: &quot;6d6f9595cfccb7646730a08104bf455c9d6d85c5789258cfe9793d49d84c5d8b&quot;,
+      &quot;api.py&quot;: &quot;51e082885811abeede7f094be486a75cb5d7672af506638fad08fc3ac6c5be4f&quot;,
+      &quot;benchmark.py&quot;: &quot;915c186ae162aefba395f6278b8b033d06a14ca8d2c6f09e1f7590050a0f3fa8&quot;,
+      &quot;bundles.py&quot;: &quot;9437ad48ad215d5ae5c7e99db6064e9f32d0ca38431acbdee8125662b661b083&quot;,
+      &quot;cli.py&quot;: &quot;6c6d76611ad26495322f2f3c07e99e2e15a791c742045dacaabc34f56ef79e9e&quot;,
+      &quot;container.py&quot;: &quot;ddee0e481e90873bf0e24e889bca016b9f3d0c832100d512eb8a14a0e59e0f52&quot;,
+      &quot;contracts.py&quot;: &quot;98e352800e53eeb8e130aeedcb9c0e443d5cfe8896712be6c4f5ee72b7e8e180&quot;,
+      &quot;data.py&quot;: &quot;1cbaafd8ef2fbd9203632af8bfa46a839466586be1055518991a93f60fa33ada&quot;,
+      &quot;evaluation.py&quot;: &quot;bc148d96df3d675c5d6dd37b9ea8c48aea2b2aa3f1739ae7c07b9a208253341a&quot;,
+      &quot;evidence.py&quot;: &quot;68d4c9b8e866cefb82156080fdbd86a825bfb399010b2c8839c6d8da5505c879&quot;,
+      &quot;fixtures/movies.json&quot;: &quot;52ededb370ed9f7618f72d466e2886850db677b302a97c6adcb2da56c9f5d634&quot;,
+      &quot;ingestion.py&quot;: &quot;ec5d3152db9a280292886de78eabf6f78bbd790b9297fe2c0e2d716af73d0b44&quot;,
+      &quot;lifecycle.py&quot;: &quot;525b980d899e22600068bd130b3442a6b16f5c631b02d562cc06fd89bba9b708&quot;,
+      &quot;load.py&quot;: &quot;690e72c9e5262d277ec49ddc53e9c7467a8255a36d02d2e1ebab966d20d2465d&quot;,
+      &quot;ranking.py&quot;: &quot;6671b0531773530f239b086b6821a2cf255e1a0e1f7349d5b25ac0ae4babba3c&quot;,
+      &quot;reports.py&quot;: &quot;52c8a00225d7fbd7ae6b7b2a0980bfde355c67a037a63b2525e88abc88309a69&quot;,
+      &quot;runtime.py&quot;: &quot;e913a1748d5e3741e83751890151b434920ce7d103b8ea1b2b19f6a15c1aee9b&quot;,
+      &quot;selection.py&quot;: &quot;2b68d9a726e6a4ebadd672af7f5f6d45d933a69f83859f13a953876c741f4586&quot;,
+      &quot;serving.py&quot;: &quot;48aec3eff7ca49aa91e762df5226ca5d826590c7710efe5346423f569bbba3ef&quot;,
+      &quot;showcase.py&quot;: &quot;59dcdae7030f7c3464195f13a2369a1941c03858a825f070faf23b8e198fe720&quot;,
+      &quot;storage.py&quot;: &quot;93312e59b0c8badf3363db8b68c7cad7c3394e9ac556dfcfd0586f65821efa08&quot;,
+      &quot;telemetry.py&quot;: &quot;8ef2ccc5dbd9942f70ba781c9eca60710f7ed9af6058e06e90282d878419a54d&quot;,
+      &quot;ui/index.html&quot;: &quot;62031b79a2b75f2a3bc43982e570b81370c0ae0e2cb7b72d48da91ca5e6d6ada&quot;
+    }
+  },
+  &quot;final_report_sha256&quot;: &quot;cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25&quot;,
+  &quot;hardware&quot;: {
+    &quot;logical_cpus&quot;: 8,
+    &quot;machine&quot;: &quot;arm64&quot;,
+    &quot;platform&quot;: &quot;macOS-26.6.2-arm64-arm-64bit&quot;,
+    &quot;python&quot;: &quot;3.12.12&quot;
+  },
+  &quot;http_load&quot;: {
+    &quot;achieved_requests_per_second&quot;: 20.002551958944906,
+    &quot;client_wall_ms&quot;: {
+      &quot;max&quot;: 100.14362505171448,
+      &quot;p50&quot;: 10.714728501625359,
+      &quot;p95&quot;: 12.070851761382073
+    },
+    &quot;completed&quot;: 5000,
+    &quot;configuration&quot;: {
+      &quot;concurrency_cap&quot;: 4,
+      &quot;k&quot;: 10,
+      &quot;mix&quot;: [
+        &quot;warm&quot;,
+        &quot;sparse&quot;,
+        &quot;zero_history&quot;,
+        &quot;ephemeral_0&quot;,
+        &quot;ephemeral_1&quot;,
+        &quot;ephemeral_3&quot;
+      ],
+      &quot;offered_requests_per_second&quot;: 20.0,
+      &quot;requests&quot;: 5000,
+      &quot;warmup&quot;: 200
+    },
+    &quot;data_mode&quot;: &quot;movielens_1m&quot;,
+    &quot;duration_seconds&quot;: 249.9681045829784,
+    &quot;error_rate&quot;: 0.0,
+    &quot;failed&quot;: 0,
+    &quot;fallback_requests&quot;: 0,
+    &quot;http_gate_passed&quot;: true,
+    &quot;memory_gate_passed&quot;: true,
+    &quot;metrics_sha256&quot;: &quot;6bb5c8ed276bc111fa1d59073864ee4ade9728fcb91c21ce178de266f55d37e2&quot;,
+    &quot;model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-9ab1ee157fe38ee7&quot;,
+    &quot;peak_api_process_rss_bytes&quot;: 184008704,
+    &quot;protocol&quot;: &quot;open-loop-http-v1&quot;,
+    &quot;queue_ms_p95&quot;: 2.3173330118879676,
+    &quot;raw_timings_sha256&quot;: &quot;056a3b08ebc08a7371bae13625f6c49fcbf766363c727ed88627ac997b64a373&quot;,
+    &quot;reference_protocol_complete&quot;: true,
+    &quot;scheduled&quot;: 5000,
+    &quot;startup_load_ms&quot;: 304.58899994846433
+  },
+  &quot;model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-9ab1ee157fe38ee7&quot;,
+  &quot;quality_objective_passed&quot;: false,
+  &quot;quality_variants&quot;: [
+    {
+      &quot;cohorts&quot;: {
+        &quot;sparse&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.7948717948717948,
+            &quot;ndcg_at_10&quot;: 0.29058576974605826,
+            &quot;recall_at_10&quot;: 0.05900106740794275,
+            &quot;recall_at_20&quot;: 0.10115599576422293
+          },
+          &quot;users&quot;: 39
+        },
+        &quot;warm&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.6288014311270125,
+            &quot;ndcg_at_10&quot;: 0.20932206093774236,
+            &quot;recall_at_10&quot;: 0.05665266750672867,
+            &quot;recall_at_20&quot;: 0.09261854554661329
+          },
+          &quot;users&quot;: 1118
+        },
+        &quot;zero_history&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.9354838709677419,
+            &quot;ndcg_at_10&quot;: 0.45025673787635917,
+            &quot;recall_at_10&quot;: 0.07876333921957233,
+            &quot;recall_at_20&quot;: 0.12378582846166745
+          },
+          &quot;users&quot;: 31
+        }
+      },
+      &quot;eligible_users&quot;: 1188,
+      &quot;failed_users&quot;: 0,
+      &quot;metrics&quot;: {
+        &quot;hit_rate_at_10&quot;: 0.6422558922558923,
+        &quot;ndcg_at_10&quot;: 0.21827682493489844,
+        &quot;recall_at_10&quot;: 0.05730672341518448,
+        &quot;recall_at_20&quot;: 0.0937121030624832
+      },
+      &quot;variant&quot;: &quot;popularity&quot;
+    },
+    {
+      &quot;cohorts&quot;: {
+        &quot;sparse&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.7435897435897436,
+            &quot;ndcg_at_10&quot;: 0.3272564069433807,
+            &quot;recall_at_10&quot;: 0.05719732652537353,
+            &quot;recall_at_20&quot;: 0.10443599010118941
+          },
+          &quot;users&quot;: 39
+        },
+        &quot;warm&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.6386404293381037,
+            &quot;ndcg_at_10&quot;: 0.23581545909264306,
+            &quot;recall_at_10&quot;: 0.06340103844565002,
+            &quot;recall_at_20&quot;: 0.10291635683470284
+          },
+          &quot;users&quot;: 1118
+        },
+        &quot;zero_history&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.9354838709677419,
+            &quot;ndcg_at_10&quot;: 0.45025673787635917,
+            &quot;recall_at_10&quot;: 0.07876333921957233,
+            &quot;recall_at_20&quot;: 0.12378582846166745
+          },
+          &quot;users&quot;: 31
+        }
+      },
+      &quot;eligible_users&quot;: 1188,
+      &quot;failed_users&quot;: 0,
+      &quot;metrics&quot;: {
+        &quot;hit_rate_at_10&quot;: 0.6498316498316499,
+        &quot;ndcg_at_10&quot;: 0.2444129983253653,
+        &quot;recall_at_10&quot;: 0.06359824935398403,
+        &quot;recall_at_20&quot;: 0.103510817539946
+      },
+      &quot;variant&quot;: &quot;item_knn&quot;
+    },
+    {
+      &quot;cohorts&quot;: {
+        &quot;sparse&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.7692307692307693,
+            &quot;ndcg_at_10&quot;: 0.2791908008527626,
+            &quot;recall_at_10&quot;: 0.05542861964639851,
+            &quot;recall_at_20&quot;: 0.09798884883349748
+          },
+          &quot;users&quot;: 39
+        },
+        &quot;warm&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.627906976744186,
+            &quot;ndcg_at_10&quot;: 0.18625368068330939,
+            &quot;recall_at_10&quot;: 0.06360862116248948,
+            &quot;recall_at_20&quot;: 0.10793099442913973
+          },
+          &quot;users&quot;: 1118
+        },
+        &quot;zero_history&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.9354838709677419,
+            &quot;ndcg_at_10&quot;: 0.45025673787635917,
+            &quot;recall_at_10&quot;: 0.07876333921957233,
+            &quot;recall_at_20&quot;: 0.12378582846166745
+          },
+          &quot;users&quot;: 31
+        }
+      },
+      &quot;eligible_users&quot;: 1188,
+      &quot;failed_users&quot;: 0,
+      &quot;metrics&quot;: {
+        &quot;hit_rate_at_10&quot;: 0.6405723905723906,
+        &quot;ndcg_at_10&quot;: 0.19619361541360675,
+        &quot;recall_at_10&quot;: 0.0637355371562959,
+        &quot;recall_at_20&quot;: 0.10801833127827973
+      },
+      &quot;variant&quot;: &quot;als_cpu&quot;
+    }
+  ],
+  &quot;release_status&quot;: &quot;experimental_quality_objective_failed&quot;,
+  &quot;schema_version&quot;: 1,
+  &quot;selection&quot;: {
+    &quot;promotion_status&quot;: &quot;pending_http_resource_and_bundle_gates&quot;,
+    &quot;quality_gates&quot;: [
+      {
+        &quot;comparison&quot;: {
+          &quot;candidate&quot;: &quot;item_knn&quot;,
+          &quot;interval_scope&quot;: &quot;Paired benchmark users; shared items/training limit generalization&quot;,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.005439709882139619,
+              &quot;paired_95_interval&quot;: [
+                -0.006346328195829556,
+                0.01813236627379873
+              ]
+            },
+            &quot;ndcg_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.008866954398135767,
+              &quot;paired_95_interval&quot;: [
+                0.003926097634791934,
+                0.013702922211801414
+              ]
+            },
+            &quot;recall_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.004810882563633702,
+              &quot;paired_95_interval&quot;: [
+                0.0006255308212381545,
+                0.008964118278280796
+              ]
+            },
+            &quot;recall_at_20&quot;: {
+              &quot;absolute_difference&quot;: 0.00246065671600328,
+              &quot;paired_95_interval&quot;: [
+                -0.0024474488038315335,
+                0.007840121857042994
+              ]
+            }
+          },
+          &quot;paired_users&quot;: 1103,
+          &quot;relative_ndcg_gain&quot;: 0.03405095138098141,
+          &quot;samples&quot;: 2000,
+          &quot;seed&quot;: 42
+        },
+        &quot;passed&quot;: false,
+        &quot;reasons&quot;: [
+          &quot;ndcg_relative_gain_below_objective&quot;
+        ],
+        &quot;variant&quot;: &quot;item_knn&quot;
+      },
+      {
+        &quot;comparison&quot;: {
+          &quot;candidate&quot;: &quot;als_cpu&quot;,
+          &quot;interval_scope&quot;: &quot;Paired benchmark users; shared items/training limit generalization&quot;,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: {
+              &quot;absolute_difference&quot;: -0.006346328195829556,
+              &quot;paired_95_interval&quot;: [
+                -0.025385312783318223,
+                0.012692656391659111
+              ]
+            },
+            &quot;ndcg_at_10&quot;: {
+              &quot;absolute_difference&quot;: -0.007337745884873807,
+              &quot;paired_95_interval&quot;: [
+                -0.014071867170941272,
+                -0.0005110343111944903
+              ]
+            },
+            &quot;recall_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.0074394893491618735,
+              &quot;paired_95_interval&quot;: [
+                -0.00026379547207831274,
+                0.01480639796166996
+              ]
+            },
+            &quot;recall_at_20&quot;: {
+              &quot;absolute_difference&quot;: 0.010086154229342786,
+              &quot;paired_95_interval&quot;: [
+                0.0016372962037878845,
+                0.018677451874821678
+              ]
+            }
+          },
+          &quot;paired_users&quot;: 1103,
+          &quot;relative_ndcg_gain&quot;: -0.02817847224119768,
+          &quot;samples&quot;: 2000,
+          &quot;seed&quot;: 42
+        },
+        &quot;passed&quot;: false,
+        &quot;reasons&quot;: [
+          &quot;ndcg_relative_gain_below_objective&quot;,
+          &quot;ndcg_interval_not_above_zero&quot;
+        ],
+        &quot;variant&quot;: &quot;als_cpu&quot;
+      }
+    ],
+    &quot;selected_for_final_refit&quot;: &quot;popularity&quot;,
+    &quot;serving_variant&quot;: &quot;popularity&quot;,
+    &quot;test_labels_used_for_selection&quot;: false
+  },
+  &quot;variant&quot;: &quot;popularity&quot;,
+  &quot;raw_accounting_verified_before_export&quot;: true,
+  &quot;raw_source_report_sha256&quot;: &quot;ed14e6a4d54f7b0c37dddba1336e6f93816dbc077aa84f6d3360546b5a883779&quot;
+}</pre></details></html>

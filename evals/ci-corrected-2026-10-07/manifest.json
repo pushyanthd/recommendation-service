@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "raw_run": "artifacts/ci-corrected/showcase",
+  "model_id": "movielens_1m-087582f44d7b5e9a-9ab1ee157fe38ee7",
+  "bundle_manifest_sha256": "b50b86dfb90fd0a176e9c70570321561a396a3cda6394ea76f9abdff66e3818e",
+  "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "final_report_sha256": "cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25",
+  "image_id": "sha256:459bed1d73daf81f691afb7de19607c4f926392db96e13be80aa430f98f9e1c7",
+  "source_identity_sha256": "bf629857b587f78176b2750726b5487f4e1b01ae02792de16cb1afd1a21748d8",
+  "ci_verified_commit": "3168ad7004feb55759736577a59a11ca23ecb50f",
+  "release_published": false,
+  "files": {
+    "README.md": "858894fc19759cdf8e6ac40e3682cf49eb4be1505d330e715151f6ee36b230db",
+    "checksums.json": "04ba387cd4b0aa2e8721532fc752c6d8bbea27ed99fe9bc1025c36bfde4ade6a",
+    "ci.json": "3719c39a80b818437da69da337e645ef06618d06a79ffc513c65c75cbe60dfc1",
+    "report.html": "4134836dd57a3e7e5c704ed5a9f91f3e62bcbed897ea13f5c1ffca437f6d8884",
+    "report.json": "bdb75df2bddeab2e453f367168c84bea045c9d9246a548ff6e151061d77b5ee1",
+    "report.md": "91e7515585e6e40a8c78cd9771d2bdf80b271dec9ac5a2536f72db7ef11ad4c7",
+    "security.json": "fd8a77abe072d14387f15e8f9efa060c2b29857685c98ad3929525fc958868d0"
+  }
+}

@@ -1,6 +1,6 @@
 # Recommendation service v1 acceptance
 
-The bounded local service is implemented. Full release publication is deferred until the remaining work is finished and verified. The original engineering acceptance passed, including HTTP/resource objectives and all four recovery drills. The personalized quality objective failed validation, so popularity stays active and the benchmark retains its experimental quality label. Software release status and model-quality results are separate outcomes, and the failed objective remains visible.
+The bounded local service and corrected-code engineering verification are complete. Full release publication remains deferred at the user’s request. The original engineering acceptance passed, including HTTP/resource objectives and all four recovery drills. The personalized quality objective failed validation, so popularity stays active and the benchmark retains its experimental quality label. Software release status and model-quality results are separate outcomes, and the failed objective remains visible.
 
 ## Architecture acceptance criteria
 
@@ -27,3 +27,7 @@ The clean environment reproduction also rebuilt real-data reports and a serving 
 The implementation, measured reports, case study and demo walkthrough were published in the source repository. The Linux process-inspection correction passed both [GitHub fixture and CPU-image jobs](https://github.com/pushyanthd/recommendation-service/actions/runs/37709752278). The remaining work is tracked in [release readiness](release-v1.md). No release tag or GitHub release has been published. Complete the remaining checks before assigning and publishing the full release version.
 
 A screen recording is optional: follow the case study's five minute demo, keep fictional and real-data provenance visible, and show the failed validation gate alongside the final result. Additional recommenders, a learned reranker and cloud infrastructure are follow-up projects rather than requirements for this release.
+
+## Corrected code verification
+
+The [corrected-code evidence](../evals/ci-corrected-2026-10-07/README.md) refreshes criteria 1, 6, 7 and 8 after the Linux lifecycle correction. All 121 local tests pass, the dependency audit is clear and [both GitHub jobs pass](https://github.com/pushyanthd/recommendation-service/actions/runs/37710120597). The full HTTP protocol completed 5,000 requests with zero failures, 12.07 ms client P95 and 175.5 MiB API RSS; all four recovery drills passed. Raw and exported evidence verify against the tested active bundle/current package. The original numerical treatment, quality decision and dated reports remain unchanged.

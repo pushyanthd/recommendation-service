@@ -1,0 +1,25 @@
+{
+  "databaseId": 37710120597,
+  "headSha": "3168ad7004feb55759736577a59a11ca23ecb50f",
+  "url": "https://github.com/pushyanthd/recommendation-service/actions/runs/37710120597",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "cpu-image",
+      "conclusion": "success",
+      "url": "https://github.com/pushyanthd/recommendation-service/actions/runs/37710120597/job/113093823559"
+    },
+    {
+      "name": "offline-fixture",
+      "conclusion": "success",
+      "url": "https://github.com/pushyanthd/recommendation-service/actions/runs/37710120597/job/113093823824"
+    }
+  ],
+  "local_checks": {
+    "tests_passed": 121,
+    "ruff_passed": true,
+    "mypy_passed": true,
+    "raw_log_sha256": "5d3624da103d69beb56ae4c159baa514358b76ee662e57be4659474fca6ee5cf"
+  }
+}

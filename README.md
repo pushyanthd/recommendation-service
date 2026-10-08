@@ -2,7 +2,7 @@
 
 CPU-only movie ranking with chronological splits, full-catalog evaluation, and an offline API demo.
 
-**Status: local v1 implemented; full release pending remaining verification.** Built a CPU-only recommendation API with chronological full-catalog evaluation, automatic model selection, cold-start fallback and verified rollback. Frozen MovieLens comparisons, real-data serving, the browser workflow, CPU packaging and process-backed showcase evidence are implemented. Neither personalized method passed validation, so popularity remains selected; outstanding unfixed image findings are documented. The benchmark retains its experimental quality label. No release tag or GitHub release has been published.
+**Status: local v1 engineering verification complete; full release publication deferred.** Built a CPU-only recommendation API with chronological full-catalog evaluation, automatic model selection, cold-start fallback and verified rollback. Frozen MovieLens comparisons, real-data serving, the browser workflow, CPU packaging and process-backed showcase evidence are implemented. Neither personalized method passed validation, so popularity remains selected; outstanding unfixed image findings are documented. The benchmark retains its experimental quality label. No release tag or GitHub release has been published.
 
 For a portfolio review, start with the [engineering case study and demo walkthrough](docs/engineering-case-study.md), then the [v1 acceptance checklist](docs/acceptance.md) and [release readiness](docs/release-v1.md). The experimental label records a failed personalization objective; engineering acceptance is reported separately.
 
@@ -77,6 +77,12 @@ The selected real-data snapshot passed the reference protocol: **200 warmups, 5,
 The original 50 ms warm P95 and 2 GiB application-memory objectives passed on Apple M1 / 16 GiB. Inference, training, Docker runtime and whole-system measurements remain distinct. The image passed non-root, read-only, network-disabled HTTP and CPU ALS checks. Chromium verified saved/ephemeral preferences, genre filtering and comparison. **119 tests**, Ruff and strict mypy pass; the offline freeze/final canary was also run locally. CI is configured for these fixture and CPU-image checks; shared runners do not enforce the hardware timing objective.
 
 See the [standalone showcase](evals/2026-10-07/report.html), [evidence guide](evals/2026-10-07/README.md), [system card](docs/system-card.md), and [rollback runbook](docs/rollback.md). Checksummed exports retain raw-run identities and verified accounting. The dependency audit is clear; the image's high/critical scan retains **eight unfixed high findings** and zero fixable high/critical findings. This is a local experimental demo, with no production-security or online-uplift claim.
+
+## Corrected Linux CI and serving verification
+
+The [corrected-code evidence](evals/ci-corrected-2026-10-07/README.md) verifies Linux process ownership with full command-line inspection, 121 local tests, Ruff, strict mypy and passing GitHub fixture/image jobs. A fresh MovieLens snapshot completed **5,000/5,000 HTTP requests with zero failures**, **12.07 ms client P95** and **175.5 MiB API RSS**. All four recovery drills passed. The earlier reports remain historical evidence; this new report binds to the corrected source and current package metadata.
+
+The final image's dependency audit is clear, and its scan retains eight high findings with no fixed versions reported. The [readiness checklist](docs/release-v1.md) records completed engineering work and those limits. Package version remains 0.1.0; release publication is deferred.
 
 ## Serve and reproduce
 

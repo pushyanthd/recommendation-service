@@ -2,20 +2,20 @@
 
 Finish and verify the remaining project work before publishing a full release. No release tag or GitHub release has been published. Package version 0.1.0 remains in use during this work.
 
-## Remaining work
+## Project verification
 
 - [x] Correct the Linux CI lifecycle failure without weakening process ownership checks.
 - [x] Add a real subprocess regression test for long arguments and verify local checks.
 - [x] Verify both GitHub fixture and CPU-image jobs on the correction: [passing run](https://github.com/pushyanthd/recommendation-service/actions/runs/37709752278).
-- [ ] Build and verify the final CPU image against the corrected source and current package metadata.
-- [ ] Audit dependencies and scan that final image; retain its actual findings and applicable fixes.
-- [ ] Rebuild a serving snapshot from the unchanged frozen MovieLens treatment.
-- [ ] Run the complete 200-warmup/5,000-request HTTP protocol and all four recovery drills for that snapshot.
-- [ ] Verify and export checksummed evidence bound to the final source, bundle and image identities.
-- [ ] Reconcile the README, acceptance mapping and progress with the final verified state.
-- [ ] Confirm GitHub CI passes on the final project revision.
+- [x] Build and verify the final CPU image against the corrected source and current package metadata.
+- [x] Audit dependencies and scan that final image; retain its actual findings and applicable fixes.
+- [x] Rebuild a serving snapshot from the unchanged frozen MovieLens treatment.
+- [x] Run the complete 200-warmup/5,000-request HTTP protocol and all four recovery drills for that snapshot.
+- [x] Verify and export checksummed evidence bound to the final source, bundle and image identities.
+- [x] Reconcile the README, acceptance mapping and progress with the final verified state.
+- [x] Confirm GitHub CI passes for the final code and package metadata: [passing run](https://github.com/pushyanthd/recommendation-service/actions/runs/37710120597).
 
-Only after those tasks are complete should the full software release version, tag and GitHub release be published. Release publication remains a separate step.
+The engineering verification above is complete. Full release publication remains deferred at the user’s request; no version bump, release tag or GitHub release is part of this completion work. The [corrected-code evidence](../evals/ci-corrected-2026-10-07/README.md) records the measured result and outstanding quality/security limits.
 
 ## Preserved results and limits
 

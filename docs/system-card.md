@@ -31,3 +31,7 @@ The October 7 dependency audit is clear. The patched image's high/critical scan 
 The [October 6 quality report](../evals/2026-10-06/final/report.html) accounts for all 1,188 eligible users across three methods. MovieLens already filters participation; observed ratings are not exposure or viewing events. Missing labels are unobserved preferences. Shared items/training constrain interpretation of paired user bootstrap intervals. No engagement, causal discovery or revenue uplift is established.
 
 The [October 7 showcase](../evals/2026-10-07/report.html) records HTTP measurements, application memory, startup, actual recovery and image checks. Client latency includes queueing. Training, API-process, container-runtime and whole-system memory are distinct measurements. CI uses fixtures and verifies image/correctness behavior; shared runners do not enforce the reference-hardware latency objective.
+
+## Corrected Linux lifecycle evidence
+
+The [corrected-code verification](../evals/ci-corrected-2026-10-07/README.md) records the process ownership correction, passing Linux CI and a fresh full HTTP/recovery protocol. The package remains at 0.1.0 with release publication deferred. Its final image passed CPU/non-root/read-only/network-disabled checks and dependency auditing; its actual image scan retains eight high findings with no fixed versions reported. The original numerical treatment and automatic quality decision remain frozen.
