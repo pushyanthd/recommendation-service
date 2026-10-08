@@ -2,6 +2,9 @@ PYTHON ?= python3.12
 BENCHMARK_DIR ?= artifacts/benchmark
 DIST_DIR ?= dist
 DIST_SETUP ?= --allow-downloads
+IMAGE ?= cpu-reco:local
+IMAGE_AUDIT_DIR ?= artifacts/image-audit
+TRIVY_CACHE ?= artifacts/trivy-cache
 UV = .bootstrap/bin/uv
 export UV_CACHE_DIR := $(CURDIR)/.uv-cache
 export OPENBLAS_NUM_THREADS := 1
@@ -55,15 +58,15 @@ showcase:
 	.venv/bin/reco showcase --report $(BENCHMARK_DIR)/final --container-evidence artifacts/container/verification.json
 
 image:
-	docker build -t cpu-reco:local .
+	docker build -t $(IMAGE) .
 
 .PHONY: image-check audit
 image-check:
-	.venv/bin/python benchmarks/verify_container.py
+	.venv/bin/python benchmarks/verify_container.py --image $(IMAGE)
 
 audit:
 	$(UV) audit --locked
-	docker scout cves cpu-reco:local --only-severity critical,high --exit-code
+	.venv/bin/python benchmarks/image_audit.py --image $(IMAGE) --output $(IMAGE_AUDIT_DIR) --cache $(TRIVY_CACHE)
 
 .PHONY: distribution distribution-check
 distribution:

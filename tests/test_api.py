@@ -1,3 +1,6 @@
+from importlib.resources import files
+from pathlib import Path
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -67,3 +70,25 @@ def test_empty_preferences_is_valid_cold_start(client):
     result = client.post("/v1/recommendations", json={"liked_movie_ids": [], "k": 3})
     assert result.status_code == 200
     assert result.json()["returned_count"] == 3
+
+
+def test_packaged_runtime_lock_matches_release_lock():
+    root = Path(__file__).resolve().parents[1]
+    assert files("reco").joinpath("runtime.lock").read_bytes() == (root / "uv.lock").read_bytes()
+
+
+@pytest.mark.parametrize("unrelated_lock", [False, True])
+def test_api_startup_outside_checkout(tmp_path, monkeypatch, unrelated_lock):
+    from reco.benchmark import execution_identity
+    from reco.storage import json_hash
+
+    root = Path(__file__).resolve().parents[1]
+    expected_identity = json_hash(execution_identity(root / "uv.lock"))
+    monkeypatch.chdir(tmp_path)
+    if unrelated_lock:
+        (tmp_path / "uv.lock").write_text("untrusted unrelated project lock")
+    with TestClient(create_app()) as session:
+        assert session.get("/readyz").json()["status"] == "ready"
+        assert "Find your next movie" in session.get("/").text
+        assert session.get("/v1/model").json()["runtime_identity_sha256"] == expected_identity
+        assert session.post("/v1/recommendations", json={"user_id": 1}).status_code == 200

@@ -1,0 +1,29 @@
+{
+  "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "dependency_lock_sha256": "116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f",
+  "evidence_kind": "local_hardened_v1_candidate",
+  "files": {
+    "README.md": "4d30cacaedf1e310f545f74ee85915b32ab99f1d6e57479a8406f6efa2e18c59",
+    "browser-verification.json": "b87a321dc217755f68b41c0b0d757cb3f6527ef874b909c04d83dbb48bfd0f30",
+    "checksums.json": "4b08c07713ff8e1197c92a692fde8297f19cf18de373b9e051b84f92c1a2ea05",
+    "container.json": "201388aa0155454ff2fb71563534afe4e598492bff063fffb259a3ac4330df9e",
+    "dependencies.json": "bab15a8c51e6769ac866ca28be7dc7fbf2abf93e2f3a1a222cc542e3a6d9078d",
+    "local-checks.json": "b537c7c2b19699826ccfe07444f44c0bd97af898899cdb8c6af005f3052c4086",
+    "report.html": "110b388591d50becc62c635ef0de34a1512ff8050cc51caf67bb97e8bcaa7e9c",
+    "report.json": "cbd691a396facdcf32a4de350ca0d503e8b4415153c00aa52cc842e48b7e539e",
+    "report.md": "41745d4547942c11517e84f0779b9cc8e0fab92052fc304cf7ddf0cc8894095d",
+    "sbom.cdx.json": "c69f7e137cd87236d432aba834879bfff79a4dfc06a97bc9af4ce76589d5d1ea",
+    "scout.sarif.json": "5464c13b460b9afef5993cfa717f32817b68c6d8f32a490954326ca27091a1a3",
+    "security.json": "52c4c521bdc75ef37d7eda0f316c2067562c676950f10c7f52b5d89d310e21cd",
+    "trivy-summary.json": "59b75f68b46ae1b98f3fb4664b0a0590eb2e5a2d51d811854763c02db70b1ee9",
+    "trivy.json": "e494a2e0072a42e2682afc4d0188b951e23fe1ec7552a712de447fe761c4726b"
+  },
+  "final_report_sha256": "cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25",
+  "image_id": "sha256:5d179aa2c57604def78eb4827dfa7e1a806d116ba0e898134567e443a5a9eaa5",
+  "model_id": "movielens_1m-087582f44d7b5e9a-f39b43421914627e",
+  "package_version": "1.0.0",
+  "schema_version": 1,
+  "source_commit_parent": "cddf650c3b2140f2b99a4c837cb6b66b88c4f7fa",
+  "source_identity_sha256": "b2c73b8d17e2d039468319b6ef61179c66ebff0a4061232669e10eba8b2614f3",
+  "working_tree_changes_uncommitted": true
+}

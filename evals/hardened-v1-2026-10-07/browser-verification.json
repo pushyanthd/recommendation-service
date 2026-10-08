@@ -1,0 +1,25 @@
+{
+  "data_mode": "fictional_fixture",
+  "model_id": "fictional_fixture-a8d92ae361c9bc13",
+  "runtime_source_identity_sha256": "b2c73b8d17e2d039468319b6ef61179c66ebff0a4061232669e10eba8b2614f3",
+  "browser": "Chromium 154.0.8037.98",
+  "checks": {
+    "saved_profile_seen_exclusion": true,
+    "ephemeral_likes_exclusion": true,
+    "genre_filter_ui": true,
+    "frozen_selection_disclosure": true,
+    "mobile_comparison_without_horizontal_overflow": true,
+    "no_javascript_errors": true
+  },
+  "assets": {
+    "fixture-demo.png": {
+      "sha256": "f20c2e82a9be33fd7dc274f2fd0aeda209432b0b36df2f9c9ed60cd011e5d270",
+      "bytes": 190419
+    },
+    "fixture-demo.webm": {
+      "sha256": "b37a15a1b307ff2bc18846f7421692213a98fe6d895e513ea941bc55c6ab6816",
+      "bytes": 2647583
+    }
+  },
+  "scope": "Real UI and HTTP; fictional fixture; recording has caption overlay"
+}

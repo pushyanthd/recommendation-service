@@ -4,10 +4,14 @@ import argparse
 import hashlib
 import json
 import os
+import socket
 import subprocess
 import tarfile
 import tempfile
+import time
 import tomllib
+import urllib.error
+import urllib.request
 import zipfile
 from email.parser import BytesParser
 from pathlib import Path
@@ -25,10 +29,72 @@ def run(*arguments, cwd, env):
     return result.stdout
 
 
+def verify_http(python, isolated, environment):
+    with socket.socket() as listener:
+        listener.bind(("127.0.0.1", 0))
+        port = listener.getsockname()[1]
+    with (isolated / "server.log").open("w+") as log:
+        server = subprocess.Popen(
+            [
+                python,
+                "-I",
+                "-c",
+                "import sys, uvicorn; from reco.api import create_app; "
+                "uvicorn.run(create_app(), host='127.0.0.1', port=int(sys.argv[1]), "
+                "access_log=False)",
+                str(port),
+            ],
+            cwd=isolated,
+            env=environment,
+            stdout=log,
+            stderr=log,
+        )
+        try:
+            url = f"http://127.0.0.1:{port}"
+
+            def get(path):
+                with urllib.request.urlopen(url + path, timeout=2) as response:
+                    return response.read()
+
+            deadline = time.monotonic() + 30
+            while True:
+                try:
+                    assert json.loads(get("/readyz"))["status"] == "ready"
+                    break
+                except (OSError, urllib.error.URLError):
+                    if server.poll() is not None or time.monotonic() >= deadline:
+                        log.seek(0)
+                        raise RuntimeError("Installed API failed startup: " + log.read()) from None
+                    time.sleep(0.1)
+            assert b"Find your next movie" in get("/")
+            assert json.loads(get("/v1/model"))["data_mode"] == "fictional_fixture"
+            for payload in ({"user_id": 1, "k": 20}, {"liked_movie_ids": [1], "k": 3}):
+                request = urllib.request.Request(
+                    url + "/v1/recommendations",
+                    data=json.dumps(payload).encode(),
+                    headers={"Content-Type": "application/json"},
+                )
+                with urllib.request.urlopen(request, timeout=2) as response:
+                    result = json.load(response)
+                excluded = {1, 2, 3, 4, 5} if "user_id" in payload else {1}
+                assert not excluded & {row["movie_id"] for row in result["items"]}
+                assert result["data_mode"] == "fictional_fixture"
+        finally:
+            server.terminate()
+            try:
+                server.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                server.kill()
+                server.wait(timeout=5)
+
+
 def verify(directory, allow_downloads=False):
     repository = Path.cwd()
     project = tomllib.loads((repository / "pyproject.toml").read_text())["project"]
     version = project["version"]
+    assert (repository / "src/reco/runtime.lock").read_bytes() == (
+        repository / "uv.lock"
+    ).read_bytes(), "Refresh the packaged runtime.lock after changing uv.lock"
     stem = project["name"].replace("-", "_") + "-" + version
     wheel = (directory / (stem + "-py3-none-any.whl")).resolve()
     sdist = (directory / (stem + ".tar.gz")).resolve()
@@ -168,6 +234,8 @@ def verify(directory, allow_downloads=False):
             env=environment,
         ).strip()
         run(reco, "verify-bundle", bundle, cwd=isolated, env=environment)
+        assert not (isolated / "uv.lock").exists()
+        verify_http(python, isolated, environment)
     evidence = {
         "schema_version": 1,
         "passed": True,
@@ -185,6 +253,7 @@ def verify(directory, allow_downloads=False):
             "isolated_noneditable_wheel_install": True,
             "offline_three_variant_fixture": True,
             "installed_cli_bundle_roundtrip": True,
+            "installed_http_api_and_browser_without_checkout_or_cwd_lock": True,
         },
         "scope": (
             "Explicit locked dependency setup may download; installed fixture commands run offline"

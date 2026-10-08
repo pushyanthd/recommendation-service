@@ -1,0 +1,35 @@
+{
+  "browser_checks": {
+    "ephemeral_likes_exclusion": true,
+    "frozen_selection_disclosure": true,
+    "genre_filter_ui": true,
+    "mobile_comparison_without_horizontal_overflow": true,
+    "no_javascript_errors": true,
+    "saved_profile_seen_exclusion": true
+  },
+  "cpu_container_health_and_library_integrity": "passed",
+  "dependency_lock_sha256": "116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f",
+  "distribution_scope": "Explicit locked dependency setup may download; installed fixture commands run offline",
+  "installed_wheel_checks": {
+    "installed_cli_bundle_roundtrip": true,
+    "installed_http_api_and_browser_without_checkout_or_cwd_lock": true,
+    "isolated_noneditable_wheel_install": true,
+    "offline_three_variant_fixture": true,
+    "sdist_contains_reproduction_inputs_without_dataset_rows": true,
+    "wheel_metadata_and_source": true
+  },
+  "mypy_strict": "passed",
+  "new_ci_and_tag_attestation_status": "requires_user_commit_and_push",
+  "offline_fixture_validation_freeze_final_canary": "passed",
+  "package_version": "1.0.0",
+  "ruff_format": "passed",
+  "ruff_lint": "passed",
+  "schema_version": 1,
+  "source_identity_sha256": "b2c73b8d17e2d039468319b6ef61179c66ebff0a4061232669e10eba8b2614f3",
+  "tests": {
+    "failed": 0,
+    "passed": 137,
+    "result_sha256": "28cdda1078115dac6a157f109781ad7364c91c44e4ae26eca2c38f0841253780"
+  },
+  "workflow_actionlint": "passed"
+}

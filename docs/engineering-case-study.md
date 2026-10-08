@@ -28,11 +28,13 @@ Item similarity's final absolute NDCG difference is 0.02614, with paired 95% int
 
 ## Serving and recovery evidence
 
-The [serving showcase](../evals/2026-10-07/report.html) measures the selected popularity snapshot on Apple M1 / 16 GiB. After 200 warmups, 5,000 HTTP requests at an offered 20 requests/second completed with zero failures. Client P95, including queueing, was 11.52 ms; peak API-process RSS was 175.3 MiB. These results apply to the selected baseline and this request mix. They do not establish full-protocol HTTP latency for the rejected personalized variants.
+The [serving showcase](../evals/hardened-v1-2026-10-07/report.html) measures the selected popularity snapshot on Apple M1 / 16 GiB. After 200 warmups, 5,000 HTTP requests at an offered 20 requests/second completed with zero failures. Client P95, including queueing, was 11.65 ms; peak API-process RSS was 175.8 MiB. These results apply to the selected baseline and this request mix. They do not establish full-protocol HTTP latency for the rejected personalized variants.
 
 Four drills use actual processes and files: corrupt candidate rejection, forced gate rejection, restart preserving version/ranking, and rollback restoring the exact prior version. Activation verifies a bundle, replaces the pointer atomically, restarts and probes the requested version. Failed startup restores the prior pointer and process. Arrays load without pickle and undergo mapping, shape, checksum and finiteness checks.
 
-The CPU image passed non-root, read-only and network-disabled checks. The retained October 7 dependency audit found no vulnerabilities; the image scan retains eight unfixed high findings. The [system card](system-card.md) records those findings and the local deployment boundary. MovieLens rating recovery establishes neither engagement nor revenue uplift.
+The smaller staged CPU image passed non-root, read-only and network-disabled checks, including actual Docker health status and native-library hashes. The dependency audit is clear. Trivy reports no HIGH/CRITICAL findings, while independent Scout retains a zlib HIGH and the required C++ library has a tracked Debian advisory. The [system card](system-card.md) records those findings and the local deployment boundary. MovieLens rating recovery establishes neither engagement nor revenue uplift.
+
+A [recorded fictional walkthrough](demo/README.md) provides an actual screenshot, captioned video and desktop/mobile verification. The [security review](security.md) explains the retained risks and complete scan/SBOM evidence. Installed-wheel verification also exercises real HTTP startup outside the source checkout. The prepared tag workflow generates attestations for exact CI-built release assets.
 
 ## Five minute demo
 
@@ -44,6 +46,6 @@ The CPU image passed non-root, read-only and network-disabled checks. The retain
 
 ## Portfolio wording
 
-“Built a CPU-only recommendation API comparing popularity, item similarity and ALS with chronological full-catalog evaluation for 1,188 users; preserved a validation-gated baseline and verified model rollback. Measured 11.52 ms HTTP P95 across 5,000 requests with zero failures on Apple M1.”
+“Built a CPU-only recommendation API comparing popularity, item similarity and ALS with chronological full-catalog evaluation for 1,188 users; preserved a validation-gated baseline and verified model rollback. Measured 11.65 ms HTTP P95 across 5,000 requests with zero failures on Apple M1.”
 
 The completed scope is summarized in the [acceptance checklist](acceptance.md), with setup and commands in the [reproduction guide](reproduction.md). Future model research needs a new evaluation design and an untouched holdout; the inspected final period cannot become a tuning target.

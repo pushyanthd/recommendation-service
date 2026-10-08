@@ -1,0 +1,77 @@
+name: release-candidate
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  verified-assets:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Check version agrees with tag
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python - <<'PY'
+          import os, pathlib, tomllib
+          version = tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version']
+          assert os.environ['RELEASE_TAG'] == 'v' + version, 'Tag/package version mismatch'
+          PY
+      - run: make setup
+      - run: make check
+      - run: make smoke
+      - run: make distribution-check DIST_DIR=release
+      - run: make image
+      - run: make image-check
+      - run: make audit
+      - name: Collect verified release assets
+        run: |
+          test "$(docker image inspect cpu-reco:local --format '{{.Architecture}}')" = amd64
+          cp artifacts/container/verification.json release/container-verification.json
+          cp artifacts/image-audit/trivy.json release/trivy.json
+          cp artifacts/image-audit/summary.json release/image-audit.json
+          cp artifacts/image-audit/sbom.cdx.json release/sbom.cdx.json
+          cp evals/hardened-v1-2026-10-07/report.html release/showcase.html
+          cp evals/hardened-v1-2026-10-07/security.json release/security-review-arm64.json
+          cp docs/demo/fixture-demo.png release/fixture-demo.png
+          cp docs/demo/fixture-demo.webm release/fixture-demo.webm
+          docker save cpu-reco:local | gzip > release/cpu-recommendation-service-linux-amd64.tar.gz
+          (cd release && sha256sum -- *.whl *.tar.gz *.json *.html *.png *.webm > SHA256SUMS)
+          (cd release && sha256sum -c SHA256SUMS)
+      - uses: actions/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d # v4.2.1
+        id: provenance
+        with:
+          subject-checksums: release/SHA256SUMS
+      - uses: actions/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d # v4.2.1
+        id: sbom
+        with:
+          subject-path: release/cpu-recommendation-service-linux-amd64.tar.gz
+          sbom-path: release/sbom.cdx.json
+      - name: Retain attestation bundles
+        env:
+          PROVENANCE_BUNDLE: ${{ steps.provenance.outputs.bundle-path }}
+          SBOM_BUNDLE: ${{ steps.sbom.outputs.bundle-path }}
+        run: |
+          cp "$PROVENANCE_BUNDLE" release/provenance.jsonl
+          cp "$SBOM_BUNDLE" release/sbom-attestation.jsonl
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: verified-release-assets
+          path: release/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: release-failure-evidence
+          path: |
+            artifacts/container
+            artifacts/image-audit
+            release/

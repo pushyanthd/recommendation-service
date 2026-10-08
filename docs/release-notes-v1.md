@@ -1,17 +1,18 @@
 # CPU Recommendation Service v1.0.0
 
-CPU-only movie recommendations with a typed API, browser demo and an independently reproducible offline evaluation. The release compares popularity, item similarity and ALS; selects the serving method automatically from validation; and carries that decision through hash-verified bundles and process-backed activation/rollback.
+CPU-only movie recommendations with a typed API, browser demo and independently reproducible offline evaluation. The release compares popularity, item similarity and ALS; selects from validation; and preserves that decision through verified bundles and actual restart/rollback.
 
-- Chronological full-catalog MovieLens 1M comparison for 1,188 final eligible users, with no scoring failures and unreachable positives retained as misses.
-- Saved/ephemeral preferences, genre filtering, strict all-seen exclusion, cold-start fallback and an explicit popularity comparison.
-- Immutable bundles, atomic selection, readiness verification, restart and rollback recovery, bounded telemetry and CPU Docker packaging.
-- 121 passing local tests, lint/types, CPU image verification and isolated installed-wheel fixture checks. CI covers fictional evaluation, package installation and the CPU image.
-- Selected-baseline serving completed 5,000 HTTP requests with zero failures, 11.66 ms client P95 and 175.4 MiB API RSS on Apple M1; all four recovery drills passed.
-- SHA-256 manifests, standalone HTML/JSON/Markdown evidence, data/system cards and reproduction/demo guides.
+- Chronological full-catalog MovieLens comparison for 1,188 final users, zero scoring failures and unreachable positives retained as misses.
+- Saved/ephemeral preferences, genre filtering, all-seen exclusion, cold-start fallback and explicit popularity comparison.
+- 137 passing local tests, lint/types, isolated installed-wheel HTTP startup outside the checkout and desktop/mobile browser verification.
+- A smaller staged CPU image with native-library provenance, offline/non-root/read-only serving and actual healthcheck/CPU ALS verification.
+- Complete vulnerability scans, CycloneDX SBOM, checksum-listed release assets and tag-workflow provenance/SBOM attestations.
+- Selected-baseline serving: 5,000 HTTP requests, zero failures, 11.65 ms client P95 and 175.8 MiB API RSS on Apple M1; four recovery drills passed.
+- An actual fictional-fixture screenshot and captioned video, plus standalone HTML/JSON/Markdown reports, cards and reproduction guides.
 
-Item similarity improved final NDCG@10 by 11.97%, but its validation gain of 3.41% missed the frozen 10% objective. Popularity remains selected and recommendation quality retains its experimental label. The selected baseline is not presented as active personalization. The release image retains eight unfixed high findings; the locked Python dependency audit is clear. Scope is the local benchmark/demo, with no online engagement or production-security claim.
+Item similarity gained 11.97% final NDCG, but its 3.41% validation gain missed the frozen 10% objective. Popularity remains selected and quality retains its experimental label. Trivy reports no HIGH/CRITICAL findings in the local candidate; independent Scout reports one unfixed zlib HIGH, and the required C++ library has an additional tracked Debian advisory. The locked Python dependency audit is clear. This is a local benchmark/demo with no active-personalization, online-effect or production-security claim.
 
-Start with the [README](https://github.com/pushyanthd/recommendation-service/blob/v1.0.0/README.md), [engineering case study](https://github.com/pushyanthd/recommendation-service/blob/v1.0.0/docs/engineering-case-study.md) and [release evidence](https://github.com/pushyanthd/recommendation-service/tree/v1.0.0/evals/release-v1-2026-10-07).
+Start with the [README](https://github.com/pushyanthd/recommendation-service/blob/v1.0.0/README.md), [case study](https://github.com/pushyanthd/recommendation-service/blob/v1.0.0/docs/engineering-case-study.md), [security review](https://github.com/pushyanthd/recommendation-service/blob/v1.0.0/docs/security.md) and [current evidence](https://github.com/pushyanthd/recommendation-service/tree/v1.0.0/evals/hardened-v1-2026-10-07). Download the attached fixture video and showcase HTML for a walkthrough without dataset setup.
 
 ```bash
 make setup
@@ -19,4 +20,4 @@ make check
 make demo-fixture
 ```
 
-Python 3.12 is required. Dependencies and optional MovieLens setup are explicit network steps. Fixture/runtime execution is offline. Attached wheel/source archives contain fictional fixtures, with no redistributed MovieLens rows or trained real-data bundles. Use the source archive and committed lock for reproducible setup; installing the wheel alone does not pin external dependencies.
+Python 3.12 is required. Dependency and optional dataset preparation are explicit network steps; subsequent fixture/runtime execution is offline. Attached wheel/source/image assets contain fictional fixtures, no MovieLens rows or trained real-data bundles. The CPU image archive is linux/amd64; Apple Silicon can build natively. Use the source archive and committed lock for reproduction; a wheel alone does not pin external dependencies. Verify attached checksums and attestations with the [publishing guide](https://github.com/pushyanthd/recommendation-service/blob/v1.0.0/docs/publishing.md).

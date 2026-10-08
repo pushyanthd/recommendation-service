@@ -30,11 +30,15 @@ def verify(image, output):
         "ALL",
         "--security-opt",
         "no-new-privileges",
+        "--health-interval",
+        "1s",
+        "--health-start-period",
+        "0s",
         image,
     )
     try:
         command = """
-import json, os, urllib.request
+import hashlib, json, os, pathlib, urllib.request
 from reco.data import load_fixture, chronological_split
 from reco.ranking import Ranker
 url='http://127.0.0.1:8000'
@@ -52,11 +56,21 @@ dataset=load_fixture()
 split=chronological_split(dataset.ratings)
 als=Ranker(dataset,split.train,'als_cpu')
 assert type(als.als).__module__=='implicit.cpu.als'
+inventory=json.loads(pathlib.Path('/usr/share/reco-runtime/inventory.json').read_text())
+for library in inventory['external_libraries']:
+    assert hashlib.sha256(pathlib.Path(library['path']).read_bytes()).hexdigest()==library['sha256']
+assert not inventory['package_managers_and_shells_included']
+for name in ('/bin/sh','/bin/bash','/usr/bin/apt','/usr/bin/dpkg','/usr/bin/perl',
+             '/usr/bin/mount','/usr/bin/nsenter','/opt/venv/bin/pip'):
+    assert not pathlib.Path(name).exists(), name
+assert not {'util-linux','perl-base','libsystemd0','libncursesw6'} & {
+    package['name'] for package in inventory['debian_packages']}
 print(json.dumps({'model_id':model['model_id'],'data_mode':model['data_mode'],
     'uid':os.getuid(),'cpu_backend':type(als.als).__module__,
     'runtime_identity_sha256':model['runtime_identity_sha256'],
     'source_identity_sha256':model['runtime_source_identity_sha256'],
     'api_peak_process_rss_bytes':model['peak_process_rss_bytes'],
+    'runtime_inventory':inventory,
     'ready':get('/readyz')['status']=='ready'}))
 """
         deadline = time.monotonic() + 30
@@ -72,6 +86,15 @@ print(json.dumps({'model_id':model['model_id'],'data_mode':model['data_mode'],
         expected_source = json_hash(execution_identity(Path("uv.lock"))["source_files"])
         assert result["source_identity_sha256"] == expected_source
         info = json.loads(docker("inspect", container))[0]
+        while info["State"]["Health"]["Status"] != "healthy":
+            if time.monotonic() >= deadline:
+                raise RuntimeError("Docker healthcheck failed: " + str(info["State"]["Health"]))
+            time.sleep(0.3)
+            info = json.loads(docker("inspect", container))[0]
+        assert image_info["Config"]["Healthcheck"]["Test"][0] == "CMD"
+        assert result["runtime_inventory"]["staging_helper_sha256"] == sha256_file(
+            Path("benchmarks/stage_runtime.py")
+        )
         assert info["HostConfig"]["ReadonlyRootfs"]
         assert info["HostConfig"]["NetworkMode"] == "none"
         assert not info["HostConfig"].get("DeviceRequests")
@@ -88,6 +111,7 @@ print(json.dumps({'model_id':model['model_id'],'data_mode':model['data_mode'],
                 execution_identity(Path("uv.lock"))["source_files"]
             ),
             "read_only": True,
+            "healthcheck_passed": True,
             "network": "none",
             "gpu_device_requests": [],
             "checks": result,

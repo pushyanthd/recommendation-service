@@ -9,3 +9,13 @@ The warm HTTP objective is P95 under 50 ms with zero failures for valid traffic.
 `verify_container.py` checks the image's actual source identity, UID, readiness and HTTP seen-item exclusion. It independently trains CPU ALS, verifies the imported backend, and inspects read-only/no-network/no-GPU settings. It removes the test container afterward. Image build/setup may download dependencies; verification uses network-disabled runtime containers.
 
 Use `make image image-check` for packaging checks, `make showcase` for the full protocol, and `reco verify-showcase <output> --root artifacts/models` to bind the result to the active snapshot/current code. Immutable outputs require a fresh `--output` directory for repeated runs. The [reproduction guide](../docs/reproduction.md) gives full commands and the [system card](../docs/system-card.md) records boundaries and outstanding security findings.
+
+## Runtime and release checks
+
+`stage_runtime.py` executes inside the pinned Debian builder. It resolves retained Python/native extension library dependencies, copies their closure and writes package control records, library checksums and license notices into the minimal runtime. Missing libraries or unknown Debian owners stop the build. Optional terminal/GUI modules are excluded; the API/CPU scope and exclusions are recorded in the runtime inventory.
+
+`make audit` first audits the locked Python environment, then `image_audit.py` exports the exact verified image and scans it using digest-pinned Trivy. The input archive is mounted read-only; the scanner gets no Docker socket. All findings, database timestamps, package inventories and a CycloneDX SBOM are retained. Missing/unsupported inventories, suppressions, mismatched image identities and every HIGH/CRITICAL result fail the gate. [Security review](../docs/security.md) records independent Scout and Debian advisories, including scanner omissions.
+
+`verify_distribution.py` requires the packaged `runtime.lock` to match the project lock, validates archive contents and installs the wheel into a separate environment. Its offline fixture checks include all three CPU methods, a bundle roundtrip and actual HTTP/page startup from a directory without a checkout or lock file. `capture_demo.py` adds actual desktop/mobile browser interaction with isolated Playwright tools; see [demo reproduction](../docs/demo/README.md).
+
+The tag workflow checks version agreement and builds/verifies distributions plus a linux/amd64 image archive. It signs provenance for the exact checksum-listed assets and a CycloneDX SBOM attestation for the image archive. Publication remains an explicit user step after checksum/attestation verification; no workflow creates a GitHub release or pushes an image registry tag.

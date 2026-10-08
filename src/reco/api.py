@@ -3,7 +3,7 @@ import logging
 import time
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from importlib.resources import files
+from importlib.resources import as_file, files
 from pathlib import Path
 from typing import Annotated
 from uuid import uuid4
@@ -44,7 +44,8 @@ def create_app(bundle_root: Path | None = None) -> FastAPI:
             application.state.metadata = bundle.manifest.model_dump()
         from reco.benchmark import execution_identity
 
-        application.state.runtime_identity = execution_identity(Path("uv.lock"))
+        with as_file(files("reco").joinpath("runtime.lock")) as runtime_lock:
+            application.state.runtime_identity = execution_identity(runtime_lock)
         application.state.startup_ms = (time.perf_counter() - startup_started) * 1000
         application.state.telemetry = Telemetry()
         application.state.ranker = ServingRanker(

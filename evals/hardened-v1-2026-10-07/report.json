@@ -1,0 +1,581 @@
+{
+  "bundle_manifest_sha256": "4717cb1762a9d0fe3b4f12d78c315a2a20bdb0d7169f23971e084c29c3347a7f",
+  "cold_start_to_readiness_wall_ms": 1351.920707966201,
+  "container": {
+    "architecture": "arm64",
+    "checks": {
+      "api_peak_process_rss_bytes": 81297408,
+      "cpu_backend": "implicit.cpu.als",
+      "data_mode": "fictional_fixture",
+      "model_id": "fictional_fixture-a8d92ae361c9bc13-eed1ba026d949754",
+      "ready": true,
+      "runtime_identity_sha256": "eb6a5c0bfe32037c5f26ce9f6c4c182a25262911ea4a8783f1739ea981e56dff",
+      "runtime_inventory": {
+        "debian_packages": [
+          {
+            "name": "base-files",
+            "version": "13.8+deb13u7"
+          },
+          {
+            "name": "ca-certificates",
+            "version": "20250419"
+          },
+          {
+            "name": "libbz2-1.0",
+            "version": "1.0.8-6"
+          },
+          {
+            "name": "libc6",
+            "version": "2.41-12+deb13u4"
+          },
+          {
+            "name": "libcrypt1",
+            "version": "1:4.4.38-1"
+          },
+          {
+            "name": "libdb5.3t64",
+            "version": "5.3.28+dfsg2-9"
+          },
+          {
+            "name": "libffi8",
+            "version": "3.4.8-2"
+          },
+          {
+            "name": "libgcc-s1",
+            "version": "14.2.0-19"
+          },
+          {
+            "name": "libgdbm6t64",
+            "version": "1.24-2"
+          },
+          {
+            "name": "libgomp1",
+            "version": "14.2.0-19"
+          },
+          {
+            "name": "liblzma5",
+            "version": "5.8.1-1+deb13u1"
+          },
+          {
+            "name": "libsqlite3-0",
+            "version": "3.46.1-7+deb13u2"
+          },
+          {
+            "name": "libssl3t64",
+            "version": "3.5.7-1~deb13u3"
+          },
+          {
+            "name": "libstdc++6",
+            "version": "14.2.0-19"
+          },
+          {
+            "name": "libzstd1",
+            "version": "1.5.7+dfsg-1"
+          },
+          {
+            "name": "tzdata",
+            "version": "2026c-0+deb13u1"
+          },
+          {
+            "name": "zlib1g",
+            "version": "1:1.3.dfsg+really1.3.1-1+b1"
+          }
+        ],
+        "external_libraries": [
+          {
+            "debian_package": "libbz2-1.0",
+            "path": "/lib/aarch64-linux-gnu/libbz2.so.1.0",
+            "sha256": "810fa9b02adc39be4a7542bde79f1da0575e9bbdf8fc3c27deeb1ee97f59fe46"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/lib/aarch64-linux-gnu/libc.so.6",
+            "sha256": "70fa4c4cf57eabeb96097cce47582d02379c4cd1de3db3e98ade4dd7089a1b13"
+          },
+          {
+            "debian_package": "libcrypt1",
+            "path": "/lib/aarch64-linux-gnu/libcrypt.so.1",
+            "sha256": "fc0165e3cbff299baa266b5531ac9054fff35786bf3ffa46f6eae5650d9bd8c8"
+          },
+          {
+            "debian_package": "libssl3t64",
+            "path": "/lib/aarch64-linux-gnu/libcrypto.so.3",
+            "sha256": "809909371a1db7d2b9cac4c2fa2eff63eb6169d5979416d94155955a7ad32516"
+          },
+          {
+            "debian_package": "libdb5.3t64",
+            "path": "/lib/aarch64-linux-gnu/libdb-5.3.so",
+            "sha256": "a9d28b0f7bbe2e391ea2d42ec89d3a2e6908a4bbf36b71462e487541e47ad06b"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/lib/aarch64-linux-gnu/libdl.so.2",
+            "sha256": "8023ba7cb6ecabb57d1910ecd24ce347cba5653d1b547d9c7950301ed59716ca"
+          },
+          {
+            "debian_package": "libffi8",
+            "path": "/lib/aarch64-linux-gnu/libffi.so.8",
+            "sha256": "f0527ef7efeaf85fc2f5855d68fddb63bf7b3b90f1228c6b49fb6020b0dca490"
+          },
+          {
+            "debian_package": "libgcc-s1",
+            "path": "/lib/aarch64-linux-gnu/libgcc_s.so.1",
+            "sha256": "9a146967dc38c3820c5dc21c3209812655f66b6551264072b187bd0e787947e0"
+          },
+          {
+            "debian_package": "libgdbm6t64",
+            "path": "/lib/aarch64-linux-gnu/libgdbm.so.6",
+            "sha256": "34cac747bb20d56694673cb527ef7f38abbb5f1ad0550462553e18b4d667245e"
+          },
+          {
+            "debian_package": "libgomp1",
+            "path": "/lib/aarch64-linux-gnu/libgomp.so.1",
+            "sha256": "a2286e5fa0f7601afdfae2a750536f409bc8c3cc5b0bb9e93a4afc5c3779a510"
+          },
+          {
+            "debian_package": "liblzma5",
+            "path": "/lib/aarch64-linux-gnu/liblzma.so.5",
+            "sha256": "4b40b41d7f4f982c6e544f2ff1c82e4d49654711f50631faf60cae830aa14f84"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/lib/aarch64-linux-gnu/libm.so.6",
+            "sha256": "a8afb2d1f4a0c5e14c0fc82f794ec839eafe29738907aa92895410f57630bbe2"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/lib/aarch64-linux-gnu/libpthread.so.0",
+            "sha256": "b4f0bcbb029e42861545757592356a490d87ef42cfa8a7f2d4295846e42698b5"
+          },
+          {
+            "debian_package": "libsqlite3-0",
+            "path": "/lib/aarch64-linux-gnu/libsqlite3.so.0",
+            "sha256": "203e52aaa9cfa34eab0f4ea46b434e8a69031610a46d72c2f7886389990468a1"
+          },
+          {
+            "debian_package": "libssl3t64",
+            "path": "/lib/aarch64-linux-gnu/libssl.so.3",
+            "sha256": "b3b9a479537bded757b818bb787413d8f8f636135e6546c84e90688eca1dc842"
+          },
+          {
+            "debian_package": "libstdc++6",
+            "path": "/lib/aarch64-linux-gnu/libstdc++.so.6",
+            "sha256": "fff1f0050a33ddf29c44634c7639ac16e2573a61e3daab4fcc4c007b432ccf19"
+          },
+          {
+            "debian_package": "zlib1g",
+            "path": "/lib/aarch64-linux-gnu/libz.so.1",
+            "sha256": "6fe00acadf8119ff245855e5dcc7f26c6c0ffaf4bfa2baa88feab58f23727d65"
+          },
+          {
+            "debian_package": "libzstd1",
+            "path": "/lib/aarch64-linux-gnu/libzstd.so.1",
+            "sha256": "1279c4edfbfb08878b5b7fb40d392c1bdc9b30100d9b7a019d4aefaf10d2046c"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/lib/ld-linux-aarch64.so.1",
+            "sha256": "1b882eddacd494b060413a8aa4f0a4754ee3f84775e68cecbf8a86092b59cca6"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/usr/lib/aarch64-linux-gnu/libnss_compat.so.2",
+            "sha256": "592b029a3e03e8f7357205a49dede7af16c7ed6a63afbd7a1d1f994e743294cd"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/usr/lib/aarch64-linux-gnu/libnss_dns.so.2",
+            "sha256": "a69d397ca7b354e1e954ce87cbb046c06a62d8042721f90d6d9ef47773af2e7d"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/usr/lib/aarch64-linux-gnu/libnss_files.so.2",
+            "sha256": "5dff3521fe00ea802ff94f4285f35e9038f52fc80ba4906db068392cb4eff272"
+          },
+          {
+            "debian_package": "libc6",
+            "path": "/usr/lib/aarch64-linux-gnu/libnss_hesiod.so.2",
+            "sha256": "8bc817883c329674e0223ad88a9fb92a365a7f816121b01803bb4bd606b07ef1"
+          }
+        ],
+        "optional_extensions_excluded": [
+          "usr/local/lib/python3.12/lib-dynload/_curses.cpython-312-aarch64-linux-gnu.so",
+          "usr/local/lib/python3.12/lib-dynload/_curses_panel.cpython-312-aarch64-linux-gnu.so",
+          "usr/local/lib/python3.12/lib-dynload/_tkinter.cpython-312-aarch64-linux-gnu.so",
+          "usr/local/lib/python3.12/lib-dynload/_uuid.cpython-312-aarch64-linux-gnu.so",
+          "usr/local/lib/python3.12/lib-dynload/readline.cpython-312-aarch64-linux-gnu.so"
+        ],
+        "package_managers_and_shells_included": false,
+        "schema_version": 1,
+        "scope": "Runtime for the recommendation API and CPU inference; no runtime setup",
+        "source_base": "python:3.12.15-slim-trixie@sha256:05cda9777409a9c3ffddd94a4c476b79f0769a0b4857f0c7ed9226b6800b0d6f",
+        "staging_helper_sha256": "6f8b82bbfcfe4816bf1f5365f1e059e56baff1ac18a1759d443f1ee3e41bc631"
+      },
+      "source_identity_sha256": "b2c73b8d17e2d039468319b6ef61179c66ebff0a4061232669e10eba8b2614f3",
+      "uid": 10001
+    },
+    "dockerfile_sha256": "f604a233c01832427a856d1962386e741e13ecd8d6b9e78eeb30d4657c5ecdb4",
+    "gpu_device_requests": [],
+    "healthcheck_passed": true,
+    "image_id": "sha256:5d179aa2c57604def78eb4827dfa7e1a806d116ba0e898134567e443a5a9eaa5",
+    "image_size_bytes": 255824586,
+    "image_user": "10001:10001",
+    "network": "none",
+    "os": "linux",
+    "passed": true,
+    "read_only": true,
+    "schema_version": 1,
+    "source_identity_sha256": "b2c73b8d17e2d039468319b6ef61179c66ebff0a4061232669e10eba8b2614f3"
+  },
+  "data_fingerprint": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "data_mode": "movielens_1m",
+  "drills": {
+    "corrupt_candidate_rejected": {
+      "active_pointer_unchanged": true,
+      "error": "Bundle checksum mismatch: popularity.npz",
+      "passed": true
+    },
+    "forced_gate_rejection": {
+      "candidate_error": "Candidate operation gate rejected activation",
+      "development_selected": "popularity",
+      "passed": true
+    },
+    "restart_preserves_version_and_ranking": {
+      "after_pid": 2998,
+      "before_pid": 2988,
+      "model_id": "movielens_1m-087582f44d7b5e9a-f39b43421914627e",
+      "passed": true
+    },
+    "rollback_restores_exact_prior_version": {
+      "activated_model_id": "movielens_1m-087582f44d7b5e9a-6a36e11a1a9f2901",
+      "activated_pid": 3004,
+      "passed": true,
+      "restored_model_id": "movielens_1m-087582f44d7b5e9a-f39b43421914627e",
+      "restored_pid": 3006
+    }
+  },
+  "engineering_acceptance_passed": true,
+  "evidence_kind": "process_backed_showcase",
+  "execution_identity": {
+    "dependencies": {
+      "fastapi": "0.142.2",
+      "implicit": "0.7.3",
+      "numpy": "2.5.3",
+      "pydantic": "2.13.5",
+      "scipy": "1.18.1",
+      "threadpoolctl": "3.7.0"
+    },
+    "dependency_lock_sha256": "116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f",
+    "python": "3.12.12",
+    "source_files": {
+      "__init__.py": "6d6f9595cfccb7646730a08104bf455c9d6d85c5789258cfe9793d49d84c5d8b",
+      "api.py": "374b650b570ba515440be4113330091c0956dceda76eabcc8b18043f5bce960d",
+      "benchmark.py": "915c186ae162aefba395f6278b8b033d06a14ca8d2c6f09e1f7590050a0f3fa8",
+      "bundles.py": "9437ad48ad215d5ae5c7e99db6064e9f32d0ca38431acbdee8125662b661b083",
+      "cli.py": "6c6d76611ad26495322f2f3c07e99e2e15a791c742045dacaabc34f56ef79e9e",
+      "container.py": "ddee0e481e90873bf0e24e889bca016b9f3d0c832100d512eb8a14a0e59e0f52",
+      "contracts.py": "98e352800e53eeb8e130aeedcb9c0e443d5cfe8896712be6c4f5ee72b7e8e180",
+      "data.py": "1cbaafd8ef2fbd9203632af8bfa46a839466586be1055518991a93f60fa33ada",
+      "evaluation.py": "bc148d96df3d675c5d6dd37b9ea8c48aea2b2aa3f1739ae7c07b9a208253341a",
+      "evidence.py": "68d4c9b8e866cefb82156080fdbd86a825bfb399010b2c8839c6d8da5505c879",
+      "fixtures/movies.json": "52ededb370ed9f7618f72d466e2886850db677b302a97c6adcb2da56c9f5d634",
+      "ingestion.py": "ec5d3152db9a280292886de78eabf6f78bbd790b9297fe2c0e2d716af73d0b44",
+      "lifecycle.py": "525b980d899e22600068bd130b3442a6b16f5c631b02d562cc06fd89bba9b708",
+      "load.py": "690e72c9e5262d277ec49ddc53e9c7467a8255a36d02d2e1ebab966d20d2465d",
+      "ranking.py": "6671b0531773530f239b086b6821a2cf255e1a0e1f7349d5b25ac0ae4babba3c",
+      "reports.py": "52c8a00225d7fbd7ae6b7b2a0980bfde355c67a037a63b2525e88abc88309a69",
+      "runtime.lock": "116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f",
+      "runtime.py": "e913a1748d5e3741e83751890151b434920ce7d103b8ea1b2b19f6a15c1aee9b",
+      "selection.py": "2b68d9a726e6a4ebadd672af7f5f6d45d933a69f83859f13a953876c741f4586",
+      "serving.py": "48aec3eff7ca49aa91e762df5226ca5d826590c7710efe5346423f569bbba3ef",
+      "showcase.py": "59dcdae7030f7c3464195f13a2369a1941c03858a825f070faf23b8e198fe720",
+      "storage.py": "93312e59b0c8badf3363db8b68c7cad7c3394e9ac556dfcfd0586f65821efa08",
+      "telemetry.py": "8ef2ccc5dbd9942f70ba781c9eca60710f7ed9af6058e06e90282d878419a54d",
+      "ui/index.html": "62031b79a2b75f2a3bc43982e570b81370c0ae0e2cb7b72d48da91ca5e6d6ada"
+    }
+  },
+  "final_report_sha256": "cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25",
+  "hardware": {
+    "logical_cpus": 8,
+    "machine": "arm64",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.12.12"
+  },
+  "http_load": {
+    "achieved_requests_per_second": 20.002668462701426,
+    "client_wall_ms": {
+      "max": 94.99579109251499,
+      "p50": 10.304020543117076,
+      "p95": 11.64588270476088
+    },
+    "completed": 5000,
+    "configuration": {
+      "concurrency_cap": 4,
+      "k": 10,
+      "mix": [
+        "warm",
+        "sparse",
+        "zero_history",
+        "ephemeral_0",
+        "ephemeral_1",
+        "ephemeral_3"
+      ],
+      "offered_requests_per_second": 20.0,
+      "requests": 5000,
+      "warmup": 200
+    },
+    "data_mode": "movielens_1m",
+    "duration_seconds": 249.9666486660717,
+    "error_rate": 0.0,
+    "failed": 0,
+    "fallback_requests": 0,
+    "http_gate_passed": true,
+    "memory_gate_passed": true,
+    "metrics_sha256": "df0d5351d68a4a236de4ff54600022e4215e286fec4962572c06e8773fe8b782",
+    "model_id": "movielens_1m-087582f44d7b5e9a-f39b43421914627e",
+    "peak_api_process_rss_bytes": 184385536,
+    "protocol": "open-loop-http-v1",
+    "queue_ms_p95": 1.4248351857531816,
+    "raw_timings_sha256": "878031d39e536abb694692e80e4c847902fe6417485346d7a6468e76ca993840",
+    "reference_protocol_complete": true,
+    "scheduled": 5000,
+    "startup_load_ms": 341.3284580456093
+  },
+  "model_id": "movielens_1m-087582f44d7b5e9a-f39b43421914627e",
+  "quality_objective_passed": false,
+  "quality_variants": [
+    {
+      "cohorts": {
+        "sparse": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.7948717948717948,
+            "ndcg_at_10": 0.29058576974605826,
+            "recall_at_10": 0.05900106740794275,
+            "recall_at_20": 0.10115599576422293
+          },
+          "users": 39
+        },
+        "warm": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.6288014311270125,
+            "ndcg_at_10": 0.20932206093774236,
+            "recall_at_10": 0.05665266750672867,
+            "recall_at_20": 0.09261854554661329
+          },
+          "users": 1118
+        },
+        "zero_history": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.9354838709677419,
+            "ndcg_at_10": 0.45025673787635917,
+            "recall_at_10": 0.07876333921957233,
+            "recall_at_20": 0.12378582846166745
+          },
+          "users": 31
+        }
+      },
+      "eligible_users": 1188,
+      "failed_users": 0,
+      "metrics": {
+        "hit_rate_at_10": 0.6422558922558923,
+        "ndcg_at_10": 0.21827682493489844,
+        "recall_at_10": 0.05730672341518448,
+        "recall_at_20": 0.0937121030624832
+      },
+      "variant": "popularity"
+    },
+    {
+      "cohorts": {
+        "sparse": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.7435897435897436,
+            "ndcg_at_10": 0.3272564069433807,
+            "recall_at_10": 0.05719732652537353,
+            "recall_at_20": 0.10443599010118941
+          },
+          "users": 39
+        },
+        "warm": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.6386404293381037,
+            "ndcg_at_10": 0.23581545909264306,
+            "recall_at_10": 0.06340103844565002,
+            "recall_at_20": 0.10291635683470284
+          },
+          "users": 1118
+        },
+        "zero_history": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.9354838709677419,
+            "ndcg_at_10": 0.45025673787635917,
+            "recall_at_10": 0.07876333921957233,
+            "recall_at_20": 0.12378582846166745
+          },
+          "users": 31
+        }
+      },
+      "eligible_users": 1188,
+      "failed_users": 0,
+      "metrics": {
+        "hit_rate_at_10": 0.6498316498316499,
+        "ndcg_at_10": 0.2444129983253653,
+        "recall_at_10": 0.06359824935398403,
+        "recall_at_20": 0.103510817539946
+      },
+      "variant": "item_knn"
+    },
+    {
+      "cohorts": {
+        "sparse": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.7692307692307693,
+            "ndcg_at_10": 0.2791908008527626,
+            "recall_at_10": 0.05542861964639851,
+            "recall_at_20": 0.09798884883349748
+          },
+          "users": 39
+        },
+        "warm": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.627906976744186,
+            "ndcg_at_10": 0.18625368068330939,
+            "recall_at_10": 0.06360862116248948,
+            "recall_at_20": 0.10793099442913973
+          },
+          "users": 1118
+        },
+        "zero_history": {
+          "descriptive_only": false,
+          "metrics": {
+            "hit_rate_at_10": 0.9354838709677419,
+            "ndcg_at_10": 0.45025673787635917,
+            "recall_at_10": 0.07876333921957233,
+            "recall_at_20": 0.12378582846166745
+          },
+          "users": 31
+        }
+      },
+      "eligible_users": 1188,
+      "failed_users": 0,
+      "metrics": {
+        "hit_rate_at_10": 0.6405723905723906,
+        "ndcg_at_10": 0.19619361541360675,
+        "recall_at_10": 0.0637355371562959,
+        "recall_at_20": 0.10801833127827973
+      },
+      "variant": "als_cpu"
+    }
+  ],
+  "raw_accounting_verified_before_export": true,
+  "raw_source_report_sha256": "a30afec9a4ebf49cdd2f4539beddccf8be942966307bf70734a0135fa29b1fec",
+  "release_status": "experimental_quality_objective_failed",
+  "schema_version": 1,
+  "selection": {
+    "promotion_status": "pending_http_resource_and_bundle_gates",
+    "quality_gates": [
+      {
+        "comparison": {
+          "candidate": "item_knn",
+          "interval_scope": "Paired benchmark users; shared items/training limit generalization",
+          "metrics": {
+            "hit_rate_at_10": {
+              "absolute_difference": 0.005439709882139619,
+              "paired_95_interval": [
+                -0.006346328195829556,
+                0.01813236627379873
+              ]
+            },
+            "ndcg_at_10": {
+              "absolute_difference": 0.008866954398135767,
+              "paired_95_interval": [
+                0.003926097634791934,
+                0.013702922211801414
+              ]
+            },
+            "recall_at_10": {
+              "absolute_difference": 0.004810882563633702,
+              "paired_95_interval": [
+                0.0006255308212381545,
+                0.008964118278280796
+              ]
+            },
+            "recall_at_20": {
+              "absolute_difference": 0.00246065671600328,
+              "paired_95_interval": [
+                -0.0024474488038315335,
+                0.007840121857042994
+              ]
+            }
+          },
+          "paired_users": 1103,
+          "relative_ndcg_gain": 0.03405095138098141,
+          "samples": 2000,
+          "seed": 42
+        },
+        "passed": false,
+        "reasons": [
+          "ndcg_relative_gain_below_objective"
+        ],
+        "variant": "item_knn"
+      },
+      {
+        "comparison": {
+          "candidate": "als_cpu",
+          "interval_scope": "Paired benchmark users; shared items/training limit generalization",
+          "metrics": {
+            "hit_rate_at_10": {
+              "absolute_difference": -0.006346328195829556,
+              "paired_95_interval": [
+                -0.025385312783318223,
+                0.012692656391659111
+              ]
+            },
+            "ndcg_at_10": {
+              "absolute_difference": -0.007337745884873807,
+              "paired_95_interval": [
+                -0.014071867170941272,
+                -0.0005110343111944903
+              ]
+            },
+            "recall_at_10": {
+              "absolute_difference": 0.0074394893491618735,
+              "paired_95_interval": [
+                -0.00026379547207831274,
+                0.01480639796166996
+              ]
+            },
+            "recall_at_20": {
+              "absolute_difference": 0.010086154229342786,
+              "paired_95_interval": [
+                0.0016372962037878845,
+                0.018677451874821678
+              ]
+            }
+          },
+          "paired_users": 1103,
+          "relative_ndcg_gain": -0.02817847224119768,
+          "samples": 2000,
+          "seed": 42
+        },
+        "passed": false,
+        "reasons": [
+          "ndcg_relative_gain_below_objective",
+          "ndcg_interval_not_above_zero"
+        ],
+        "variant": "als_cpu"
+      }
+    ],
+    "selected_for_final_refit": "popularity",
+    "serving_variant": "popularity",
+    "test_labels_used_for_selection": false
+  },
+  "variant": "popularity"
+}

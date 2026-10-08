@@ -145,3 +145,21 @@ Export verified aggregates without distributing models, histories or raw profile
 .venv/bin/reco export-showcase artifacts/showcase evals/local-showcase
 .venv/bin/reco verify-showcase evals/local-showcase --aggregate
 ```
+
+## Hardened v1 candidate
+
+The [new evidence](../evals/hardened-v1-2026-10-07/README.md) keeps the original numerical treatment and final comparison. Only serving provenance and image packaging changed. `src/reco/runtime.lock` must be byte-identical to `uv.lock`; refresh it explicitly whenever the project lock changes. The API reads that packaged asset independently of the caller's directory and reports actual installed dependency/Python versions. Plain wheel installation still does not enforce the full lock.
+
+```bash
+make check smoke
+make distribution-check DIST_DIR=artifacts/local-distribution
+make image image-check audit
+.venv/bin/reco build-bundle --report artifacts/benchmark-2026-10-06/final \
+  --root artifacts/hardening-v1/models --select
+.venv/bin/reco showcase --root artifacts/hardening-v1/models \
+  --report artifacts/benchmark-2026-10-06/final --output artifacts/hardening-v1/showcase \
+  --container-evidence artifacts/container/verification.json
+.venv/bin/reco verify-showcase artifacts/hardening-v1/showcase --root artifacts/hardening-v1/models
+```
+
+The dated benchmark path assumes the original locally verified reports/data are present; use your independently reproduced final report otherwise. Choose fresh model/showcase directories when repeating immutable runs. Run the full measurement without concurrent browser recording, image building or other load. [Browser capture](demo/README.md) uses isolated optional tools, not additional runtime dependencies. [Security](security.md) explains complete scanning and retained unresolved advisories. [Publishing](publishing.md) uses CI-built bytes so release checksums and attestations match.

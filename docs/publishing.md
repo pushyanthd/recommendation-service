@@ -1,43 +1,32 @@
-# Publishing v1.0.0 yourself
+# Publish v1.0.0 yourself
 
-Package v1.0.0 is prepared locally. No commits, pushes, tags or releases were made during this preparation. The software release covers the bounded local benchmark/demo; the failed personalized validation objective remains experimental and popularity stays selected.
+The hardened candidate is locally verified. No commits, pushes, tags or releases were made during this work. Publish after the exact committed revision passes CI and the tag workflow produces verified, attested assets. This is a local experimental benchmark/demo; popularity remains selected and the failed personalization objective stays visible.
 
-## Verified scope and retained findings
+Review [release readiness](release-v1.md), [security review](security.md) and [current evidence](../evals/hardened-v1-2026-10-07/README.md). Trivy reports no HIGH/CRITICAL findings, while Scout reports one unfixed HIGH and the required C++ library has an additional tracked Debian advisory. A passing CI scan does not erase either risk. Current raw scans, lower-severity findings and package provenance remain available.
 
-The release image `cpu-reco:v1.0.0` passed non-root/read-only/network-disabled CPU checks. Its current high/critical scan records eight unfixed high findings and zero fixable high/critical findings; the Python dependency audit is clear. [Release evidence](../evals/release-v1-2026-10-07/README.md) retains the image and scan identities. Review these limits before publishing the local experimental demo.
-
-Automatic approval review initially rejected the Docker Scout scan because of potential image-metadata transfer. A read-only check established that all image source/build instructions match the public repository and that the image contains only public dependencies and fictional fixtures. Review then allowed the scan; the fresh result above was retained without suppressions.
-
-To refresh the scan yourself later:
+## Review and commit the fixes
 
 ```bash
 cd /Users/pushyanth/Desktop/Code/recommendation-service
-docker scout cves cpu-reco:v1.0.0 --only-severity critical,high --exit-code
-```
-
-This exits nonzero while high/critical findings remain. It may send image-derived package metadata to Docker's service. Preserve new results with their actual image identity and date rather than rewriting the historical evidence.
-
-## Review, commit and push
-
-```bash
 git diff --check
 git diff
 git status --short
-git add pyproject.toml uv.lock Makefile .github/workflows/check.yml \
-  benchmarks/verify_distribution.py README.md arch_plan/recommendation-service-plan.md \
-  docs/acceptance.md docs/progress.md docs/release-v1.md docs/reproduction.md \
-  docs/system-card.md docs/publishing.md docs/release-notes-v1.md \
-  evals/release-v1-2026-10-07
+git add Dockerfile Makefile .github/workflows/check.yml .github/workflows/release.yml \
+  benchmarks/stage_runtime.py benchmarks/image_audit.py benchmarks/capture_demo.py \
+  benchmarks/verify_container.py benchmarks/verify_distribution.py benchmarks/README.md \
+  src/reco/api.py src/reco/runtime.lock tests/test_api.py tests/test_image_audit.py \
+  README.md arch_plan/recommendation-service-plan.md docs/acceptance.md docs/progress.md \
+  docs/release-v1.md docs/reproduction.md docs/system-card.md docs/security.md \
+  docs/publishing.md docs/release-notes-v1.md docs/engineering-case-study.md \
+  docs/demo evals/hardened-v1-2026-10-07
 git diff --cached --stat
-git commit -m "Prepare verified CPU recommendation service v1.0.0"
+git commit -m "Harden v1 runtime and verify standalone installation and release assets"
 git push origin main
 ```
 
-Only project release files are staged. Real data, model bundles, raw profile traffic and generated distributions stay ignored. The separate portfolio working tree is outside this commit.
+The commands stage project files explicitly. Real data, model bundles, local browser tools, scanner caches and distributions remain ignored. No portfolio files outside this repository are included.
 
-## Check the committed revision in CI
-
-Wait for the `checks` workflow on the exact pushed commit. It checks the fixture, full test suite, package installation and CPU image. The prior passing jobs cover 0.1.0 and do not verify the new packaging step.
+## Wait for checks on your exact commit
 
 ```bash
 release_commit=$(git rev-parse HEAD)
@@ -46,22 +35,69 @@ release_run=$(gh run list --commit "$release_commit" --workflow check.yml \
 test -n "$release_run" && gh run watch "$release_run" --exit-status
 ```
 
-If the run has not appeared yet, repeat the last two commands. Continue only after that exact commit passes both jobs. GitHub upload artifacts retain the Python distributions and container verification for the committed source.
+Repeat the last two commands if the run has not appeared. Continue only when both jobs pass for this commit. The earlier passing run verifies the earlier preparation, not these uncommitted changes. CI checks tests, installed-wheel HTTP startup, fixture evaluation, CPU serving, native library provenance, vulnerability inventory and SBOM generation. Raw scan evidence is retained on gate failure; resolve a new failure before tagging.
 
-## Build final assets and publish
+## Tag and produce attested assets
 
 ```bash
-make distribution-check DIST_DIR=artifacts/full-release-v1/distribution
-(cd artifacts/full-release-v1/distribution && shasum -a 256 -c SHA256SUMS)
+test -z "$(git status --porcelain)"
+test "$(git rev-parse HEAD)" = "$release_commit"
 git tag -a v1.0.0 -m "CPU Recommendation Service v1.0.0"
 git push origin v1.0.0
+```
+
+The tag starts `release-candidate`; it does not automatically publish a release. The workflow verifies tag/package version agreement, repeats engineering/package/image checks, scans the linux/amd64 image and generates provenance and SBOM attestations. It uploads `verified-release-assets`, including the wheel, source archive, compressed CPU image, complete Trivy scan, CycloneDX SBOM, checksums, showcase and fixture demo. Local arm64 security evidence is explicitly named separately from the fresh CI amd64 scan.
+
+```bash
+candidate_run=$(gh run list --commit "$release_commit" --workflow release.yml \
+  --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+test -n "$candidate_run" && gh run watch "$candidate_run" --exit-status
+```
+
+Repeat those two commands if needed. Continue only after the tag workflow succeeds. Download into a new empty directory so old local builds cannot be mixed with attested assets:
+
+```bash
+release_assets="artifacts/publish-v1-${candidate_run}"
+test ! -e "$release_assets" && mkdir -p "$release_assets"
+gh run download "$candidate_run" --name verified-release-assets --dir "$release_assets"
+(cd "$release_assets" && shasum -a 256 -c SHA256SUMS)
+gh attestation verify "$release_assets/cpu_recommendation_service-1.0.0-py3-none-any.whl" \
+  --repo pushyanthd/recommendation-service --source-digest "$release_commit" \
+  --signer-workflow pushyanthd/recommendation-service/.github/workflows/release.yml
+gh attestation verify "$release_assets/cpu_recommendation_service-1.0.0.tar.gz" \
+  --repo pushyanthd/recommendation-service --source-digest "$release_commit" \
+  --signer-workflow pushyanthd/recommendation-service/.github/workflows/release.yml
+gh attestation verify "$release_assets/cpu-recommendation-service-linux-amd64.tar.gz" \
+  --repo pushyanthd/recommendation-service --source-digest "$release_commit" \
+  --signer-workflow pushyanthd/recommendation-service/.github/workflows/release.yml
+gh attestation verify "$release_assets/cpu-recommendation-service-linux-amd64.tar.gz" \
+  --repo pushyanthd/recommendation-service --source-digest "$release_commit" \
+  --signer-workflow pushyanthd/recommendation-service/.github/workflows/release.yml \
+  --predicate-type https://cyclonedx.org/bom
+```
+
+Inspect `image-audit.json`, `trivy.json`, `security-review-arm64.json` and the workflow attestation summary. The SBOM attestation uses the CycloneDX predicate `https://cyclonedx.org/bom`. If any verification fails, stop before publication and inspect that run's evidence.
+
+## Publish the verified assets
+
+```bash
 gh release create v1.0.0 --verify-tag --title "CPU Recommendation Service v1.0.0" \
   --notes-file docs/release-notes-v1.md \
-  artifacts/full-release-v1/distribution/cpu_recommendation_service-1.0.0-py3-none-any.whl \
-  artifacts/full-release-v1/distribution/cpu_recommendation_service-1.0.0.tar.gz \
-  artifacts/full-release-v1/distribution/verification.json \
-  artifacts/full-release-v1/distribution/SHA256SUMS
+  "$release_assets"/*.whl "$release_assets"/*.tar.gz "$release_assets"/*.json \
+  "$release_assets"/*.jsonl "$release_assets"/*.html "$release_assets"/*.png \
+  "$release_assets"/*.webm "$release_assets/SHA256SUMS"
 gh release view v1.0.0 --web
 ```
 
-Tag the verified commit without further source changes. The wheel and source archive include fictional fixtures; neither includes MovieLens rows or trained real-data bundles. Dataset setup remains an explicit step governed by the preserved GroupLens terms. PyPI publication and public API hosting are outside this release.
+The release wheel/source/image contain fictional fixtures and no MovieLens rows or trained real-data bundles. Dataset preparation remains explicit and subject to GroupLens terms. A wheel installed alone does not pin external dependencies; use the source archive and committed lock for reproduction. Attach the CI-built bytes above so the attestations match; do not replace them with a subsequent local build. Public API hosting and PyPI publication are separate decisions.
+
+To use the attached CPU image locally:
+
+```bash
+gzip -dc cpu-recommendation-service-linux-amd64.tar.gz | docker load
+docker run --rm --read-only --tmpfs /tmp:rw,noexec,nosuid,size=16m \
+  --cap-drop ALL --security-opt no-new-privileges \
+  -p 127.0.0.1:8000:8000 cpu-reco:local
+```
+
+That archive is linux/amd64. Apple Silicon can use Docker's emulation or build its own native image with `make image image-check audit`. The native local image is verified separately and is not the attested amd64 archive.

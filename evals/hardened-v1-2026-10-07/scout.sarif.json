@@ -1,0 +1,559 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "fullName": "Docker Scout",
+          "informationUri": "https://docker.com/products/docker-scout",
+          "name": "docker scout",
+          "rules": [
+            {
+              "id": "CVE-2010-0928",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2010-0928"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2010-0928?s=debian&n=openssl&ns=debian&t=deb&osn=debian&osv=13&vr=%3E%3D3.2.1-3",
+              "help": {
+                "text": "OpenSSL 0.9.8i on the Gaisler Research LEON3 SoC on the Xilinx Virtex-II Pro FPGA uses a Fixed Width Exponentiation (FWE) algorithm for certain signature calculations, and does not verify the signature before providing it to a caller, which makes it easier for physically proximate attackers to determine the private key via a modified supply voltage for the microprocessor, related to a \"fault-based attack.\"\n\n---\nhttp://www.eecs.umich.edu/~valeria/research/publications/DATE10RSA.pdf\nhttps://github.com/openssl/openssl/discussions/24540\nFault injection based attacks are not within OpenSSLs threat model according\nto the security policy: https://www.openssl.org/policies/general/security-policy.html\n",
+                "markdown": "> OpenSSL 0.9.8i on the Gaisler Research LEON3 SoC on the Xilinx Virtex-II Pro FPGA uses a Fixed Width Exponentiation (FWE) algorithm for certain signature calculations, and does not verify the signature before providing it to a caller, which makes it easier for physically proximate attackers to determine the private key via a modified supply voltage for the microprocessor, related to a \"fault-based attack.\"\n\n---\nhttp://www.eecs.umich.edu/~valeria/research/publications/DATE10RSA.pdf\nhttps://github.com/openssl/openssl/discussions/24540\nFault injection based attacks are not within OpenSSLs threat model according\nto the security policy: https://www.openssl.org/policies/general/security-policy.html\n\n|                                                                                                      |\n|Package         pkg:deb/debian/openssl@3.5.7-1~deb13u3?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >=3.2.1-3                                                                             |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">=3.2.1-3",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/openssl@3.5.7-1~deb13u3?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2010-4756",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2010-4756"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2010-4756?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "The glob implementation in the GNU C Library (aka glibc or libc6) allows remote authenticated users to cause a denial of service (CPU and memory consumption) via crafted glob expressions that do not match any pathnames, as demonstrated by glob expressions in STAT commands to an FTP daemon, a different vulnerability than CVE-2010-2632.\n\n---\n- glibc <removed> (unimportant)\n- eglibc <unfixed> (unimportant)\nThat's standard POSIX behaviour implemented by (e)glibc. Applications using\nglob need to impose limits for themselves\n",
+                "markdown": "> The glob implementation in the GNU C Library (aka glibc or libc6) allows remote authenticated users to cause a denial of service (CPU and memory consumption) via crafted glob expressions that do not match any pathnames, as demonstrated by glob expressions in STAT commands to an FTP daemon, a different vulnerability than CVE-2010-2632.\n\n---\n- glibc <removed> (unimportant)\n- eglibc <unfixed> (unimportant)\nThat's standard POSIX behaviour implemented by (e)glibc. Applications using\nglob need to impose limits for themselves\n\n|                                                                                                      |\n|Package         pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                    |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2018-20796",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2018-20796"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2018-20796?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(\\227|)(\\\\1\\\\1|t1|\\\\\\2537)+' in grep.\n\n---\n- glibc <unfixed> (unimportant)\n- eglibc <removed> (unimportant)\nhttps://debbugs.gnu.org/cgi/bugreport.cgi?bug=34141\nhttps://lists.gnu.org/archive/html/bug-gnulib/2019-01/msg00108.html\nNo treated as vulnerability: https://sourceware.org/glibc/wiki/Security%20Exceptions\n",
+                "markdown": "> In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(\\227|)(\\\\1\\\\1|t1|\\\\\\2537)+' in grep.\n\n---\n- glibc <unfixed> (unimportant)\n- eglibc <removed> (unimportant)\nhttps://debbugs.gnu.org/cgi/bugreport.cgi?bug=34141\nhttps://lists.gnu.org/archive/html/bug-gnulib/2019-01/msg00108.html\nNo treated as vulnerability: https://sourceware.org/glibc/wiki/Security%20Exceptions\n\n|                                                                                                      |\n|Package         pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                    |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2019-1010022",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2019-1010022"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2019-1010022?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass stack guard protection. The component is: nptl. The attack vector is: Exploit stack buffer overflow vulnerability and use this bypass vulnerability to bypass stack guard. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22850\n",
+                "markdown": "> GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass stack guard protection. The component is: nptl. The attack vector is: Exploit stack buffer overflow vulnerability and use this bypass vulnerability to bypass stack guard. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22850\n\n|                                                                                                      |\n|Package         pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                    |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2019-1010023",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2019-1010023"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2019-1010023?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "GNU Libc current is affected by: Re-mapping current loaded library with malicious ELF file. The impact is: In worst case attacker may evaluate privileges. The component is: libld. The attack vector is: Attacker sends 2 ELF files to victim and asks to run ldd on it. ldd execute code. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22851\n",
+                "markdown": "> GNU Libc current is affected by: Re-mapping current loaded library with malicious ELF file. The impact is: In worst case attacker may evaluate privileges. The component is: libld. The attack vector is: Attacker sends 2 ELF files to victim and asks to run ldd on it. ldd execute code. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22851\n\n|                                                                                                      |\n|Package         pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                    |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2019-1010024",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2019-1010024"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2019-1010024?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass ASLR using cache of thread stack and heap. The component is: glibc. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22852\n",
+                "markdown": "> GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may bypass ASLR using cache of thread stack and heap. The component is: glibc. NOTE: Upstream comments indicate \"this is being treated as a non-security bug and no real threat.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22852\n\n|                                                                                                      |\n|Package         pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                    |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2019-1010025",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2019-1010025"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2019-1010025?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may guess the heap addresses of pthread_created thread. The component is: glibc. NOTE: the vendor's position is \"ASLR bypass itself is not a vulnerability.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22853\n",
+                "markdown": "> GNU Libc current is affected by: Mitigation bypass. The impact is: Attacker may guess the heap addresses of pthread_created thread. The component is: glibc. NOTE: the vendor's position is \"ASLR bypass itself is not a vulnerability.\n\n---\n- glibc <unfixed> (unimportant)\nNot treated as a security issue by upstream\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=22853\n\n|                                                                                                      |\n|Package         pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                    |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2019-9192",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2019-9192"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2019-9192?s=debian&n=glibc&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(|)(\\\\1\\\\1)*' in grep, a different issue than CVE-2018-20796. NOTE: the software maintainer disputes that this is a vulnerability because the behavior occurs only with a crafted pattern\n\n---\n- glibc <unfixed> (unimportant)\n- eglibc <removed> (unimportant)\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=24269\n",
+                "markdown": "> In the GNU C Library (aka glibc or libc6) through 2.29, check_dst_limits_calc_pos_1 in posix/regexec.c has Uncontrolled Recursion, as demonstrated by '(|)(\\\\1\\\\1)*' in grep, a different issue than CVE-2018-20796. NOTE: the software maintainer disputes that this is a vulnerability because the behavior occurs only with a crafted pattern\n\n---\n- glibc <unfixed> (unimportant)\n- eglibc <removed> (unimportant)\nhttps://sourceware.org/bugzilla/show_bug.cgi?id=24269\n\n|                                                                                                      |\n|Package         pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                    |\n|Fixed version   not fixed                                                                             |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2021-45346",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2021-45346"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2021-45346?s=debian&n=sqlite3&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "A Memory Leak vulnerability exists in SQLite Project SQLite3 3.35.1 and 3.37.0 via maliciously crafted SQL Queries (made via editing the Database File), it is possible to query a record, and leak subsequent bytes of memory that extend beyond the record, which could let a malicious user obtain sensitive information. NOTE: The developer disputes this as a vulnerability stating that If you give SQLite a corrupted database file and submit a query against the database, it might read parts of the database that you did not intend or expect.\n\n---\n- sqlite3 <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1005974)\n- sqlite <removed> (unimportant)\nhttps://github.com/guyinatuxedo/sqlite3_record_leaking\nhttps://bugzilla.redhat.com/show_bug.cgi?id=2054793\nhttps://sqlite.org/forum/forumpost/056d557c2f8c452ed5bb9c215414c802b215ce437be82be047726e521342161e\nNegligible security impact\n",
+                "markdown": "> A Memory Leak vulnerability exists in SQLite Project SQLite3 3.35.1 and 3.37.0 via maliciously crafted SQL Queries (made via editing the Database File), it is possible to query a record, and leak subsequent bytes of memory that extend beyond the record, which could let a malicious user obtain sensitive information. NOTE: The developer disputes this as a vulnerability stating that If you give SQLite a corrupted database file and submit a query against the database, it might read parts of the database that you did not intend or expect.\n\n---\n- sqlite3 <unfixed> (unimportant; bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1005974)\n- sqlite <removed> (unimportant)\nhttps://github.com/guyinatuxedo/sqlite3_record_leaking\nhttps://bugzilla.redhat.com/show_bug.cgi?id=2054793\nhttps://sqlite.org/forum/forumpost/056d557c2f8c452ed5bb9c215414c802b215ce437be82be047726e521342161e\nNegligible security impact\n\n|                                                                                                         |\n|Package         pkg:deb/debian/sqlite3@3.46.1-7%2Bdeb13u2?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                       |\n|Fixed version   not fixed                                                                                |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/sqlite3@3.46.1-7%2Bdeb13u2?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2025-70873",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2025-70873"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2025-70873?s=debian&n=sqlite3&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "An information disclosure issue in the zipfileInflate function in the zipfile extension in SQLite v3.51.1 and earlier allows attackers to obtain heap memory via supplying a crafted ZIP file.\n\n---\n- sqlite3 <unfixed> (unimportant)\nhttps://sqlite.org/src/info/3d459f1fb1bd1b5e\nhttps://sqlite.org/forum/forumpost/761eac3c82\nhttps://gist.github.com/cnwangjihe/f496393f30f5ecec5b18c8f5ab072054\nzipfile extension not build for Debian binary package builds\n",
+                "markdown": "> An information disclosure issue in the zipfileInflate function in the zipfile extension in SQLite v3.51.1 and earlier allows attackers to obtain heap memory via supplying a crafted ZIP file.\n\n---\n- sqlite3 <unfixed> (unimportant)\nhttps://sqlite.org/src/info/3d459f1fb1bd1b5e\nhttps://sqlite.org/forum/forumpost/761eac3c82\nhttps://gist.github.com/cnwangjihe/f496393f30f5ecec5b18c8f5ab072054\nzipfile extension not build for Debian binary package builds\n\n|                                                                                                         |\n|Package         pkg:deb/debian/sqlite3@3.46.1-7%2Bdeb13u2?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                       |\n|Fixed version   not fixed                                                                                |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "LOW",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/sqlite3@3.46.1-7%2Bdeb13u2?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "3.1",
+                "tags": [
+                  "LOW"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2026-85091",
+              "name": "OsPackageVulnerability",
+              "shortDescription": {
+                "text": "CVE-2026-85091"
+              },
+              "helpUri": "https://scout.docker.com/v/CVE-2026-85091?s=debian&n=zlib&ns=debian&t=deb&osn=debian&osv=13&vr=%3E0",
+              "help": {
+                "text": "zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.\n\n---\n- zlib <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146895)\nhttps://gist.github.com/thesmartshadow/e0b9481792afb7c31e86fee1ff084490\nhttps://github.com/madler/zlib/issues/1310\nhttps://github.com/madler/zlib/pull/1317\nFixed by: https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148\nDiscussion on affected range: https://github.com/madler/zlib/issues/1310#issuecomment-5979623265\nSupport non-blocking devices in the gz* routines introduced with:\nhttps://github.com/madler/zlib/commit/81cc0bebedd935daeb81b0b6e475d8786b51af3d (v1.3.1.2)\n",
+                "markdown": "> zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.\n\n---\n- zlib <unfixed> (bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1146895)\nhttps://gist.github.com/thesmartshadow/e0b9481792afb7c31e86fee1ff084490\nhttps://github.com/madler/zlib/issues/1310\nhttps://github.com/madler/zlib/pull/1317\nFixed by: https://github.com/madler/zlib/commit/df84af25dc1942490e1d1c899a07619152a46148\nDiscussion on affected range: https://github.com/madler/zlib/issues/1310#issuecomment-5979623265\nSupport non-blocking devices in the gz* routines introduced with:\nhttps://github.com/madler/zlib/commit/81cc0bebedd935daeb81b0b6e475d8786b51af3d (v1.3.1.2)\n\n|                                                                                                                |\n|Package         pkg:deb/debian/zlib@1%3A1.3.dfsg%2Breally1.3.1-1?os_distro=trixie&os_name=debian&os_version=13  |\n|Affected range  >0                                                                                              |\n|Fixed version   not fixed                                                                                       |\n"
+              },
+              "properties": {
+                "affected_version": ">0",
+                "cvssV3_severity": "HIGH",
+                "fixed_version": "not fixed",
+                "purls": [
+                  "pkg:deb/debian/zlib@1%3A1.3.dfsg%2Breally1.3.1-1?os_distro=trixie&os_name=debian&os_version=13"
+                ],
+                "security-severity": "8.3",
+                "tags": [
+                  "HIGH"
+                ]
+              }
+            }
+          ],
+          "version": "1.24.0"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CVE-2010-0928",
+          "ruleIndex": 0,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2010-0928                                                                         \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/openssl@3.5.7-1~deb13u3?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>=3.2.1-3                                                                             \nFixed version    :not fixed                                                                             \nEPSS Score       :0.005360                                                                              \nEPSS Percentile  :0.433220                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libssl3t64/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2010-4756",
+          "ruleIndex": 1,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2010-4756                                                                         \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                    \nFixed version    :not fixed                                                                             \nEPSS Score       :0.026110                                                                              \nEPSS Percentile  :0.849190                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libc6/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2018-20796",
+          "ruleIndex": 2,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2018-20796                                                                        \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                    \nFixed version    :not fixed                                                                             \nEPSS Score       :0.057570                                                                              \nEPSS Percentile  :0.928620                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libc6/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2019-1010022",
+          "ruleIndex": 3,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2019-1010022                                                                      \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                    \nFixed version    :not fixed                                                                             \nEPSS Score       :0.032230                                                                              \nEPSS Percentile  :0.878370                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libc6/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2019-1010023",
+          "ruleIndex": 4,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2019-1010023                                                                      \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                    \nFixed version    :not fixed                                                                             \nEPSS Score       :0.030440                                                                              \nEPSS Percentile  :0.871120                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libc6/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2019-1010024",
+          "ruleIndex": 5,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2019-1010024                                                                      \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                    \nFixed version    :not fixed                                                                             \nEPSS Score       :0.031930                                                                              \nEPSS Percentile  :0.877050                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libc6/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2019-1010025",
+          "ruleIndex": 6,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2019-1010025                                                                      \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                    \nFixed version    :not fixed                                                                             \nEPSS Score       :0.022670                                                                              \nEPSS Percentile  :0.824730                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libc6/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2019-9192",
+          "ruleIndex": 7,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2019-9192                                                                         \nSeverity         :LOW                                                                                   \nPackage          :pkg:deb/debian/glibc@2.41-12%2Bdeb13u4?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                    \nFixed version    :not fixed                                                                             \nEPSS Score       :0.024470                                                                              \nEPSS Percentile  :0.838350                                                                              \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libc6/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2021-45346",
+          "ruleIndex": 8,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2021-45346                                                                           \nSeverity         :LOW                                                                                      \nPackage          :pkg:deb/debian/sqlite3@3.46.1-7%2Bdeb13u2?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                       \nFixed version    :not fixed                                                                                \nEPSS Score       :0.016140                                                                                 \nEPSS Percentile  :0.752110                                                                                 \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libsqlite3-0/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2025-70873",
+          "ruleIndex": 9,
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Vulnerability    :CVE-2025-70873                                                                           \nSeverity         :LOW                                                                                      \nPackage          :pkg:deb/debian/sqlite3@3.46.1-7%2Bdeb13u2?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                       \nFixed version    :not fixed                                                                                \nEPSS Score       :0.003010                                                                                 \nEPSS Percentile  :0.208300                                                                                 \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/libsqlite3-0/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2026-85091",
+          "ruleIndex": 10,
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Vulnerability    :CVE-2026-85091                                                                                  \nSeverity         :HIGH                                                                                            \nPackage          :pkg:deb/debian/zlib@1%3A1.3.dfsg%2Breally1.3.1-1?os_distro=trixie&os_name=debian&os_version=13  \nAffected range   :>0                                                                                              \nFixed version    :not fixed                                                                                       \nEPSS Score       :0.005920                                                                                        \nEPSS Percentile  :0.465260                                                                                        \n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/usr/share/doc/zlib1g/copyright"
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/var/lib/dpkg/status"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

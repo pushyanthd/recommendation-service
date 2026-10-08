@@ -1,0 +1,605 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CPU recommendation service showcase</title><style>body{font:16px/1.65 system-ui;max-width:1000px;margin:48px auto;padding:0 24px;background:#f4f6f1;color:#19332d}table{border-collapse:collapse;width:100%;background:white}th,td{text-align:left;padding:12px;border-bottom:1px solid #ccd8d0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:24px;border-radius:12px}h1{font-size:40px}</style><h1>CPU ranking, measured.</h1><p>experimental_quality_objective_failed · movielens_1m</p><table><tr><th>Method</th><th>Final NDCG@10</th><th>Final Recall@20</th></tr><tr><td>popularity</td><td>0.218277</td><td>0.093712</td></tr><tr><td>item_knn</td><td>0.244413</td><td>0.103511</td></tr><tr><td>als_cpu</td><td>0.196194</td><td>0.108018</td></tr></table><h2>Serving and recovery evidence</h2><pre># CPU recommendation service showcase
+
+Status: **experimental_quality_objective_failed**. Selected: **popularity**.
+
+Model: `movielens_1m-087582f44d7b5e9a-f39b43421914627e`. Data: `movielens_1m`.
+
+| Method | Final NDCG@10 | Final Recall@20 |
+|---|---:|---:|
+| popularity | 0.218277 | 0.093712 |
+| item_knn | 0.244413 | 0.103511 |
+| als_cpu | 0.196194 | 0.108018 |
+
+HTTP: 5000/5000 completed; 0 failures; warm client P95 11.646 ms; 20.00 requests/s.
+
+API process peak RSS: 175.8 MiB. Snapshot startup load: 341.33 ms.
+
+## Recovery drills
+
+- corrupt_candidate_rejected: passed
+- forced_gate_rejection: passed
+- restart_preserves_version_and_ranking: passed
+- rollback_restores_exact_prior_version: passed
+
+Validation selection is preserved. Final metrics do not select a new model. Offline rating recovery does not establish viewing, clicks or revenue. HTTP latency includes client queueing. Docker/whole-system memory is separate. Raw timings and process evidence remain in ignored local artifacts.
+</pre><details><summary>Full provenance and acceptance evidence</summary><pre>{
+  &quot;bundle_manifest_sha256&quot;: &quot;4717cb1762a9d0fe3b4f12d78c315a2a20bdb0d7169f23971e084c29c3347a7f&quot;,
+  &quot;cold_start_to_readiness_wall_ms&quot;: 1351.920707966201,
+  &quot;container&quot;: {
+    &quot;architecture&quot;: &quot;arm64&quot;,
+    &quot;checks&quot;: {
+      &quot;api_peak_process_rss_bytes&quot;: 81297408,
+      &quot;cpu_backend&quot;: &quot;implicit.cpu.als&quot;,
+      &quot;data_mode&quot;: &quot;fictional_fixture&quot;,
+      &quot;model_id&quot;: &quot;fictional_fixture-a8d92ae361c9bc13-eed1ba026d949754&quot;,
+      &quot;ready&quot;: true,
+      &quot;runtime_identity_sha256&quot;: &quot;eb6a5c0bfe32037c5f26ce9f6c4c182a25262911ea4a8783f1739ea981e56dff&quot;,
+      &quot;runtime_inventory&quot;: {
+        &quot;debian_packages&quot;: [
+          {
+            &quot;name&quot;: &quot;base-files&quot;,
+            &quot;version&quot;: &quot;13.8+deb13u7&quot;
+          },
+          {
+            &quot;name&quot;: &quot;ca-certificates&quot;,
+            &quot;version&quot;: &quot;20250419&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libbz2-1.0&quot;,
+            &quot;version&quot;: &quot;1.0.8-6&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libc6&quot;,
+            &quot;version&quot;: &quot;2.41-12+deb13u4&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libcrypt1&quot;,
+            &quot;version&quot;: &quot;1:4.4.38-1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libdb5.3t64&quot;,
+            &quot;version&quot;: &quot;5.3.28+dfsg2-9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libffi8&quot;,
+            &quot;version&quot;: &quot;3.4.8-2&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libgcc-s1&quot;,
+            &quot;version&quot;: &quot;14.2.0-19&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libgdbm6t64&quot;,
+            &quot;version&quot;: &quot;1.24-2&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libgomp1&quot;,
+            &quot;version&quot;: &quot;14.2.0-19&quot;
+          },
+          {
+            &quot;name&quot;: &quot;liblzma5&quot;,
+            &quot;version&quot;: &quot;5.8.1-1+deb13u1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libsqlite3-0&quot;,
+            &quot;version&quot;: &quot;3.46.1-7+deb13u2&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libssl3t64&quot;,
+            &quot;version&quot;: &quot;3.5.7-1~deb13u3&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libstdc++6&quot;,
+            &quot;version&quot;: &quot;14.2.0-19&quot;
+          },
+          {
+            &quot;name&quot;: &quot;libzstd1&quot;,
+            &quot;version&quot;: &quot;1.5.7+dfsg-1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;tzdata&quot;,
+            &quot;version&quot;: &quot;2026c-0+deb13u1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;zlib1g&quot;,
+            &quot;version&quot;: &quot;1:1.3.dfsg+really1.3.1-1+b1&quot;
+          }
+        ],
+        &quot;external_libraries&quot;: [
+          {
+            &quot;debian_package&quot;: &quot;libbz2-1.0&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libbz2.so.1.0&quot;,
+            &quot;sha256&quot;: &quot;810fa9b02adc39be4a7542bde79f1da0575e9bbdf8fc3c27deeb1ee97f59fe46&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libc.so.6&quot;,
+            &quot;sha256&quot;: &quot;70fa4c4cf57eabeb96097cce47582d02379c4cd1de3db3e98ade4dd7089a1b13&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libcrypt1&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libcrypt.so.1&quot;,
+            &quot;sha256&quot;: &quot;fc0165e3cbff299baa266b5531ac9054fff35786bf3ffa46f6eae5650d9bd8c8&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libssl3t64&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libcrypto.so.3&quot;,
+            &quot;sha256&quot;: &quot;809909371a1db7d2b9cac4c2fa2eff63eb6169d5979416d94155955a7ad32516&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libdb5.3t64&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libdb-5.3.so&quot;,
+            &quot;sha256&quot;: &quot;a9d28b0f7bbe2e391ea2d42ec89d3a2e6908a4bbf36b71462e487541e47ad06b&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libdl.so.2&quot;,
+            &quot;sha256&quot;: &quot;8023ba7cb6ecabb57d1910ecd24ce347cba5653d1b547d9c7950301ed59716ca&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libffi8&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libffi.so.8&quot;,
+            &quot;sha256&quot;: &quot;f0527ef7efeaf85fc2f5855d68fddb63bf7b3b90f1228c6b49fb6020b0dca490&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libgcc-s1&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libgcc_s.so.1&quot;,
+            &quot;sha256&quot;: &quot;9a146967dc38c3820c5dc21c3209812655f66b6551264072b187bd0e787947e0&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libgdbm6t64&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libgdbm.so.6&quot;,
+            &quot;sha256&quot;: &quot;34cac747bb20d56694673cb527ef7f38abbb5f1ad0550462553e18b4d667245e&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libgomp1&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libgomp.so.1&quot;,
+            &quot;sha256&quot;: &quot;a2286e5fa0f7601afdfae2a750536f409bc8c3cc5b0bb9e93a4afc5c3779a510&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;liblzma5&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/liblzma.so.5&quot;,
+            &quot;sha256&quot;: &quot;4b40b41d7f4f982c6e544f2ff1c82e4d49654711f50631faf60cae830aa14f84&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libm.so.6&quot;,
+            &quot;sha256&quot;: &quot;a8afb2d1f4a0c5e14c0fc82f794ec839eafe29738907aa92895410f57630bbe2&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libpthread.so.0&quot;,
+            &quot;sha256&quot;: &quot;b4f0bcbb029e42861545757592356a490d87ef42cfa8a7f2d4295846e42698b5&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libsqlite3-0&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libsqlite3.so.0&quot;,
+            &quot;sha256&quot;: &quot;203e52aaa9cfa34eab0f4ea46b434e8a69031610a46d72c2f7886389990468a1&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libssl3t64&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libssl.so.3&quot;,
+            &quot;sha256&quot;: &quot;b3b9a479537bded757b818bb787413d8f8f636135e6546c84e90688eca1dc842&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libstdc++6&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libstdc++.so.6&quot;,
+            &quot;sha256&quot;: &quot;fff1f0050a33ddf29c44634c7639ac16e2573a61e3daab4fcc4c007b432ccf19&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;zlib1g&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libz.so.1&quot;,
+            &quot;sha256&quot;: &quot;6fe00acadf8119ff245855e5dcc7f26c6c0ffaf4bfa2baa88feab58f23727d65&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libzstd1&quot;,
+            &quot;path&quot;: &quot;/lib/aarch64-linux-gnu/libzstd.so.1&quot;,
+            &quot;sha256&quot;: &quot;1279c4edfbfb08878b5b7fb40d392c1bdc9b30100d9b7a019d4aefaf10d2046c&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/lib/ld-linux-aarch64.so.1&quot;,
+            &quot;sha256&quot;: &quot;1b882eddacd494b060413a8aa4f0a4754ee3f84775e68cecbf8a86092b59cca6&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/usr/lib/aarch64-linux-gnu/libnss_compat.so.2&quot;,
+            &quot;sha256&quot;: &quot;592b029a3e03e8f7357205a49dede7af16c7ed6a63afbd7a1d1f994e743294cd&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/usr/lib/aarch64-linux-gnu/libnss_dns.so.2&quot;,
+            &quot;sha256&quot;: &quot;a69d397ca7b354e1e954ce87cbb046c06a62d8042721f90d6d9ef47773af2e7d&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/usr/lib/aarch64-linux-gnu/libnss_files.so.2&quot;,
+            &quot;sha256&quot;: &quot;5dff3521fe00ea802ff94f4285f35e9038f52fc80ba4906db068392cb4eff272&quot;
+          },
+          {
+            &quot;debian_package&quot;: &quot;libc6&quot;,
+            &quot;path&quot;: &quot;/usr/lib/aarch64-linux-gnu/libnss_hesiod.so.2&quot;,
+            &quot;sha256&quot;: &quot;8bc817883c329674e0223ad88a9fb92a365a7f816121b01803bb4bd606b07ef1&quot;
+          }
+        ],
+        &quot;optional_extensions_excluded&quot;: [
+          &quot;usr/local/lib/python3.12/lib-dynload/_curses.cpython-312-aarch64-linux-gnu.so&quot;,
+          &quot;usr/local/lib/python3.12/lib-dynload/_curses_panel.cpython-312-aarch64-linux-gnu.so&quot;,
+          &quot;usr/local/lib/python3.12/lib-dynload/_tkinter.cpython-312-aarch64-linux-gnu.so&quot;,
+          &quot;usr/local/lib/python3.12/lib-dynload/_uuid.cpython-312-aarch64-linux-gnu.so&quot;,
+          &quot;usr/local/lib/python3.12/lib-dynload/readline.cpython-312-aarch64-linux-gnu.so&quot;
+        ],
+        &quot;package_managers_and_shells_included&quot;: false,
+        &quot;schema_version&quot;: 1,
+        &quot;scope&quot;: &quot;Runtime for the recommendation API and CPU inference; no runtime setup&quot;,
+        &quot;source_base&quot;: &quot;python:3.12.15-slim-trixie@sha256:05cda9777409a9c3ffddd94a4c476b79f0769a0b4857f0c7ed9226b6800b0d6f&quot;,
+        &quot;staging_helper_sha256&quot;: &quot;6f8b82bbfcfe4816bf1f5365f1e059e56baff1ac18a1759d443f1ee3e41bc631&quot;
+      },
+      &quot;source_identity_sha256&quot;: &quot;b2c73b8d17e2d039468319b6ef61179c66ebff0a4061232669e10eba8b2614f3&quot;,
+      &quot;uid&quot;: 10001
+    },
+    &quot;dockerfile_sha256&quot;: &quot;f604a233c01832427a856d1962386e741e13ecd8d6b9e78eeb30d4657c5ecdb4&quot;,
+    &quot;gpu_device_requests&quot;: [],
+    &quot;healthcheck_passed&quot;: true,
+    &quot;image_id&quot;: &quot;sha256:5d179aa2c57604def78eb4827dfa7e1a806d116ba0e898134567e443a5a9eaa5&quot;,
+    &quot;image_size_bytes&quot;: 255824586,
+    &quot;image_user&quot;: &quot;10001:10001&quot;,
+    &quot;network&quot;: &quot;none&quot;,
+    &quot;os&quot;: &quot;linux&quot;,
+    &quot;passed&quot;: true,
+    &quot;read_only&quot;: true,
+    &quot;schema_version&quot;: 1,
+    &quot;source_identity_sha256&quot;: &quot;b2c73b8d17e2d039468319b6ef61179c66ebff0a4061232669e10eba8b2614f3&quot;
+  },
+  &quot;data_fingerprint&quot;: &quot;a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20&quot;,
+  &quot;data_mode&quot;: &quot;movielens_1m&quot;,
+  &quot;drills&quot;: {
+    &quot;corrupt_candidate_rejected&quot;: {
+      &quot;active_pointer_unchanged&quot;: true,
+      &quot;error&quot;: &quot;Bundle checksum mismatch: popularity.npz&quot;,
+      &quot;passed&quot;: true
+    },
+    &quot;forced_gate_rejection&quot;: {
+      &quot;candidate_error&quot;: &quot;Candidate operation gate rejected activation&quot;,
+      &quot;development_selected&quot;: &quot;popularity&quot;,
+      &quot;passed&quot;: true
+    },
+    &quot;restart_preserves_version_and_ranking&quot;: {
+      &quot;after_pid&quot;: 2998,
+      &quot;before_pid&quot;: 2988,
+      &quot;model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-f39b43421914627e&quot;,
+      &quot;passed&quot;: true
+    },
+    &quot;rollback_restores_exact_prior_version&quot;: {
+      &quot;activated_model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-6a36e11a1a9f2901&quot;,
+      &quot;activated_pid&quot;: 3004,
+      &quot;passed&quot;: true,
+      &quot;restored_model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-f39b43421914627e&quot;,
+      &quot;restored_pid&quot;: 3006
+    }
+  },
+  &quot;engineering_acceptance_passed&quot;: true,
+  &quot;evidence_kind&quot;: &quot;process_backed_showcase&quot;,
+  &quot;execution_identity&quot;: {
+    &quot;dependencies&quot;: {
+      &quot;fastapi&quot;: &quot;0.142.2&quot;,
+      &quot;implicit&quot;: &quot;0.7.3&quot;,
+      &quot;numpy&quot;: &quot;2.5.3&quot;,
+      &quot;pydantic&quot;: &quot;2.13.5&quot;,
+      &quot;scipy&quot;: &quot;1.18.1&quot;,
+      &quot;threadpoolctl&quot;: &quot;3.7.0&quot;
+    },
+    &quot;dependency_lock_sha256&quot;: &quot;116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f&quot;,
+    &quot;python&quot;: &quot;3.12.12&quot;,
+    &quot;source_files&quot;: {
+      &quot;__init__.py&quot;: &quot;6d6f9595cfccb7646730a08104bf455c9d6d85c5789258cfe9793d49d84c5d8b&quot;,
+      &quot;api.py&quot;: &quot;374b650b570ba515440be4113330091c0956dceda76eabcc8b18043f5bce960d&quot;,
+      &quot;benchmark.py&quot;: &quot;915c186ae162aefba395f6278b8b033d06a14ca8d2c6f09e1f7590050a0f3fa8&quot;,
+      &quot;bundles.py&quot;: &quot;9437ad48ad215d5ae5c7e99db6064e9f32d0ca38431acbdee8125662b661b083&quot;,
+      &quot;cli.py&quot;: &quot;6c6d76611ad26495322f2f3c07e99e2e15a791c742045dacaabc34f56ef79e9e&quot;,
+      &quot;container.py&quot;: &quot;ddee0e481e90873bf0e24e889bca016b9f3d0c832100d512eb8a14a0e59e0f52&quot;,
+      &quot;contracts.py&quot;: &quot;98e352800e53eeb8e130aeedcb9c0e443d5cfe8896712be6c4f5ee72b7e8e180&quot;,
+      &quot;data.py&quot;: &quot;1cbaafd8ef2fbd9203632af8bfa46a839466586be1055518991a93f60fa33ada&quot;,
+      &quot;evaluation.py&quot;: &quot;bc148d96df3d675c5d6dd37b9ea8c48aea2b2aa3f1739ae7c07b9a208253341a&quot;,
+      &quot;evidence.py&quot;: &quot;68d4c9b8e866cefb82156080fdbd86a825bfb399010b2c8839c6d8da5505c879&quot;,
+      &quot;fixtures/movies.json&quot;: &quot;52ededb370ed9f7618f72d466e2886850db677b302a97c6adcb2da56c9f5d634&quot;,
+      &quot;ingestion.py&quot;: &quot;ec5d3152db9a280292886de78eabf6f78bbd790b9297fe2c0e2d716af73d0b44&quot;,
+      &quot;lifecycle.py&quot;: &quot;525b980d899e22600068bd130b3442a6b16f5c631b02d562cc06fd89bba9b708&quot;,
+      &quot;load.py&quot;: &quot;690e72c9e5262d277ec49ddc53e9c7467a8255a36d02d2e1ebab966d20d2465d&quot;,
+      &quot;ranking.py&quot;: &quot;6671b0531773530f239b086b6821a2cf255e1a0e1f7349d5b25ac0ae4babba3c&quot;,
+      &quot;reports.py&quot;: &quot;52c8a00225d7fbd7ae6b7b2a0980bfde355c67a037a63b2525e88abc88309a69&quot;,
+      &quot;runtime.lock&quot;: &quot;116dcabace3280444b72a12f4780a56d5a679802d90a0460f81748c2f5c2554f&quot;,
+      &quot;runtime.py&quot;: &quot;e913a1748d5e3741e83751890151b434920ce7d103b8ea1b2b19f6a15c1aee9b&quot;,
+      &quot;selection.py&quot;: &quot;2b68d9a726e6a4ebadd672af7f5f6d45d933a69f83859f13a953876c741f4586&quot;,
+      &quot;serving.py&quot;: &quot;48aec3eff7ca49aa91e762df5226ca5d826590c7710efe5346423f569bbba3ef&quot;,
+      &quot;showcase.py&quot;: &quot;59dcdae7030f7c3464195f13a2369a1941c03858a825f070faf23b8e198fe720&quot;,
+      &quot;storage.py&quot;: &quot;93312e59b0c8badf3363db8b68c7cad7c3394e9ac556dfcfd0586f65821efa08&quot;,
+      &quot;telemetry.py&quot;: &quot;8ef2ccc5dbd9942f70ba781c9eca60710f7ed9af6058e06e90282d878419a54d&quot;,
+      &quot;ui/index.html&quot;: &quot;62031b79a2b75f2a3bc43982e570b81370c0ae0e2cb7b72d48da91ca5e6d6ada&quot;
+    }
+  },
+  &quot;final_report_sha256&quot;: &quot;cfe320cd30c9850077e7ee2af3d13f7b2c7f6b2d98382c444baa3e5b05242e25&quot;,
+  &quot;hardware&quot;: {
+    &quot;logical_cpus&quot;: 8,
+    &quot;machine&quot;: &quot;arm64&quot;,
+    &quot;platform&quot;: &quot;macOS-26.6.2-arm64-arm-64bit&quot;,
+    &quot;python&quot;: &quot;3.12.12&quot;
+  },
+  &quot;http_load&quot;: {
+    &quot;achieved_requests_per_second&quot;: 20.002668462701426,
+    &quot;client_wall_ms&quot;: {
+      &quot;max&quot;: 94.99579109251499,
+      &quot;p50&quot;: 10.304020543117076,
+      &quot;p95&quot;: 11.64588270476088
+    },
+    &quot;completed&quot;: 5000,
+    &quot;configuration&quot;: {
+      &quot;concurrency_cap&quot;: 4,
+      &quot;k&quot;: 10,
+      &quot;mix&quot;: [
+        &quot;warm&quot;,
+        &quot;sparse&quot;,
+        &quot;zero_history&quot;,
+        &quot;ephemeral_0&quot;,
+        &quot;ephemeral_1&quot;,
+        &quot;ephemeral_3&quot;
+      ],
+      &quot;offered_requests_per_second&quot;: 20.0,
+      &quot;requests&quot;: 5000,
+      &quot;warmup&quot;: 200
+    },
+    &quot;data_mode&quot;: &quot;movielens_1m&quot;,
+    &quot;duration_seconds&quot;: 249.9666486660717,
+    &quot;error_rate&quot;: 0.0,
+    &quot;failed&quot;: 0,
+    &quot;fallback_requests&quot;: 0,
+    &quot;http_gate_passed&quot;: true,
+    &quot;memory_gate_passed&quot;: true,
+    &quot;metrics_sha256&quot;: &quot;df0d5351d68a4a236de4ff54600022e4215e286fec4962572c06e8773fe8b782&quot;,
+    &quot;model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-f39b43421914627e&quot;,
+    &quot;peak_api_process_rss_bytes&quot;: 184385536,
+    &quot;protocol&quot;: &quot;open-loop-http-v1&quot;,
+    &quot;queue_ms_p95&quot;: 1.4248351857531816,
+    &quot;raw_timings_sha256&quot;: &quot;878031d39e536abb694692e80e4c847902fe6417485346d7a6468e76ca993840&quot;,
+    &quot;reference_protocol_complete&quot;: true,
+    &quot;scheduled&quot;: 5000,
+    &quot;startup_load_ms&quot;: 341.3284580456093
+  },
+  &quot;model_id&quot;: &quot;movielens_1m-087582f44d7b5e9a-f39b43421914627e&quot;,
+  &quot;quality_objective_passed&quot;: false,
+  &quot;quality_variants&quot;: [
+    {
+      &quot;cohorts&quot;: {
+        &quot;sparse&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.7948717948717948,
+            &quot;ndcg_at_10&quot;: 0.29058576974605826,
+            &quot;recall_at_10&quot;: 0.05900106740794275,
+            &quot;recall_at_20&quot;: 0.10115599576422293
+          },
+          &quot;users&quot;: 39
+        },
+        &quot;warm&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.6288014311270125,
+            &quot;ndcg_at_10&quot;: 0.20932206093774236,
+            &quot;recall_at_10&quot;: 0.05665266750672867,
+            &quot;recall_at_20&quot;: 0.09261854554661329
+          },
+          &quot;users&quot;: 1118
+        },
+        &quot;zero_history&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.9354838709677419,
+            &quot;ndcg_at_10&quot;: 0.45025673787635917,
+            &quot;recall_at_10&quot;: 0.07876333921957233,
+            &quot;recall_at_20&quot;: 0.12378582846166745
+          },
+          &quot;users&quot;: 31
+        }
+      },
+      &quot;eligible_users&quot;: 1188,
+      &quot;failed_users&quot;: 0,
+      &quot;metrics&quot;: {
+        &quot;hit_rate_at_10&quot;: 0.6422558922558923,
+        &quot;ndcg_at_10&quot;: 0.21827682493489844,
+        &quot;recall_at_10&quot;: 0.05730672341518448,
+        &quot;recall_at_20&quot;: 0.0937121030624832
+      },
+      &quot;variant&quot;: &quot;popularity&quot;
+    },
+    {
+      &quot;cohorts&quot;: {
+        &quot;sparse&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.7435897435897436,
+            &quot;ndcg_at_10&quot;: 0.3272564069433807,
+            &quot;recall_at_10&quot;: 0.05719732652537353,
+            &quot;recall_at_20&quot;: 0.10443599010118941
+          },
+          &quot;users&quot;: 39
+        },
+        &quot;warm&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.6386404293381037,
+            &quot;ndcg_at_10&quot;: 0.23581545909264306,
+            &quot;recall_at_10&quot;: 0.06340103844565002,
+            &quot;recall_at_20&quot;: 0.10291635683470284
+          },
+          &quot;users&quot;: 1118
+        },
+        &quot;zero_history&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.9354838709677419,
+            &quot;ndcg_at_10&quot;: 0.45025673787635917,
+            &quot;recall_at_10&quot;: 0.07876333921957233,
+            &quot;recall_at_20&quot;: 0.12378582846166745
+          },
+          &quot;users&quot;: 31
+        }
+      },
+      &quot;eligible_users&quot;: 1188,
+      &quot;failed_users&quot;: 0,
+      &quot;metrics&quot;: {
+        &quot;hit_rate_at_10&quot;: 0.6498316498316499,
+        &quot;ndcg_at_10&quot;: 0.2444129983253653,
+        &quot;recall_at_10&quot;: 0.06359824935398403,
+        &quot;recall_at_20&quot;: 0.103510817539946
+      },
+      &quot;variant&quot;: &quot;item_knn&quot;
+    },
+    {
+      &quot;cohorts&quot;: {
+        &quot;sparse&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.7692307692307693,
+            &quot;ndcg_at_10&quot;: 0.2791908008527626,
+            &quot;recall_at_10&quot;: 0.05542861964639851,
+            &quot;recall_at_20&quot;: 0.09798884883349748
+          },
+          &quot;users&quot;: 39
+        },
+        &quot;warm&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.627906976744186,
+            &quot;ndcg_at_10&quot;: 0.18625368068330939,
+            &quot;recall_at_10&quot;: 0.06360862116248948,
+            &quot;recall_at_20&quot;: 0.10793099442913973
+          },
+          &quot;users&quot;: 1118
+        },
+        &quot;zero_history&quot;: {
+          &quot;descriptive_only&quot;: false,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: 0.9354838709677419,
+            &quot;ndcg_at_10&quot;: 0.45025673787635917,
+            &quot;recall_at_10&quot;: 0.07876333921957233,
+            &quot;recall_at_20&quot;: 0.12378582846166745
+          },
+          &quot;users&quot;: 31
+        }
+      },
+      &quot;eligible_users&quot;: 1188,
+      &quot;failed_users&quot;: 0,
+      &quot;metrics&quot;: {
+        &quot;hit_rate_at_10&quot;: 0.6405723905723906,
+        &quot;ndcg_at_10&quot;: 0.19619361541360675,
+        &quot;recall_at_10&quot;: 0.0637355371562959,
+        &quot;recall_at_20&quot;: 0.10801833127827973
+      },
+      &quot;variant&quot;: &quot;als_cpu&quot;
+    }
+  ],
+  &quot;release_status&quot;: &quot;experimental_quality_objective_failed&quot;,
+  &quot;schema_version&quot;: 1,
+  &quot;selection&quot;: {
+    &quot;promotion_status&quot;: &quot;pending_http_resource_and_bundle_gates&quot;,
+    &quot;quality_gates&quot;: [
+      {
+        &quot;comparison&quot;: {
+          &quot;candidate&quot;: &quot;item_knn&quot;,
+          &quot;interval_scope&quot;: &quot;Paired benchmark users; shared items/training limit generalization&quot;,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.005439709882139619,
+              &quot;paired_95_interval&quot;: [
+                -0.006346328195829556,
+                0.01813236627379873
+              ]
+            },
+            &quot;ndcg_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.008866954398135767,
+              &quot;paired_95_interval&quot;: [
+                0.003926097634791934,
+                0.013702922211801414
+              ]
+            },
+            &quot;recall_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.004810882563633702,
+              &quot;paired_95_interval&quot;: [
+                0.0006255308212381545,
+                0.008964118278280796
+              ]
+            },
+            &quot;recall_at_20&quot;: {
+              &quot;absolute_difference&quot;: 0.00246065671600328,
+              &quot;paired_95_interval&quot;: [
+                -0.0024474488038315335,
+                0.007840121857042994
+              ]
+            }
+          },
+          &quot;paired_users&quot;: 1103,
+          &quot;relative_ndcg_gain&quot;: 0.03405095138098141,
+          &quot;samples&quot;: 2000,
+          &quot;seed&quot;: 42
+        },
+        &quot;passed&quot;: false,
+        &quot;reasons&quot;: [
+          &quot;ndcg_relative_gain_below_objective&quot;
+        ],
+        &quot;variant&quot;: &quot;item_knn&quot;
+      },
+      {
+        &quot;comparison&quot;: {
+          &quot;candidate&quot;: &quot;als_cpu&quot;,
+          &quot;interval_scope&quot;: &quot;Paired benchmark users; shared items/training limit generalization&quot;,
+          &quot;metrics&quot;: {
+            &quot;hit_rate_at_10&quot;: {
+              &quot;absolute_difference&quot;: -0.006346328195829556,
+              &quot;paired_95_interval&quot;: [
+                -0.025385312783318223,
+                0.012692656391659111
+              ]
+            },
+            &quot;ndcg_at_10&quot;: {
+              &quot;absolute_difference&quot;: -0.007337745884873807,
+              &quot;paired_95_interval&quot;: [
+                -0.014071867170941272,
+                -0.0005110343111944903
+              ]
+            },
+            &quot;recall_at_10&quot;: {
+              &quot;absolute_difference&quot;: 0.0074394893491618735,
+              &quot;paired_95_interval&quot;: [
+                -0.00026379547207831274,
+                0.01480639796166996
+              ]
+            },
+            &quot;recall_at_20&quot;: {
+              &quot;absolute_difference&quot;: 0.010086154229342786,
+              &quot;paired_95_interval&quot;: [
+                0.0016372962037878845,
+                0.018677451874821678
+              ]
+            }
+          },
+          &quot;paired_users&quot;: 1103,
+          &quot;relative_ndcg_gain&quot;: -0.02817847224119768,
+          &quot;samples&quot;: 2000,
+          &quot;seed&quot;: 42
+        },
+        &quot;passed&quot;: false,
+        &quot;reasons&quot;: [
+          &quot;ndcg_relative_gain_below_objective&quot;,
+          &quot;ndcg_interval_not_above_zero&quot;
+        ],
+        &quot;variant&quot;: &quot;als_cpu&quot;
+      }
+    ],
+    &quot;selected_for_final_refit&quot;: &quot;popularity&quot;,
+    &quot;serving_variant&quot;: &quot;popularity&quot;,
+    &quot;test_labels_used_for_selection&quot;: false
+  },
+  &quot;variant&quot;: &quot;popularity&quot;,
+  &quot;raw_accounting_verified_before_export&quot;: true,
+  &quot;raw_source_report_sha256&quot;: &quot;a30afec9a4ebf49cdd2f4539beddccf8be942966307bf70734a0135fa29b1fec&quot;
+}</pre></details></html>
